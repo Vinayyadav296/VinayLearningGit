@@ -1,0 +1,67 @@
+show databases;  -- query to show databases;
+create databse learningMySql; -- query to create new database name laearing mysql
+use learningMySql; //query to use the database leariningMySql
+drop database databasename; -- to delete a database
+ create table user(id int(11)primary key,name varchar(100) not null,city varchar(50));--query to create new table with coulmn id, name and city.
+
+show tables; -- query to show tables which are present;
+ desc user; --user is the name of table and this query is used to know the fields of table
+drop table user -- query to delete table
+truncate table user -- quesry to delete table data;
+ALTER TABLE APPLICANTS DROP COLUMN CITY; // QUERY TO DELETE ENTIRE COLUMN OF A TABLE
+alter table user rename to student;--query to rename the table user renamed to student
+insert into student (id,name,city) values (15,'Vinay','varansi');--querry to  insert data into the columns of table however we can directly put values by using query insert into student  values(45,'Vikas','Bhilai');
+INSERT INTO STUDENTS VALUES(111,'KARANDEEP BISHT','NEW DELHI'),(120,'PANKAJ GUPTA','JAUNPUR');// QUERY TO PASS MUTIPLE VALUES AT SAME TIME IN TABLE.
+select * from student;--query to look for data inside the table
+alter table student add country varchar(50);--query to add new column in the existing table;
+ update student set country='India' where name='Vinay';-- query to select and upadate country of vinay to India if wedo;nt put where name then it will upadate india to every name in the country column
+ update student set city='Chattisgarh', country='india' where id=45; --query to update the city and country at same time using id;
+delete from student whew id=15;--quesry to delete a row with unique id
+ select * from student where country='India';//query to select value from country column
+select name,city from student where country='usa'; // query to select particular value from table;
+select name as 'username',city as 'cityname' from student;//query to select any particular column from table and giving it a different name FOR SOMETIME 
+ select distinct(country) from student; //query to select distinct country 
+select * from student where country='India' and city='Ghazipur'; // joining two conditons
+ select * from student where country='usa' or city='GreaterNoida';//using or operator in query
+select * from student where id>=45 and id<=90; or  select * from student where id between 45 and 90; these both are same
+select * from student where id=50 or id=70;select * from student where id in(50,70); these both are same but we should use later one because if the number of id increases then we have to write a lot of or then its better to use second approach
+select * from student limit 2;// ye top se 2 student ko select karne ki query hai;
+select * from student limit 3 offset 1; // ye top se 1 ko chodke uske bad k 3 students niklane ki query hai
+select * from student order by id; // id ko le k ascending order me arrange karega
+select * from student order by id desc;//id ko le k descending order me arrange karega
+select * from student order by name;  //name ko le k ascending order me arrange karega
+select * from student order by name desc;//name ko le k descending order me arrange karega
+
+suppose examiner ask to edit the name in last which has some mistake then the query for that is--
+select * from student order by id desc limit 1;
+update student set name='   '; where id=    ;
+
+
+% -- is used for zero ,one or multiple character 
+_ -- is used for one character
+
+select * from student where city like '_a%'; -- jaha city ka nam ka dusra letter a ho;
+ select * from student where city like'%a'; // jaha city ke nam end me a aata ho
+select * from student where city like '%_d_'; // jaha city k second last name me d aata ho;
+select sum(id) from student;//sum function used to calculate sum
+select avg(id) from student; //used to calculate avg
+select count(id) from student;// used to calculate sum
+ select min(id) from student;// query to select min id i.e salary
+select name from student where id=(select min(id) from student); / / query to select name of the student who has minimum salary
+select max(id) from student;// query to select max id i.e salary
+select name from student where id=(select max(id) from student);/ / query to select name of the student who has maximum salary
+
+ create table laptop(lid int primary key,lmodel varchar(200),studentId int,foreign key(studentId) references student(id));  
+ insert into laptop values(1314,'HP',4541);
+ insert into laptop values(1314,'HP',15);
+select student.name,student.city,laptop.lmodel from student,laptop where student.id=laptop.studentId;
+select student.name,laptop.lmodel from student inner join laptop where student.id=laptop.studentId;
+
+
+
+
+
+
+
+
+

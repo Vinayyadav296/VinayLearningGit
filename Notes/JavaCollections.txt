@@ -1,0 +1,95 @@
+Collections==> it is a framework which provides an architecture which is used to store and manipulate a group of objects.
+collection represents a single unit of object
+
+Java Collections can achieve all the operations that you perform on a data such as searching, sorting, insertion, manipulation, and deletion.Java Collection framework provides many interfaces (Set, List, Queue, Deque) and classes (ArrayList, Vector, LinkedList, PriorityQueue, HashSet, LinkedHashSet, TreeSet).
+
+java.util package contains all the classes and interfaces for the Collection framework.
+
+Java ArrayList==>
+
+Java ArrayList class uses a dynamic array for storing the elements. It is like an array, but there is no size limit. We can add or remove elements anytime. So, it is much more flexible than the traditional array. It is found in the java.util package. It is like the Vector in C++.
+
+The ArrayList in Java can have the duplicate elements also. It implements the List interface so we can use all the methods of the List interface here. The ArrayList maintains the insertion order internally.
+
+It inherits the AbstractList class and implements List interface.
+
+The important points about the Java ArrayList class are:
+
+Java ArrayList class can contain duplicate elements.
+Java ArrayList class maintains insertion order.
+Java ArrayList class is non synchronized.
+Java ArrayList allows random access because the array works on an index basis.
+In ArrayList, manipulation is a little bit slower than the LinkedList in Java because a lot of shifting needs to occur if any element is removed from the array list.
+We can not create an array list of the primitive types, such as int, float, char, etc
+
+difference between array and array list==>
+
+Array                                                                                ArrayList
+Array is static in size.                                         ArrayList is dynamic in size.
+
+It is mandatory to provide the size of an array while initializing it directly or indirectly.	We can create an instance of ArrayList without specifying its size. Java                                                                                                                                                  creates ArrayList of default size.
+It performs fast in comparison to ArrayList because of fixed size.	ArrayList is internally backed by the array in Java. The resize operation in ArrayList slows down the performance.
+
+An array can store both objects and primitives type.	We cannot store primitive type in ArrayList. It automatically converts primitive type to object.
+
+Array can be multi-dimensional.	ArrayList is always single-dimensional.
+
+When to use ArrayList and LinkedList in Java==>ArrayList provides constant time for search operation, so it is better to use ArrayList if searching is more frequent operation than add and remove operation. The LinkedList provides constant time for add and remove operations. So it is better to use LinkedList for manipulation.
+
+ArrayList has O(1) time complexity to access elements via the get and set methods.
+
+LinkedList has O(n/2) time complexity to access the elements.
+
+LinkedLinked class implements Deque interface also, so you can get the functionality of double ended queue in LinkedList. The ArrayList class doesn't implement Deque interface.
+
+ LinkedList ==>Java LinkedList class uses a doubly linked list to store the elements. It provides a linked-list data structure. It inherits the AbstractList class and implements List and Deque interfaces. 
+LinkedList has same methods like arraylist
+
+The important points about Java LinkedList are:
+
+Java LinkedList class can contain duplicate elements.
+Java LinkedList class maintains insertion order.
+Java LinkedList class is non synchronized.
+In Java LinkedList class, manipulation is fast because no shifting needs to occur.
+Java LinkedList class can be used as a list, stack or queue.
+
+import java.util.*;  
+class Book {  
+int id;  
+String name,author,publisher;  
+int quantity;  
+public Book(int id, String name, String author, String publisher, int quantity) {  
+    this.id = id;  
+    this.name = name;  
+    this.author = author;  
+    this.publisher = publisher;  
+    this.quantity = quantity;  
+}  
+}  
+public class LinkedListExample {  
+public static void main(String[] args) {  
+    //Creating list of Books  
+    List<Book> list=new LinkedList<Book>();  
+    //Creating Books  
+    Book b1=new Book(101,"Let us C","Yashwant Kanetkar","BPB",8);  
+    Book b2=new Book(102,"Data Communications & Networking","Forouzan","Mc Graw Hill",4);  
+    Book b3=new Book(103,"Operating System","Galvin","Wiley",6);  
+    //Adding Books to list  
+    list.add(b1);  
+    list.add(b2);  
+    list.add(b3);  
+    //Traversing list  
+    for(Book b:list){  
+    System.out.println(b.id+" "+b.name+" "+b.author+" "+b.publisher+" "+b.quantity);  
+    }  
+}  
+}  
+
+
+Java Queue Interface==>
+The interface Queue is available in the java.util package and does extend the Collection interface. It is used to keep the elements that are processed in the First In First Out (FIFO) manner. It is an ordered list of objects, where insertion of elements occurs at the end of the list, and removal of elements occur at the beginning of the list.
+
+Being an interface, the queue requires, for the declaration, a concrete class, and the most common classes are the LinkedList and PriorityQueue in Java. Implementations done by these classes are not thread safe. If it is required to have a thread safe implementation, PriorityBlockingQueue is an available option.
+
+PriorityQueue Class==>
+PriorityQueue is also class that is defined in the collection framework that gives us a way for processing the objects on the basis of priority. It is already described that the insertion and deletion of objects follows FIFO pattern in the Java queue. However, sometimes the elements of the queue are needed to be processed according to the priority, that's where a PriorityQueue comes into action.

@@ -1,0 +1,220 @@
+code .  ---> this will open the vs code from inside the folder
+node --version // it will give the version of node and it is done in poweshell
+npm --version
+npx --version
+
+npx create-react-app hello-world // this is used to open the react app with low configuration from inside the vs code terminal
+
+ cd hello-world
+  npm start  --> it will start the index.html file and display it in the browser
+
+npm start -- problem ko solve karne k liye terminal me pwd karne se path aaega path me cd todos-list likhne se project me chale jaaenge and uske badd npm start kar sakte hai
+
+package.json--> it consists  of dependencies and script required for the project
+node modules-->this consists of all the dependencies which are installed this is generated when we put  create react app command or when we run npm install
+public--> this consist of three files the imp one is idex.html which imp for us
+src--> is the folder where we are going to work the most in our react development
+index.js --it defines the root component which is the App component and dom element is controlled by react and the dom element consist of element having id root
+app.js--> it is responsible for the html displayed in the browser in other words the app.js responsible for the view that we see in the browser 
+
+
+
+
+React is an open source javascript library for building user interfaces.
+React is a project created and maintained by Facebook.
+React has more than a 100 thousand stars on GitHub and a huge community behind it.
+React has become increasingly 
+popular among developers and is also one of the most sought out skill-sets by companies right now.
+
+React has a component based architecture. This lets you break down your application into small encapsulated parts which can then be composed to make more complex UI.
+React is declarative.
+React will make it painless for you to create complex UIs by abstracting away the difficult parts. 
+React will handle efficiently updating and rendering just the right components in your application when your data changes. 
+DOM updates which is one of the more expensive operations is handled gracefully in React.
+
+components--components represents a part of the user interface
+the example of hello word app -- it has five components --header, side nav ,footer ,main content and finally one component to contain every other component which is the root(app) component
+compoents are resusable -- it used to display it can be used with different properties to display diff information eg. side nav consist of left side nav and right side nav
+
+How does component translated code in our application?
+a component code is placed usually placed in a js file eg app component is placed in app.js
+ 
+components types--> it has two types--
+1--> stateless component --these are literally js functions they return html which describe the ui
+eg. function welcome(props){
+      return <h1> Hello,(props.name)</h1>;
+      }
+2-->Statefull Class Components --> these are regulaer ES6 classes extending the component class from the react library
+It must contain a render method which return a html
+ eg. class welcome extends React.component {
+       render(){
+      return <h1> Hello,(this.props.name)</h1>;
+      }
+
+functional components-->The simplest way to define a component is to write a JavaScript function. A valid React component because it accepts a single “props” (which stands for properties) object argument with data and returns a React element. We call such components “function components” because they are literally JavaScript functions.
+
+aise he rakhe hai code app.js ke div ke andar se cut kar k confuse mat honaa--
+<header className="App-header">
+        <img src={logo} className="App-logo" alt="logo" />
+        <p>
+          Hello World!!
+        </p>
+        <a
+          className="App-link"
+          href="https://reactjs.org"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
+          Learn React
+        </a>
+      </header>
+
+class Components-->Class syntax is one of the most common ways to define a React component. While more verbose than the functional syntax, it offers more control in the form of lifecycle hooks.
+Creating a class component is pretty simple; just define a class that extends Component and has a render function
+whenever you create a class component you need to include two imports React and component class from react
+import React,{Component} from "react";
+
+functional componets                                     ----                              class Components
+FC has simple functions                                  ----           More Feature Rich
+Use FC as much as possible                          -----           Maintain there own private data-state
+There is absence of this keyword so less complex  ----  Complex UI logic
+Provide solution without using state              -----           Provides lifeCycle Hooks
+Mainly responsible for the UI
+Stateless /Dumb/Presentational                   -----          Stateful/Smarter/Container
+
+JSX--JavaScript XML (JSX) is an extension to the JavaScript language syntax. With React, it's an extension to write XML-like code for elements and components. And just like XML, JSX tags have a tag name, attributes, and children.
+
+ Why do we need JSX--JSX is not a necessity to write react applications.
+JSX makes your react code simpler and elegant
+JSX ultimately transpiles to pure javaScript which is understood by the browsers
+
+differences in JSX as Compared to normal HTML---
+Class ---> className
+for  --> htmlFor
+camelCase property naming convention
+onclick--> onClick
+tabindex-->tabIndex
+
+Props--->props short for properties, is the optional input that your component can accept.
+It also allows the component content to be dynamic.
+props are immuatable that is there value can't be change
+
+State-->State is similar to props, but it is private and fully controlled by the component.
+
+                            props                                          ----             state
+props gets passed to the components                  -----   state is managed within the component
+eg. Function parameters                                       ------ Variables declared in the funtion body
+props are immutable                                            -------  states can be changed
+functionalComponents--- props                            ------  functionalComponents--- useStateHook
+classComponents---- this.props                            ----   classComponents---this.state
+
+
+rce-->snippet for adding class components
+rfece-->snippet for adding funtional components
+rconst--> snippet for constr and oll
+setState--
+never modify state directly instead use setState otherwise you will not notice any change in the UI
+
+Destructuring props and state-- Desstructuring is an ES6 feature that makes it possible to unpack values from arrays or properties from objects into distinct variables
+
+In react events are to be written in camelCase
+
+Condtional rendering --
+When you are building React applications, you may often need to show or hide some HTML based on a certain condition. 
+Luckily, conditional rendering in React works the same way conditions work in JavaScript. 
+We have 4 different approaches and we will take a detailed look at all of them.
+We have if/else, element variables, ternary conditional operator and short circuit operator (&&).
+
+hello.js deals with the JSX and it determines how the code looks like with and without JSX
+props are immutable that is its value cant be change
+messege.js deals with the state components
+this.state -- it represents an object
+
+useContext provides a way to pass data through component tree without having to pass props down manually  to every level
+
+useReducer is a hook used for state management it is an alternative to useState 
+useState is built using useReducer
+useReducer(reducer,singleState)
+newState=reducer(currentState,action)
+useReducer return a pair of value [newState,dispatch]
+
+useReducer- Local state management
+share state between component -- global state management done by combining useReduer+useContext
+
+                           useState                                                                       useReducer
+type of state   Number,string,boolean                                                   object or Array
+Number of state tansition  one or two                                                  too many
+realte state transition    no                                                                   yes
+                       not for complex logic                                                      for complex lgic
+                      better for local state                                                         best for global
+
+useCallback Hook-- it is a hook that will return a memoized version of callback function that only changes if one of the dependencies has changed
+why? it is useful when passing callbacks to optimized child components that rely on reference equality to prevent unnecessary renders
+
+Custom Hooks-- A custom hook is a javascript function whose name starts with "use"
+A custom hook can also call other hooks if required
+need of custom Hooks--as an alternative of HOCs and render props
+
+LifeCycle --When we create a React component, the component goes through several stages in its lifecycle. React provides us with built-in 
+methods that we can override at particular stages in the lifecycle
+
+Constructor(props)--A special function that will get called whenever a new component is created
+Eg. Initializing state,Binding event handlers
+Constructor can not do side effects eg. HTTP requests
+super(props) -- is used to call base class constructo
+Construrctor is the only place where we can direactly change or directly overrides as this.state in other places we have to use this.setState()
+
+static getDerivedStateFromProps(props,state)--it is rarely used only when the states of the component depends only on change in props over time and it can can not cause side effects
+
+render()-- it is the only method that is required in the class components it reads this.props and this.state and return jsx
+Do not change the state or interact with dom or making ajax calls
+
+componentDidMount()--invoked immediately after a component and all its children components have been rendered to the dom . Can cause side effects eg. interact with dom or perfrom any ajax calls to load the data
+
+shouldComponentUpdate(nextProps,nextState) -- dictates if components should re render or not used for performance optimization but it is rarely used method 
+do not cause sideeffects
+
+getSnapShotBeforeUpdate(prevProps,prevState)-- called right beforre the changes in the  virtual dom are to be reflected in the real dom it is rarely used method it return either null or return a value
+
+componentDidUpdate(prevProps,prevState,snapshot)--called after render is finished in the re render cycles
+it can cause side effects
+
+Fragments--React Fragments let you group a list of children without adding extra nodes to the DOM.
+
+Pure Component-In React, we can create a component by extending the PureComponent class. A Pure Component implements the shouldComponentUpdate lifecycle method by performing a shallow comparison on the props and state
+of the component. If there is no difference, the component is not re-rendered thereby providing a performance boost
+it does SC of prevState with currentState and prevProp with currentProp and if any difference found then it re renders the components
+Pure Component works only in class based components it would be nice if we can use it with functional components and for that react.memo is used
+
+Regular component---A regular component does not implement shouldComponentUpdate method it always return true by default
+
+Refs--Refs make it possible to access DOM nodes directly within React.
+
+Portals--Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+ReactDOM.createPortal(child, container)
+he first argument (child) is any renderable React child, such as an element, string, or fragment. The second argument (container) is a DOM element.
+
+Error Boundary--Error boundaries are React components that catch JavaScript errors anywhere in their child component tree, log those errors, and display a fallback UI instead of the component tree that crashed. Error boundaries catch errors during rendering, in lifecycle methods, and in constructors of the whole tree below them.
+
+A class component becomes an error boundary if it defines or implements either (or both) of the lifecycle methods static getDerivedStateFromError() or componentDidCatch(). 
+Use static getDerivedStateFromError() to render a fallback UI after an error has been thrown. Use componentDidCatch() to log error information.
+
+
+
+Pure Component--A pure component on the other hand implement shouldComponentUpdate with shallow props and state comparison
+
+Shallow compare does check for equality. When comparing scalar values (numbers, strings) it compares their values. When comparing objects, it does not compare their attributes - only their references are compared (e.g. "do they point to same object?"). and return true if they are same on comparison
+user = {
+  name: "John",
+  surname: "Doe"
+}
+const user = this.state.user;
+user.name = "Jane";
+console.log(user === this.state.user); // true
+Notice you changed users name. Even with this change, the objects are equal. The references are exactly the same.
+Shallow compare is an efficient way to detect changes. It expects you don't mutate data.
+
+Higher Order Component-- a higher-order component is a function that takes a component as an argument and returns a new component.
+const NewComponent = higherOrderComponent(OriginalComponent);
+const EnhancedComponent = higherOrderComponent(WrappedComponent);
+const IronMan=withSuit(TonyStark)

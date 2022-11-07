@@ -1,0 +1,2688 @@
+Arrays --
+public class ArrayReversal {
+	public void reverseArray(int arr[], int start, int end) {
+		int temp;
+		while (start < end) {
+			temp = arr[start];
+			arr[start] = arr[end];
+			arr[end] = temp;
+			start++;
+			end--;
+		}
+	}
+
+	public void printArray(int arr[], int l) {
+		for (int i = 0; i < l; i++) {
+			System.out.print(arr[i] + " ");
+		}
+	}
+
+	public static void main(String[] args) {
+		ArrayReversal rev = new ArrayReversal();
+		int arr[] = { 1, 2, 3, 4, 5, 6 };
+		int l = arr.length;
+		System.out.println("array before reversal");
+		rev.printArray(arr, l);
+		System.out.println();
+		System.out.println("array after reversal");
+		rev.reverseArray(arr, 0, l - 1);
+		rev.printArray(arr, l);
+
+	}
+
+}
+
+
+
+
+public class CopyArrayAndInsertOneMore {
+	public void copyArray(int arr[],int n,int brr[],int val) {
+		n=arr.length+1;
+		for(int i=0;i<arr.length;i++) {
+			brr[i]=arr[i];
+		}
+		brr[n-1]=val;
+	}
+	public void printArray(int brr[]) {
+		for(int i=0;i<brr.length;i++) {
+			System.out.print(brr[i]+" ");
+		}
+	}
+	public static void main(String[] args) {
+		CopyArrayAndInsertOneMore obj=new 	CopyArrayAndInsertOneMore();
+		int arr[]=new int[] {10,20,30,40,50};
+		int n=arr.length+1;
+		int brr[]=new int[n];
+		System.out.println("Original array");
+		 obj.printArray(arr);
+         System.out.println();
+         System.out.println("copy array");
+         obj.copyArray(arr, arr.length+1, brr, 45);
+         obj.printArray(brr);
+	}
+
+}
+
+
+
+public class InsertElementInArray {
+	int count=0;
+       public void insertAtStart(int arr[],int val) {       //inserting element at the start of the array
+    	   for(int i=arr.length-1;i>0;i--) {
+    		   arr[i]=arr[i-1];
+    	   }
+    	   arr[0]=val;
+       }
+       public void insertAtPosition(int arr[],int pos,int val) {
+    	   for(int i=arr.length-1;i>pos;i--) {
+    		   arr[i]=arr[i-1];
+    	   }
+    	   arr[pos]=val;
+       }
+      public void printArray(int arr[]) {
+    	  for(int i=0;i<arr.length;i++) {
+    		  System.out.print(arr[i]+" ");
+    	  }
+      }
+	public static void main(String[] args) {
+		InsertElementInArray obj=new InsertElementInArray();
+		int arr[]=new int[]{10,20,30,40,50};
+        obj.insertAtStart(arr, 25);
+         obj.printArray(arr);
+         System.out.println();
+         obj.insertAtPosition(arr, 4, 45);
+         obj.printArray(arr);
+	}
+
+}
+
+public class MaxAndMinElementArray {
+public int maxArrayElement(int arr[],int size) {
+	int max=Integer.MIN_VALUE;
+	for(int i=0;i<size;i++) {
+		if(arr[i]>max) {
+			max=arr[i];
+		}
+	}
+	return max;
+}
+public int minArrayElement(int arr[],int size) {
+	int min=Integer.MAX_VALUE;
+	for(int i=0;i<size;i++) {
+		if(arr[i]<min) {
+			min=arr[i];
+		}
+	}
+	return min;
+}
+
+	public static void main(String[] args) {
+		MaxAndMinElementArray obj=new MaxAndMinElementArray();
+		int arr[]=new int[] {50,10,40,30,20};
+		int n=arr.length;
+		System.out.println(obj.maxArrayElement(arr, n));
+		System.out.println(obj.minArrayElement(arr, n));
+
+	}
+
+}
+
+
+package hashing;
+
+import java.util.HashSet;
+
+public class CountDistinct {
+	public int countDistinctElement(int arr[], int n) {
+		HashSet<Integer> hs = new HashSet<>();
+		for (int i = 0; i < n; i++) {
+			hs.add(arr[i]);
+		}
+		return hs.size();
+	}
+
+	public static void main(String[] args) {
+		CountDistinct obj = new CountDistinct();
+		int arr[] = new int[] { 6, 10, 5, 4, 9, 120, 4, 6, 10 };
+		int n = arr.length;
+		System.out.println(obj.countDistinctElement(arr, n));
+
+	}
+
+}
+
+package hashing;
+
+import java.util.HashSet;
+
+public class Hashing {
+
+	public static void main(String[] args) {
+		HashSet<Integer> s=new HashSet<>();
+		s.add(5);
+		s.add(10);
+		System.out.println(s);
+        if(s.contains(10)) {
+        	System.out.println("present");
+        }
+        else {
+        	System.out.println("not present");
+        }
+        s.remove(5);
+        System.out.println(s.isEmpty());
+        System.out.println(s.size());
+        s.clear();
+	}
+}
+
+package hashing;
+
+import java.util.HashSet;
+
+public class Union {
+  public int union(int arr1[],int arr2[]) {
+	  HashSet<Integer> set=new HashSet<>();
+	  for(int ele:arr1) {
+		  set.add(ele);
+	  }
+	  for(int ele:arr2) {
+		  set.add(ele);
+	  }
+	  return set.size();
+  }
+	public static void main(String[] args) {
+		Union obj=new Union();
+        int arr1[]=new int[] {5,10,15,5};
+        int arr2[]=new int[] {10,15,4};
+        System.out.println(obj.union(arr1, arr2));
+	}
+
+}
+
+
+package linkedlist;
+
+public class DeleteNode {
+  static Node head;
+  public class Node{
+	  int data;
+	  Node next;
+	  Node(int data){
+		  this.data=data;
+		  this.next=null;
+	  }
+  }
+	  public void add(int data) {
+		Node newNode=new Node(data);
+		  if(head==null) {
+			  head=newNode;
+			  return;
+		  }
+		  newNode.next=head;
+		  head=newNode;
+	  }
+	  public void printList() {
+		  Node curr=head;
+		  while(curr!=null) {
+			  System.out.print(curr.data+"->");
+			  curr=curr.next;
+		  }
+		  System.out.println();
+	  }
+	  public Node findNode(Node head,int n) {
+		  if(head.next==null) {
+			  return null;
+		  }
+		  int size=0;
+		  Node currNode=head;
+		  while(currNode!=null) {
+			  currNode=currNode.next;
+			  size++;
+		  }
+		  if(size==n) {
+			  return head.next;
+		  }
+		  int idxtosearch=size-n;   //n is the position of the node from starting to calculate its position from start we have to use size-n
+		  Node prevNode=head;
+		  int cp=1;
+		  while(cp!=idxtosearch) {
+			  prevNode=prevNode.next;
+		  }
+		  prevNode.next=prevNode.next.next;
+		  return head;
+		  
+	  }
+
+  
+	public static void main(String[] args) {
+		DeleteNode list=new DeleteNode();
+		list.add(1);
+		list.add(2);
+		list.add(3);
+		list.add(4);
+		list.printList();
+		list.findNode( head, 3);
+		list.printList();
+
+	}
+
+}
+
+
+package linkedlist;
+
+public class DetectLoopLL {
+ static Node head;
+ public class Node{
+	 int data;
+	 Node next;
+	 Node(int data){
+		 this.data=data;
+		 this.next=null;
+	 }
+ }
+ public boolean hasCycle(Node head) {
+	 if(head==null) {
+		 return false;
+	 }
+	 Node fast=head;
+	 Node slow=head;
+	 while(fast!=null&&fast.next!=null) {
+		 fast=fast.next.next;
+		 slow=slow.next;
+		 if(fast==slow) {
+			 return true;
+		 }
+	 }
+	 return false;
+ }
+ public void add(int data) {
+	 Node newnode=new Node(data);
+	 if(head==null) {
+		 head=newnode;
+		 return; 			 
+	 }
+	 newnode.next=head;
+	 head=newnode;
+ }
+ public void printList() {
+	 Node curr=head;
+	 while(curr!=null) {
+		 System.out.print(curr.data+"->");
+		 curr=curr.next;
+	 }
+	 System.out.println();
+ }
+	public static void main(String[] args) {
+		DetectLoopLL list=new DetectLoopLL();
+		list.add(1);
+		list.add(2);
+		list.add(4);
+		list.add(4);
+		list.add(5);
+		boolean found=list.hasCycle(head);
+		if(found) {
+			System.out.println("loop found");
+		}
+			else {
+				System.out.println("loop not found");
+			}
+		
+		
+
+	}
+
+}
+
+
+package linkedlist;
+
+public class DetectLoopLL {
+ static Node head;
+ public class Node{
+	 int data;
+	 Node next;
+	 Node(int data){
+		 this.data=data;
+		 this.next=null;
+	 }
+ }
+ public boolean hasCycle(Node head) {
+	 if(head==null) {
+		 return false;
+	 }
+	 Node fast=head;
+	 Node slow=head;
+	 while(fast!=null&&fast.next!=null) {
+		 fast=fast.next.next;
+		 slow=slow.next;
+		 if(fast==slow) {
+			 return true;
+		 }
+	 }
+	 return false;
+ }
+ public void add(int data) {
+	 Node newnode=new Node(data);
+	 if(head==null) {
+		 head=newnode;
+		 return; 			 
+	 }
+	 newnode.next=head;
+	 head=newnode;
+ }
+ public void printList() {
+	 Node curr=head;
+	 while(curr!=null) {
+		 System.out.print(curr.data+"->");
+		 curr=curr.next;
+	 }
+	 System.out.println();
+ }
+	public static void main(String[] args) {
+		DetectLoopLL list=new DetectLoopLL();
+		list.add(1);
+		list.add(2);
+		list.add(4);
+		list.add(4);
+		list.add(5);
+		boolean found=list.hasCycle(head);
+		if(found) {
+			System.out.println("loop found");
+		}
+			else {
+				System.out.println("loop not found");
+			}
+		
+		
+
+	}
+
+}
+
+
+package linkedlist;
+
+import java.util.LinkedList;
+
+public class LLcollectionFramework {
+
+	public static void main(String[] args) {
+		LinkedList<String> list = new LinkedList<String>();
+		list.addFirst("a");
+		
+		list.addFirst("is");
+		
+		list.addFirst("this");
+		
+		list.addLast("list");
+		
+		System.out.println(list);
+		
+		System.out.println(list.size());
+		
+System.out.println(list.getFirst());
+		
+		System.out.println(list.getLast());
+		
+		for (int i = 0; i < list.size(); i++) {
+			System.out.print(list.get(i) + "->");
+		}
+		
+		System.out.println();
+		
+		list.add(4, "linked list");
+		
+		System.out.println(list);
+		
+		list.remove(4);
+		System.out.println(list);
+	}
+
+}
+
+
+package linkedlist;
+
+public class LLPalindrome {
+static Node head;
+
+	public class Node { // in java node is represented in the form of the class.
+		String data;
+		Node next;
+		String val;
+
+		Node(String data) { // Node class constructor.
+			this.data = data;
+			this.next = null; // by default next pointer points to null 
+		}
+	}
+
+	public void addFirst(String data) {                   //method to add element at first.
+		Node newNode = new Node(data);
+		if (head == null) {
+			head = newNode;
+			return;
+		}
+		newNode.next = head;
+		head = newNode;
+	}
+	public Node getMiddle(Node head) {
+		   Node fast = head;
+		   Node slow = head;
+		   while (fast.next != null && fast.next.next != null) {
+		       fast = fast.next.next;
+		       slow = slow.next;
+		   }
+		   return slow;
+		}
+		 
+		public Node reverse(Node head) {
+		   Node prev = null;
+		   Node curr = head;
+		  
+		   while (curr != null) {
+		       Node next = curr.next;
+		       curr.next = prev;
+		       prev = curr;
+		       curr = next;
+		   }
+		   return prev;
+		}
+		 
+		 
+		public boolean isPalindrome(Node head) {
+		   if(head == null || head.next == null) {
+		       return true;
+		   }
+		  
+		   Node firstHalfEnd = getMiddle(head);
+		   Node secondHalfStart = reverse(firstHalfEnd.next);
+		   Node firstHalfStart = head;
+		  
+		   while(secondHalfStart != null) {
+		       if(secondHalfStart.val != firstHalfStart.val) {
+		           return false;
+		       }
+		       secondHalfStart = secondHalfStart.next;
+		       firstHalfStart = firstHalfStart.next;
+		   }
+		  
+		   return true;
+		}
+
+
+	public void printList() {
+		Node currNode = head;
+
+		while (currNode != null) {
+			System.out.print(currNode.data + " -> ");
+			currNode = currNode.next;
+		}
+
+		System.out.println("null");
+	} 
+
+	public static void main(String[] args) {
+		LLPalindrome list = new LLPalindrome();
+	    list.addFirst("list");
+		list.addFirst("a");
+		list.addFirst("is");
+		list.addFirst("this");
+	
+		list.printList();
+		System.out.println(list.isPalindrome(head));
+		
+		
+
+	}
+
+}
+
+
+package linkedlist;
+//https://www.geeksforgeeks.org/reverse-a-list-in-groups-of-given-size/
+public class ReverseLLinK {
+ static Node head;
+ public static class Node{
+	 int data;
+	 Node next;
+	 Node(int data){
+		 this.data=data;
+		 this.next=null;
+	 }
+ }
+	 Node reverse(Node head,int k) {
+		 if(head==null) {
+			 return null;
+		 }
+		 Node current=head;
+		 Node prev=null;
+		 Node next=null;
+		 int count=0;
+		 while(count<k&&current!=null) {
+			  next=current.next;
+			 current.next=prev;
+			 prev=current;
+			 current=next;
+			 count++;
+		 }
+		 if(next!=null) {
+			 head.next=reverse(current,k);
+		 }
+		 return prev;
+	 }
+	 public void add(int data) {
+		 Node newnode=new Node(data);
+		 if(head==null) {
+			 head=newnode;
+			 return;
+		 }
+		 newnode.next=head;
+		 head=newnode;
+	 }
+	 public void printList() {
+		 Node currnode=head;
+		 while(currnode!=null) {
+			 System.out.print(currnode.data+"->");
+			 currnode=currnode.next;
+		 }
+		 System.out.println();
+	 }
+ 
+	public static void main(String[] args) {
+		ReverseLLinK list=new ReverseLLinK();
+		list.add(6);
+		list.add(5);
+		list.add(4);
+		list.add(3);
+		list.add(2);
+		list.add(1);
+		list.printList();
+		list.head=list.reverse(head, 2);
+		list.printList();
+		
+
+	}
+
+}
+
+
+package linkedlist;
+
+import java.util.LinkedList;
+
+public class SearchingList {
+public static void main(String[] args) {
+	LinkedList<Integer> list=new LinkedList<Integer>();
+	list.addFirst(3);
+	list.addFirst(2);
+	list.addFirst(8);
+	list.addFirst(3);
+	list.addFirst(7);
+	list.addFirst(5);
+	list.addFirst(1);
+	System.out.println(list);
+	for(int i=0;i<list.size();i++) {
+		if(list.get(i)==7) {
+			System.out.println(i);
+		}
+	}
+}
+}
+
+
+package linkedlist;
+
+public class StudentLL {
+     Student head;
+     class Student{
+    	 String name;
+    	 Student next;
+    	 Student(String name){
+    		 this.name=name;
+    		 this.next=null;
+    		 }
+     }
+     public void addFirst(String name) {
+    	 Student newStudent=new Student(name);
+    	 if(head==null) {
+    		 head=newStudent;
+    		 return;
+    		 }
+    	newStudent.next=head;
+    	head=newStudent;
+     }
+     public void printNode() {
+    	 Student currStudent=head;
+    	 while(currStudent!=null) {
+    		 System.out.print(currStudent.name+"->");
+    		 currStudent=currStudent.next;
+    	 }
+    	 System.out.println("null");
+     }
+     public void addLast(String name) {
+    	 Student newStudent=new Student(name);
+    	 if(head==null) {
+    		 head=newStudent;
+    		 return;
+    	 }
+    	 Student lastStudent=head;
+    	 while(lastStudent.next!=null) {
+    		 lastStudent=lastStudent.next;
+    	 }
+    	 lastStudent.next=newStudent;
+    	  }
+     public void reverseIterate() {
+    	 if(head==null||head.next==null) {
+    		 return;
+    	 }
+    	 Student prevStudent=head;
+    	 Student currStudent=head.next;
+    	 while(currStudent!=null) {
+    		 Student nextStudent=currStudent.next;
+    		 currStudent.next=prevStudent;
+    		 
+    		 prevStudent=currStudent;
+    		 currStudent=nextStudent;
+    	 }
+    	 head.next=null;
+    	 head=prevStudent;
+     }
+     public Student reverseListRecursive(Student head) {
+    	 if(head==null||head.next==null) {
+    		 return head;
+    	 }
+    	 Student newHead= reverseListRecursive(head.next);
+    	 head.next.next=head;
+    	 head.next=null;
+    	return newHead;	 
+     }
+	public static void main(String[] args) {
+		StudentLL list=new StudentLL();
+	    list.addLast("a");
+		list.addLast("list");
+		list.printNode();
+		list.addFirst("is");
+		list.addFirst("this");
+		list.printNode();
+		list.reverseIterate();
+		list.printNode();
+		list.head=list.reverseListRecursive(list.head);
+
+		
+
+	}
+
+}
+
+
+package precomputationTechniques;
+
+import java.util.Scanner;
+
+public class Factorials {
+
+	public static void main(String[] args) {
+		int m = (int) (1e9 + 7);
+		Scanner sc = new Scanner(System.in);
+		int t = sc.nextInt();
+		while (t > 0) {
+			int n = sc.nextInt();
+			int fact = 1;
+			for (int i = 2; i <= n; i++) {
+				fact = (fact * i) % m;
+			}
+			System.out.println(fact); // original time complexity=O(N*t)
+		}
+
+	}
+
+}
+
+
+package precomputationTechniques;
+
+public class KadenesAlgorithm {
+	public int maxSumSubarray(int arr[]) {
+		int maxSum = 0;
+		int currentSum = 0;
+		for (int i = 0; i < arr.length; i++) {
+			currentSum = currentSum + arr[i];
+			if (currentSum > maxSum) {
+				maxSum = currentSum;
+			}
+			if (currentSum < 0) {
+				currentSum = 0;
+			}
+		}
+		return maxSum;
+	}
+
+	public static void main(String[] args) {
+		int arr[] = new int[] { 5, -4, -2, 6, -1 };
+		KadenesAlgorithm obj = new KadenesAlgorithm();
+		System.out.println(obj.maxSumSubarray(arr));
+
+	}
+
+}
+
+package precomputationTechniques;
+
+import java.util.Scanner;
+
+public class PrefixSum {
+
+	public static void main(String[] args) {
+		int arr[]=new int[]{6, 3, -2, 4, -1, 0, -5};
+		int n=7;
+		for(int i=0;i<n;i++) {
+			System.out.print(arr[i]+" ");
+		}
+      int sum[]=new int[n];
+      sum[0]=arr[0];
+      for(int i=1;i<n;i++) {
+    	  sum[i]=sum[i-1]+arr[i];
+      }
+      System.out.println();
+      for(int i=0;i<n;i++) {
+    	  System.out.print(sum[i]+" ");
+      }
+     /* Scanner sc=new Scanner(System.in);
+      int q=sc.nextInt();
+      int l=sc.nextInt();
+      int r=sc.nextInt();*/
+      int l=0,r=4;
+      if(l<0) {
+    	  System.out.println(sum[r]);
+      }
+      else {
+    	  System.out.println(sum[r]-sum[l-1]);
+      }
+	}
+
+}
+
+
+package precomputationTechniques;
+
+import java.util.Scanner;
+
+public class RangeSum {
+	public static void main(String[] args) {
+		int arr[]=new int[] {6, 3, -2, 4, -1, 0, -5};
+        Scanner sc=new Scanner(System.in);
+        int q=sc.nextInt();
+        while(q>0) {
+        	int l,r;
+        	l=sc.nextInt();
+        	r=sc.nextInt();
+        	long sum=0;
+        	for(int i=l;i<=r;i++) {                      //we should use 1 based array in case of prefix sum.
+        		sum+=arr[i];
+        	}
+        	System.out.println(sum);
+        			
+        }
+        sc.close();                                                                // TC=O(q*n);
+	}
+
+}
+
+
+package precomputationTechniques;
+
+public class SubArraySum {
+	public int maxSumArray(int arr[],int n) {
+		int maxSum=0;
+		for(int i=0;i<n;i++) {
+			int subArraySum=0;
+			for(int j=i;j<n;j++) {
+                subArraySum+=arr[j];
+				if(subArraySum>maxSum) {
+					maxSum=subArraySum;
+				}
+			
+			}
+			
+		}
+		return maxSum;
+	}
+public static void main(String[] args) {
+	int arr[]=new int[] {-4,5,7,-6,10,-15,3};
+	SubArraySum obj=new SubArraySum();
+	System.out.println(obj.maxSumArray(arr, arr.length));
+}
+}
+
+
+package queue;
+
+public class CircularQueues {
+	static class Queue {
+		static int arr[];
+		static int size;
+		static int rear = -1;
+		static int front = -1;// we have to initialize front because in case of circular queue front=-1
+
+		Queue(int n) {
+			arr = new int[n];
+			this.size = n;
+		}
+
+		public static boolean isEmpty() {
+			return rear == -1 && front == -1; // means our queue is empty it has nothing in it
+		}
+
+		public static boolean isFull() {
+			return (rear + 1) % size == front; // means our queue is full nothing can be added in it
+		}
+
+		public static void add(int data) { // method for adding element in queue (enqueue)
+			if (isFull()) { // if queue is full then nothing can be added then return
+				System.out.println("full queue");
+				return;
+			}
+			if (front == -1) { // for adding first element in an empty queue
+				front = 0;
+			}
+			rear = (rear + 1) % size; // increasing the queue by 1 in the rear and adding element
+			arr[rear] = data;
+		}
+
+		public static int remove() { // O(n) //removing element from queue it has return type int because we could
+										// know the removed element
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			int result = arr[front];
+			if (rear == front) { // if queue has only single element then after removal both front and rear
+									// becomes -1
+				rear = front = -1;
+			} else {
+				front = (front + 1) % size; // this condition mainly comes when our front is at last index then we have
+											// to increment it by 1
+			}
+			return result;
+		}
+
+		public static int peek() {
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			return arr[front];
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Queue q = new Queue(5);
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+		System.out.println(q.remove()); // removing front
+		q.add(6);
+		System.out.println(q.remove());
+		q.add(7);
+		while (!q.isEmpty()) {
+			System.out.println(q.peek());
+			q.remove();
+		}
+
+	}
+
+}
+
+
+package queue;
+
+public class QueueLL {
+	public static class Node {
+		int data;
+		Node next;
+
+		Node(int data) {
+			this.data = data;
+			this.next = null;
+		}
+	}
+
+	static class Queue {
+		static Node head = null;
+		static Node tail = null;
+
+		public static boolean isEmpty() {
+			return head == null && tail == null; // means our queue is empty it has nothing in it
+		}
+
+		public static void add(int data) { // method for adding element in queue (enqueue)
+			Node newNode = new Node(data);
+			if (tail == null) { // when there is only one node
+				tail = head = newNode;
+			}
+			tail.next = newNode;
+			tail = newNode;
+		}
+
+		public static int remove() { // O(n) //removing element from queue it has return type int because we could
+										// know the removed element
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			if (head == tail) { // case of single element in node after its removal tail also become null
+				tail = null;
+			}
+			int front = head.data;
+			head = head.next;
+			return front;
+		}
+
+		public static int peek() {
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			return head.data;
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Queue q = new Queue();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+
+		while (!q.isEmpty()) {
+			System.out.println(q.peek());
+			q.remove();
+		}
+
+	}
+
+}
+
+
+package queue;
+
+public class Queues {
+	static class Queue {
+		static int arr[];
+		static int size;
+		static int rear = -1; // we don't initialize front because in case of array front always =0
+
+		Queue(int n) {
+			arr = new int[n];
+			this.size = n;
+		}
+
+		public static boolean isEmpty() {
+			return rear == -1; // means our queue is empty it has nothing in it
+		}
+
+		public static void add(int data) { // method for adding element in queue (enqueue)
+			if (rear == size - 1) { // if queue is full then nothing can be added then return
+				System.out.println("full queue");
+				return;
+			}
+			rear++; // increasing the queue by 1 in the rear and adding element
+			arr[rear] = data;
+		}
+
+		public static int remove() { // O(n) //removing element from queue it has return type int because we could
+										// know the removed element
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			int front = arr[0];
+			for (int i = 0; i < rear; i++) {
+				arr[i] = arr[i + 1]; // since array is shifting by one toward left
+			}
+			rear--; // we have to decrease the rear by 1
+			return front;
+		}
+
+		public static int peek() {
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			return arr[0];
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Queue q = new Queue(5);
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+		while (!q.isEmpty()) {
+			System.out.println(q.peek());
+			q.remove();
+		}
+
+	}
+
+}
+
+
+package queue;
+
+import java.util.*;
+
+public class QueueStack {
+	static class Queue {
+		static Stack<Integer> s1 = new Stack<>();
+		static Stack<Integer> s2 = new Stack<>();
+
+		public static boolean isEmpty() {
+			return s1.isEmpty();
+		}
+
+		public static void add(int data) {
+			while (!s1.isEmpty()) {
+				s2.push(s1.pop()); // pushing all data into stack2 untill stack1 is empty
+			}
+			s1.push(data);
+			while (!s2.isEmpty()) {
+				s1.push(s2.pop());
+			}
+		}
+
+		public static int remove() {
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			return s1.pop(); // removing element from top of stack1 which is front of queue
+		}
+
+		public static int peek() {
+			if (isEmpty()) {
+				System.out.println("empty queue");
+				return -1;
+			}
+			return s1.peek();
+		}
+
+	}
+
+	public static void main(String[] args) {
+		Queue q = new Queue();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+
+		while (!q.isEmpty()) {
+			System.out.println(q.peek());
+			q.remove();
+		}
+	}
+
+}
+
+
+package queue;
+
+import java.util.*;
+
+public class QueueCFAD {
+
+	public static void main(String[] args) {
+		Queue<Integer> q = new ArrayDeque<>();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+
+		while (!q.isEmpty()) {
+			System.out.println(q.peek());
+			q.remove();
+		}
+
+	}
+
+}
+
+
+package queue;
+
+import java.util.*;
+
+public class QueueCFLL {
+
+	public static void main(String[] args) {
+		Queue<Integer> q = new LinkedList<>();
+		q.add(1);
+		q.add(2);
+		q.add(3);
+		q.add(4);
+		q.add(5);
+
+		while (!q.isEmpty()) {
+			System.out.println(q.peek());
+			q.remove();
+		}
+
+	}
+
+}
+
+
+package recursion;
+
+public class Factorial {
+	public static int factorial(int n) {
+		if (n == 0) {
+			return 1;
+		}
+		return n * factorial(n - 1);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(factorial(5));
+
+	}
+
+}
+
+
+package recursion;
+
+public class Factorial {
+	public static int factorial(int n) {
+		if (n == 0) {
+			return 1;
+		}
+		return n * factorial(n - 1);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(factorial(5));
+
+	}
+
+}
+
+
+package recursion;
+
+public class RecusionPrintNum {
+ public static void printNum(int n) {
+	 if(n==6) {        //base case to stop recursive calls
+		 return;
+	 }
+	   System.out.println(n);
+	   printNum(n+1);   //calling recursive functions
+ }
+	public static void main(String[] args) {
+		printNum(1);
+
+	}
+
+}
+
+
+package recursion;
+
+public class StackHeightPower {
+public static int power(int x,int n) {
+	if(n==0) {
+		return 1;
+	}
+	if(x==0) {
+		return 0;
+	}
+	int xpownm1=power(x,n-1);
+	int xpown=x*xpownm1;
+	return xpown;
+}
+	public static void main(String[] args) {
+	 int x=5,n=6;
+	 int ans=power(x,n);
+	 System.out.println(ans);
+
+	}
+
+}
+
+package recursion;
+
+public class SumnNatural {
+	public static int sum(int n) {
+		if (n == 1) {
+			return 1;
+		}
+		return n + sum(n - 1);
+	}
+
+	public static void main(String[] args) {
+		System.out.println(sum(5));
+
+	}
+
+}
+
+
+package searching;
+
+import java.util.Scanner;
+
+public class BinarySearch {    //the array must be sorted before performing binary Search
+	public int BinarySearch(int arr[],int n,int key) {                     //time complexity=O(n/2^k);
+		int startIdx=0;
+		int endIdx=n;
+		while(startIdx<=endIdx) {
+			int midIdx=(startIdx+endIdx)/2;
+			if(key==arr[midIdx]) {
+				return midIdx;
+			}
+			else if(key<arr[midIdx]) {
+				endIdx=midIdx-1;
+			}
+			else if(key>arr[midIdx]) {
+				startIdx=midIdx+1;
+			}
+		}
+		return -1;
+	}
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		BinarySearch obj=new BinarySearch();
+		int n=sc.nextInt();
+		int arr[]=new int[n];
+		for(int i=0;i<arr.length;i++) {
+			arr[i]=sc.nextInt();
+		}
+	int key=sc.nextInt();
+
+	int result=obj.BinarySearch(arr, n, key);
+	System.out.println(result);
+		
+
+	}
+
+}
+
+
+package searching;
+
+import java.util.Scanner;
+
+public class LinearSearch {
+   public int linearSearch(int arr[],int n,int key) {
+	  for(int i=0;i<n;i++) {
+		  if(arr[i]==key) {
+			  return i;
+		  }
+	  }
+	   return -1;
+   }
+	public static void main(String[] args) {
+		LinearSearch obj=new LinearSearch();
+		Scanner sc=new Scanner(System.in);
+	int n=sc.nextInt();
+	int arr[]=new int[n];
+	for(int i=0;i<arr.length;i++) {
+		arr[i]=sc.nextInt();
+	}
+int key=sc.nextInt();
+
+int result=obj.linearSearch(arr, n, key);
+System.out.println(result);
+
+	}
+
+}
+
+
+package sorting;
+
+import java.util.Arrays;
+
+public class BubbleSort {
+	public void bubbleSort(int arr[]) {
+		for (int i = 0; i < arr.length - 1; i++) {
+			for (int j = 0; j < arr.length - i - 1; i++) {
+				if (arr[j] > arr[j + 1]) {
+					swap(arr, j, j + 1);
+				}
+			}
+		}
+	}
+
+	private void swap(int arr[], int idx1, int idx2) {
+		int temp = arr[idx1];
+		arr[idx1] = arr[idx2];
+		arr[idx2] = temp;
+	}
+
+	public static void main(String[] args) {
+		BubbleSort obj = new BubbleSort();
+		int array[] = new int[] { 10, 45, 15, 85, 25, 88 };
+		obj.bubbleSort(array);
+		System.out.println(Arrays.toString(array));
+	}
+
+}
+
+package sorting;
+
+import java.util.Arrays;
+
+public class InsertionSort {
+	public void insertionSort(int arr[]) {
+		for (int i = 1; i < arr.length; i++) {
+			int currentElement = arr[i];
+			int j = i - 1;
+			while (j >= 0 && currentElement < arr[j]) {
+				arr[j + 1] = arr[j];
+				j--;
+			}
+			arr[j + 1] = currentElement;
+		}
+	}
+
+	public static void main(String[] args) {
+		InsertionSort obj = new InsertionSort();
+		int arr[] = new int[] { 100, -50, 87, 78, 25, 89, 41, -52 };
+		obj.insertionSort(arr);
+		System.out.println(Arrays.toString(arr));
+
+	}
+
+}
+
+
+package sorting;
+
+import java.util.Arrays;
+
+public class QuickSort {
+	public void quicksort(int arr[]  ,int low  , int high) {
+        if (low < high) {
+            int pivotidx = partition(arr, low, high);
+            quicksort(arr, low, pivotidx - 1);
+            quicksort(arr, pivotidx + 1, high);
+        }
+	}
+        public int partition(int arr[], int low, int high) {
+	        int pivot = arr[high];
+	        int i=low-1;
+	            for(int j=low;j<high-1;j++) {
+	            	if(arr[j]<pivot) {
+	            		i++;
+	            		swap(arr,i,j);
+	            	}
+	        }
+	            i++;
+	            swap(arr,i,high);
+	            return i;
+	        
+	    }
+        private void swap(int arr[],int index1,int index2){
+	        int temp=arr[index1];
+	        arr[index1]=arr[index2];
+	        arr[index2]=temp;
+	    }
+
+
+	public static void main(String[] args) {
+		QuickSort obj = new QuickSort();
+		int Arr[] = new int[] { 7, 6, 10, 5, 9, 2, 1, 15, 7 };
+		int n=Arr.length;
+		obj.quicksort(Arr, 0,n-1);
+		System.out.println(Arrays.toString(Arr));
+	}
+}
+
+
+package sorting;
+
+import java.util.Arrays;
+
+public class SelectionSort {
+	public void selectionSort(int arr[]) {
+		for(int i=0;i<arr.length-1;i++) {
+			int min=i;
+			for(int j=i+1;j<arr.length;j++) {
+				if(arr[min]>arr[j]) {
+					swap(arr,min,j);
+				}
+			}
+		}
+	}
+	public void swap(int arr[],int index1,int index2) {
+		int temp=arr[index1];
+		arr[index1]=arr[index2];
+		arr[index2]=temp;
+	}
+	public static void main(String[] args) {
+		SelectionSort obj=new SelectionSort();
+		int arr[]=new int[] {100,-50,87,78,25,89,41,-52};
+		obj.selectionSort(arr);
+		System.out.println(Arrays.toString(arr));
+	}
+}
+
+package stack;
+
+public class StackClass {
+	public static class Node {
+		int data;
+		Node next;
+
+		Node(int data) {
+			this.data = data;
+			next = null;
+		}
+	}
+
+	static class Stack {
+		public static Node head;     // this head will be top of the stack
+
+		public static boolean isEmpty() {  // this method will check if list is empty or not and return yes if list is empty no when list is not empty
+			return head == null;
+		}
+
+		public static void push(int data) { // method to push data on the top of stack i.e on the head of the link list
+			Node newNode = new Node(data);
+			if (isEmpty()) {
+				head = newNode;
+				return;
+			}
+			newNode.next = head;
+			head = newNode;
+		}
+
+		public static int pop() {        //method to delete element from the top of the stack
+			
+			if (isEmpty()) {            //if list is empty and no element available to delete the return -1
+				return -1;
+			}
+			Node top = head;
+			head = head.next;        //moving the head to next node to delete a stack element
+			return top.data;
+		}
+
+		public static int peek() {    //method to retrieve data from the top of the stack 
+			if (isEmpty()) {
+				return -1;
+			}
+			Node top = head;
+			return top.data;
+		}
+	}
+
+	public static void main(String args[]) {
+		Stack stack = new Stack();
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+		stack.push(4);
+
+		while (!stack.isEmpty()) {             //run loop till stack is not empty
+			System.out.println(stack.peek());
+			stack.pop();
+		}
+	}
+}
+
+package stack;
+
+import java.util.*;
+
+public class StackCF {
+	public static void main(String[] args) {
+	 Stack<Integer> stack = new Stack<>();
+     stack.push(1);
+     stack.push(2);
+     stack.push(3);
+     stack.push(4);
+
+     while(!stack.isEmpty()) {
+         System.out.println(stack.peek());
+         stack.pop();
+     }
+}
+}
+
+
+package stack;
+
+import java.util.ArrayList;
+
+public class StackArrayList {
+	 static class Stack {
+	        ArrayList<Integer> list = new ArrayList<>();
+
+	        public void push(int data) {
+	            list.add(data);
+	        }
+
+	        public boolean isEmpty() {
+	            return list.size() == 0;
+	        }
+
+	        public int pop() {
+	            if(isEmpty()) {
+	                return -1;
+	            }
+	            int top = list.remove(list.size()-1);
+	            return top;
+	        }
+
+	        public int peek() {
+	            if(isEmpty()) {
+	                return -1;
+	            }
+	            return list.get(list.size()-1);
+	        }
+	    }
+
+	public static void main(String[] args) {
+	     Stack stack = new Stack();
+	        stack.push(1);
+	        stack.push(2);
+	        stack.push(3);
+	        stack.push(4);
+
+	        while(!stack.isEmpty()) {
+	            System.out.println(stack.peek());
+	            stack.pop();
+	        }
+
+	}
+
+}
+
+
+package stack;
+
+import java.util.Stack;
+
+public class PushAtBottom {
+	public static void pushAtBottom(int data, Stack<Integer> s) {
+		if (s.isEmpty()) {
+			s.push(data);
+			return;
+		}
+		int top = s.pop();
+		pushAtBottom(data, s);
+		s.push(top);
+	}
+
+	public static void main(String[] args) {
+		Stack<Integer> stack = new Stack<>();
+		stack.push(1);
+		stack.push(2);
+		stack.push(3);
+		pushAtBottom(4, stack);
+		while (!stack.isEmpty()) {
+			System.out.println(stack.peek());
+			stack.pop();
+		}
+
+	}
+
+}
+
+
+package string;                                                                                               
+import java.util.*;                                                                                           
+import java.util.Scanner;                                                                                     
+                                                                                                              
+public class Strings {                                                                                        
+                                                                                                              
+	public static void main(String[] args) { 
+		 
+	     /* int number = 123;      //toString method
+	      String str = Integer.toString(number);
+	      System.out.println(str.length());
+	      */
+	  
+
+		 
+	       String str = "123";     //parseInt
+	       int number = Integer.parseInt(str);
+	       System.out.println(number);
+	      
+
+		String sentence="My name is tony";  //for taking a particular string                                                                   
+	    String name =sentence.substring(11,sentence.length());                                                
+		System.out.println(name);
+		
+		/*String name1="tony"; //compairing two strings                                                      
+		String name2="tony";                                                                                  
+		if(name1.compareTo(name2)==0) {                                                                       
+			System.out.println("string are equal");                                                           
+		}                                                                                                     
+		else {                                                                                                
+			System.out.println("Strings are not equal");                                                      
+		}*/ 
+		                                                                                                    
+		String FirstName="tony";       //concation or joining two strings                                                                     
+		String LastName="Stark";                                                                              
+		String FullName=FirstName+" "+LastName;                                                               
+		System.out.println(FullName.length());                                                                         
+		                                                                                                      
+		/*Scanner sc=new Scanner(System.in);   //taking user string                                                               
+		String name=sc.nextLine();                                                                            
+		System.out.print("Your name is:"+name);//its like an array. 
+		String name=new String("Vinay kumar "); 
+		for(int i=0;i<name.length();i++) {                                                                  
+		System.out.print(name.charAt(i));                                                                     
+	}                                                                                                         
+	                                                                                                        
+	String name1=name.concat(" yadav");     //concat method                                                                      
+	System.out.print(name+" "+name1);                                                                         
+	String nameCap=name.toUpperCase(); //    convert string in uppercase                                                                    
+	System.out.print(" "+nameCap);  */                                                                        
+                                                                                                              
+		                                                                                                      
+	}                                                                                                         
+                                                                                                              
+}                                                                                                             
+    
+package string;
+
+import java.util.Scanner;
+
+public class UsernameString {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		String email=sc.next();
+		String userName="";
+		for(int i=0;i<email.length();i++) {
+			if(email.charAt(i)=='@') {
+				break;
+		}
+			else {
+				userName+=email.charAt(i);
+			}
+		}
+		
+		System.out.println(userName);
+
+	}
+
+}
+
+
+package string;
+
+public class StringBuilders {
+
+	public static void main(String[] args) {
+		
+		/*StringBuilder sb=new StringBuilder("tony");  //String Builder declaration
+		System.out.println(sb);*/
+		
+		/*StringBuilder sb=new StringBuilder("tony");  //get a character from particular index
+		System.out.println(sb.charAt(2));*/
+		
+		/*StringBuilder sb=new StringBuilder("tony"); //set character at index
+		sb.setCharAt(0, 'L');
+		System.out.println(sb);*/
+		
+		/*StringBuilder sb=new StringBuilder("tony");   //insert character at index 
+		sb.insert(0, 'S');
+		System.out.println(sb);*/
+		
+		/*StringBuilder sb=new StringBuilder("Stony");  // delete a character;
+		sb.delete(0, 1);
+		System.out.println(sb);*/
+		
+		/*StringBuilder sb=new StringBuilder("tony");    // Append i.e to add something at the end of the string
+		sb.append(" stark");
+		System.out.println(sb);*/
+		
+		StringBuilder sb=new StringBuilder("tony");
+		System.out.println(sb.length());
+		
+		
+
+	}
+
+}
+
+
+package string;
+
+import java.util.Scanner;
+
+public class StringArrayLength {
+
+	public static void main(String[] args) {
+		Scanner sc=new Scanner(System.in);
+		int size=sc.nextInt();
+		String arr[]=new String[size];       
+		int totalLength=0;
+		for(int i=0;i<size;i++) {
+			arr[i]=sc.next();
+			totalLength+=arr[i].length();
+		}
+		System.out.println(totalLength);
+
+	}
+
+}
+
+
+package string;
+
+public class ReverseStringIterate {
+	public String reverseIterate(String str) {
+		String rev="";
+		for(int i=str.length()-1;i>=0;i--) {
+			rev+=str.charAt(i);
+		}
+		return rev;
+	}
+
+	public static void main(String[] args) {
+		ReverseStringIterate obj=new ReverseStringIterate();
+		System.out.println(obj.reverseIterate("hello world"));
+
+	}
+
+}
+
+
+package string;
+
+//https://www.javatpoint.com/program-to-determine-whether-one-string-is-a-rotation-of-another
+
+public class StringRotation {
+	public static void main(String[] args) {
+		String str1 = "abcde";
+		String str2 = "deabc";
+		if (str1.length() != str2.length()) {
+			System.out.println("string 2 is not rotation of string 1");
+		}
+		else {
+			str1 = str1.concat(str1);
+			if (str1.indexOf(str2) != -1) 
+				System.out.println("Second string is the rotation of the first String");
+			
+			else 
+				System.out.println("second string is not the rotation of the first string");
+			
+		}
+
+	}
+
+}
+
+
+package string;
+
+import java.util.Scanner;
+
+public class ReplaceString {
+
+	public static void main(String[] args) {
+	 Scanner sc=new Scanner(System.in);
+	 String str=sc.next();
+	 String result="";
+	 for(int i=0;i<str.length();i++) {
+		 if(str.charAt(i)=='e') {
+			 result+='i';
+		 }
+		 else {
+			 result+=str.charAt(i);
+		 }
+	 }
+	 System.out.println(result);
+
+	}
+
+}
+
+
+package string;
+
+public class DuplicateString {
+
+	public static void main(String[] args) {
+		String str="Great Responsibility";
+		int count;
+		char string[]=str.toCharArray();
+		System.out.println("Duplicate characters are:");
+		for(int i=0;i<string.length;i++) {      ////Counts each character present in the string
+			count=1;
+			for(int j=i+1;j<string.length;j++) {
+				if(string[i]==string[j]&& string[i]!=' ') {  //' 'is used in case of characters
+					count++;
+					string[j]='0';   ////Set string[j] to 0 to avoid printing visited character  
+				}
+			}
+			if(count>1&&string[i]!='0') {   //A character is considered as duplicate if count is greater than 1 
+				System.out.println(string[i]);
+			}
+		}
+
+	}
+
+}
+
+
+package string;
+
+public class CheckPalindrome {
+
+	public static void main(String[] args) {
+		String str="Kayak";
+		boolean flag=true;
+		str=str.toLowerCase();
+		for(int i=0;i<str.length()/2;i++) {
+			if(str.charAt(i)!=str.charAt(str.length()-i-1)) {
+		    flag=false;
+		    break;
+			}
+		}
+    if(flag) {
+    	System.out.println("Given string is palindrome");
+    }
+    else {
+    	System.out.println("Given string is not palindrome");
+    }
+	}
+
+}
+
+
+package trees;
+
+public class BuildBinaryTrees {
+ static class Node{     //this node class will represent each tree single node
+	 int data;
+	 Node left;
+	 Node right;
+	 Node(int data){
+		 this.data=data;
+		 this.right=null;   //right child =null
+		 this.left=null;    //left child=null
+	 }
+ }
+ static class BinaryTree{
+	 static int idx=-1;
+	 public static Node buildTree(int node[]) {       //this function returns root node
+		 idx++;
+		 if(node[idx]==-1) {   
+			 return null;      //because -1 represents null node
+		 }
+		 Node newnode=new Node(node[idx]);
+		 newnode.left=buildTree(node);
+		 newnode.right=buildTree(node);
+		 return newnode;      //this will return root node
+	 }
+	 
+ }
+	public static void main(String[] args) {
+		int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+		BinaryTree tree=new BinaryTree();
+		Node root=tree.buildTree(nodes);
+		System.out.println(root.data);  //if tree is build correctly root will have 1 
+
+	}
+
+}
+
+
+package trees;
+       //tc O(n)
+
+public class PreOrderTraversal {
+	public static class Node{
+		int data;
+		Node left;
+		Node right;
+		Node(int data){
+			this.data=data;
+			this.left=null;
+			this.right=null;
+		}
+	}
+	public static class BinaryTree{
+		static int idx=-1;
+	public static Node buildTree(int node[]) {
+		idx++;
+		if(node[idx]==-1) {
+			return null;
+		}
+		Node newnode=new Node(node[idx]);
+		newnode.left=buildTree(node);
+		newnode.right=buildTree(node);
+		return newnode;
+	}
+	}
+	public static void preorder(Node root) {
+		if(root==null) {    //base case 
+			return;
+		}
+		System.out.print(root.data+" ");   //printing the root 
+		preorder(root.left);               //then printing the left subtree
+		preorder(root.right);              //printing the right subtree
+	}
+
+	public static void main(String[] args) {
+		int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+		BinaryTree tree=new BinaryTree();
+		Node root=tree.buildTree(nodes);
+		preorder(root);
+
+	}
+
+}
+
+
+package trees;
+
+public class PostOrderTraversal {    //tc O(n)
+	static class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	public static class BinaryTree {
+		static int idx = -1;
+
+		public static Node buildTree(int node[]) {
+			idx++;
+			if (node[idx] == -1) {
+				return null;
+			}
+			Node newnode = new Node(node[idx]);
+			newnode.left = buildTree(node);
+			newnode.right = buildTree(node);
+			return newnode;
+		}
+
+	}
+
+	public static void postorder(Node root) {
+		if (root == null) {
+			return;
+		}
+		postorder(root.left);
+		postorder(root.right);
+		System.out.print(root.data + " ");
+
+	}
+
+	public static void main(String[] args) {
+		int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+		BinaryTree tree = new BinaryTree();
+		Node root = tree.buildTree(nodes);
+		postorder(root);
+
+	}
+
+}
+
+
+package trees;
+
+import java.util.*;
+
+public class LevelOrderTraversal {
+	static class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	public static class BinaryTree {
+		static int idx = -1;
+
+		public static Node buildTree(int node[]) {
+			idx++;
+			if (node[idx] == -1) {
+				return null;
+			}
+			Node newnode = new Node(node[idx]);
+			newnode.left = buildTree(node);
+			newnode.right = buildTree(node);
+			return newnode;
+		}
+	}
+
+	public static void levelOrder(Node root) {
+		if (root == null) {
+			return;
+		}
+		Queue<Node> q = new LinkedList<>();
+		q.add(root);
+		q.add(null);
+		while (!q.isEmpty()) {
+			Node currentnode = q.remove();
+			if (currentnode == null) {
+				System.out.println();
+				if (q.isEmpty()) {
+					break;
+				} else {
+					q.add(null);
+				}
+			} else {
+				System.out.print(currentnode.data + " ");
+				if (currentnode.left != null) {
+					q.add(currentnode.left);
+				}
+				if (currentnode.right != null) {
+					q.add(currentnode.right);
+				}
+			}
+		}
+	}
+
+	public static void main(String[] args) {
+		int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+		BinaryTree tree = new BinaryTree();
+		Node root = tree.buildTree(nodes);
+		levelOrder(root);
+	}
+
+}
+
+
+package trees;
+public class InOrderTraversal {  // tc O(n)
+	public static class Node{
+		int data;
+		Node left;
+		Node right;
+		Node(int data){
+			this.data=data;
+			this.left=null;
+			this.right=null;
+		}
+	}
+ public static class BinaryTree{
+	 static int idx=-1;
+	 public static Node buildTree(int node[]) {
+		 idx++;
+		 if(node[idx]==-1) {
+			 return null;
+		 }
+		 Node newnode=new Node(node[idx]);
+		 newnode.left=buildTree(node);
+		 newnode.right=buildTree(node);
+		 return newnode;
+	 }
+ }
+ public static  void inorder(Node root) {
+	 if(root==null) {
+		 return;
+	 }
+	 inorder(root.left);   //printing left subtree
+	 System.out.print(root.data+" ");   //printing root
+	 inorder(root.right);
+ }
+	public static void main(String[] args) {
+		int nodes[] = {1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1};
+		BinaryTree tree=new BinaryTree();
+		Node root=tree.buildTree(nodes);
+		inorder(root);
+
+	}
+
+}
+
+
+package trees;
+
+public class HeightOfTree {
+
+	static class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	static class BinaryTree {
+		static int idx = -1;
+
+		static Node buildTree(int node[]) {
+			idx++;
+			if (node[idx] == -1) {
+				return null;
+			}
+			Node newnode = new Node(node[idx]);
+			newnode.left = buildTree(node);
+			newnode.right = buildTree(node);
+			return newnode;
+		}
+	}
+
+	public static int height(Node root) { // tc O(n)
+		if (root == null) { // base case for recursive function
+			return 0;
+		}
+		int leftnode = height(root.left); // calculating height of  leftSubtree
+		int rightnode = height(root.right);// calculating height of  rightSubtree
+		int myHeight=Math.max(leftnode,rightnode) + 1; // total height
+		return myHeight;
+	}
+
+	public static void main(String[] args) {
+		int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+		BinaryTree tree = new BinaryTree();
+		Node root = tree.buildTree(nodes);
+		System.out.println(height(root));
+
+
+			}
+
+}
+
+
+package trees;
+
+public class CountOfNode {
+	static class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	static class BinaryTree {
+		static int idx = -1;
+
+		static Node buildTree(int node[]) {
+			idx++;
+			if (node[idx] == -1) {
+				return null;
+			}
+			Node newnode = new Node(node[idx]);
+			newnode.left = buildTree(node);
+			newnode.right = buildTree(node);
+			return newnode;
+		}
+	}
+
+	public static int countOfnodes(Node root) { // tc O(n)
+		if (root == null) { // base case for recursive function
+			return 0;
+		}
+		int leftnode = countOfnodes(root.left); // counting number of nodes in leftSubtree
+		int rightnode = countOfnodes(root.right);// counting number of nodes in rightSubtree
+		return leftnode + rightnode + 1; // total number of nodes
+	}
+
+	public static void main(String[] args) {
+		int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+		BinaryTree tree = new BinaryTree();
+		Node root = tree.buildTree(nodes);
+		System.out.println(countOfnodes(root));
+
+	}
+
+}
+
+
+package trees;
+
+public class SumOfNodes {
+	static class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	static class BinaryTree {
+		static int idx = -1;
+
+		static Node buildTree(int node[]) {
+			idx++;
+			if (node[idx] == -1) {
+				return null;
+			}
+			Node newnode = new Node(node[idx]);
+			newnode.left = buildTree(node);
+			newnode.right = buildTree(node);
+			return newnode;
+		}
+	}
+
+	public static int sumOfnodes(Node root) { // tc O(n)
+		if (root == null) { // base case for recursive function
+			return 0;
+		}
+		int leftnode = sumOfnodes(root.left); // counting sum of nodes in leftSubtree
+		int rightnode = sumOfnodes(root.right);// counting sum of nodes in rightSubtree
+		return leftnode + rightnode + root.data; // total sum of nodes
+	}
+
+	public static void main(String[] args) {
+		int nodes[] = { 1, 2, 4, -1, -1, 5, -1, -1, 3, -1, 6, -1, -1 };
+		BinaryTree tree = new BinaryTree();
+		Node root = tree.buildTree(nodes);
+		System.out.println(sumOfnodes(root));
+
+	}
+}
+
+
+import java.util.Stack;
+public class BalancedExpression {
+ public static boolean isBalanced(String exp) {
+	 if(exp==null ||exp.length()%2==1) {
+		 return false;
+	 }
+	 Stack<Character>stack=new Stack<>();
+	 for(char ch: exp.toCharArray()) {
+		 if(ch=='(') {
+			 stack.push(')');
+		 }
+		 else if(ch=='[') {
+			 stack.push(']');
+		 }
+		 else if(stack.isEmpty()||stack.pop()!=ch) {
+			 return false;
+		 }
+	 }
+	 return stack.empty();
+ }
+	public static void main(String[] args) {
+		String exp="((x+y)+z )";
+		if(isBalanced(exp)) {
+			System.out.println("expression is balanced");
+		}
+		else {
+			System.out.println("expression is not balanced");
+		}
+	}
+
+}
+
+
+public class LCS {
+ public static int LCSLength(String text1,String text2,int m,int n) {
+	 if(m==0||n==0) {
+		 return 0;
+	 }
+	 if(text1.charAt(m-1)==text2.charAt(n-1)) {
+		 return LCSLength(text1,text2,m-1,n-1)+1;
+	 }
+	 return Integer.max(LCSLength(text1,text2,m,n-1),LCSLength(text1,text2,m-1,n));
+ }
+	public static void main(String[] args) {
+		String text1 = "abcde", text2 = "ace" ;
+		System.out.println(LCSLength(text1,text2,text1.length(),text2.length()));
+
+
+	}
+
+}
+
+
+
+package trees;
+
+public class BuildBST {
+	static class Node{
+		int data;
+		Node left;
+		Node right;
+		Node(int data){
+			this.data=data;
+			this.left=null;
+			this.right=null;
+		}
+	}
+	public static class BST{
+	public static Node buildBST(Node root,int val) {
+		if(root==null) {         //if we encounter a null node in that case we will create new node
+			return new Node(val);
+		}
+		if(val<root.data) {
+			root.left=buildBST(root.left,val);      //if value is less than root then it will move in the left of bst
+		}
+		else {
+			root.right=buildBST(root.right,val);   //if value id greater than root then it will move to the right of the tree
+		}
+		return root;
+	}
+	public static void inorderBST(Node root) {         // inorder traversal of  bst
+		if(root==null) {
+			return;
+		}
+		inorderBST(root.left);
+		System.out.print(root.data+" ");
+		inorderBST(root.right);
+	}
+	}
+	public static void main(String[] args) {
+     BST tree =new BST();
+     Node root=null;
+     root=tree.buildBST(root, 5);
+     tree.buildBST(root, 1);
+     tree.buildBST(root, 2);
+     tree.buildBST(root, 3);
+     tree.buildBST(root, 4);
+     tree.buildBST(root, 7);
+     tree.inorderBST(root);
+     
+     
+     }
+	}
+
+
+package trees;
+
+public class SearchingBST {
+	static class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+
+	static Node searchInBst(Node root, int key) {
+		if(root==null) {
+			return null;    //base case that there is no node available 
+		}
+		if (root.data == key) {     //if root data is equal to key then we should return root
+			return root;
+		}
+		if (root.data > key) {      //if root data is less than key then we should search in left subtree
+			return searchInBst(root.left, key);
+		}
+		return searchInBst(root.right, key);    // if root data is greater than the key then we should search in right subtree
+	}
+
+	public static void main(String[] args) {
+		Node root = new Node(4);
+		root.left = new Node(2);
+		root.right = new Node(5);
+		root.left.left = new Node(1);
+		root.left.right = new Node(3);
+		root.right.right = new Node(6);
+		if (searchInBst(root, 5) == null) {
+			System.out.println("Key does'nt exist");
+		} else {
+			System.out.println("key exists");
+		}
+
+	}
+
+}
+
+package trees;
+
+public class DeleteNodeBst {
+	static class Node {
+		int data;
+		Node left;
+		Node right;
+
+		Node(int data) {
+			this.data = data;
+			this.left = null;
+			this.right = null;
+		}
+	}
+	static Node insert(Node root, int val) {
+		if (root == null) {
+			return new Node(val);
+		}
+		if (val < root.data) {
+			root.left = insert(root.left, val);
+		}
+		if (val > root.data) {
+			root.right = insert(root.right, val);
+		}
+		return root;
+	}
+	
+	static Node inorderSucc(Node root) {
+		Node curr = root;
+		while (curr != null && curr.left != null) {
+			curr = curr.left;
+		}
+		return curr;
+	}
+
+	static Node deleteInBst(Node root, int key) {
+		if(root==null) {
+			return null;
+		}
+		if (key < root.data) {
+			root.left = deleteInBst(root.left, key);
+		} else if (key > root.data) {
+			root.right = deleteInBst(root.right, key);
+		} else { // the key value is equal to the the root data and which is also the node to be deleted
+					
+			if (root.left == null && root.right == null) { // if the node to be deleted has no child then set the node
+															// to null
+				root = null;
+			} else if (root.left == null) { // if the node to be deleted has only one right child
+				root = root.right;
+			} else if (root.right == null) { // if the node to be deleted has only one left child
+				root = root.left;
+			} else { // if the node to be deleted has two children node
+				Node temp = inorderSucc(root.right); // finding the minimum node from the right subtree
+				root.data = temp.data; // exchanging data between root node and temp node
+				root.right = deleteInBst(root.right, temp.data); // deleting the duplicate node from the right subtree
+			}
+		}
+		return root;
+	}
+
+	public static void inorder(Node root) {
+		if (root == null) {
+			return;
+		}
+		inorder(root.left);
+		System.out.print(root.data + " ");
+		inorder(root.right);
+	}
+
+	public static void main(String[] args) {
+//		Node root = new Node(4);
+//		root.left = new Node(2);
+//		root.right = new Node(5);
+//		root.left.left = new Node(1);
+//		root.left.right = new Node(3);
+//		root.right.right = new Node(6);
+//		inorder(root);
+//		deleteInBst(root, 5);
+//		System.out.println();
+//		inorder(root);
+		Node root = null;
+		root = insert(root, 4);
+		insert(root, 2);
+		insert(root, 5);
+		insert(root, 1);
+		insert(root, 3);
+		insert(root, 6);
+		inorder(root);
+		deleteInBst(root, 3);
+		System.out.println();
+		inorder(root);
+	}
+}
+                                                                                                          
+import java.util.Scanner;
+
+public class MaxDiff {
+	static void maxDiff(int arr[],int n) {
+		for(int j=0;j<n;j++) {
+			for(int i=0;i<1;i++) {
+				if(arr[j]>arr[i]&&j==n-1) {
+					System.out.println(j-i);
+				}
+				else if(arr[j]<arr[i]&&j==n-1) {
+					System.out.println(-1);
+				}
+			}
+		}
+		}
+	
+
+	public static void main(String[] args) {
+		int N;
+		Scanner sc=new Scanner(System.in);
+		System.out.println("enter length of array:");
+		N=sc.nextInt();
+		int Arr[]=new int[N];
+		System.out.println("'enter array elements:");
+		for(int i=0;i<N;i++) {
+		Arr[i]=sc.nextInt();
+		}
+        MaxDiff m=new MaxDiff();
+        m.maxDiff(Arr, N);
+	}
+
+}
+
+import java.util.*;
+public class Mock {
+  static int subarrayLength(int arr[],int n,int k) {
+	  HashMap<Integer,Integer> map=new HashMap<>();
+	  int sum=0, maxLength=0;
+	  for(int i=0;i<n;i++) {
+		  sum=sum+arr[i];
+		  if(sum==k) {
+			  maxLength=i+1;
+		  }
+		  if(!map.containsKey(sum)) {
+			  map.put(sum, i);
+		  }
+		  if(map.containsKey(sum-k)) {
+			  if(maxLength<(i-map.get(sum-k)))
+				  maxLength=i-map.get(sum-k);
+		  }
+	  }
+	  return maxLength;
+  }
+	public static void main(String[] args) {
+		int arr[]= {1, 1, 1, 1, 1, 1, 1, 2, 2, 2, 2, 3, 3, 7, 8};
+		int n=arr.length;
+		int k=7;
+		System.out.println(subarrayLength(arr, n, k));
+
+	}
+
+}
+//Given an input string, write a function that returns the Run Length Encoded string for the input string.
+//For example, if the input string is “wwwwaaadexxxxxx”, then the function should return “w4a3d1e1x6”
+//aaaabbbaaaccc arr:[4 1 1 1 2 3 5], k = 5
+
+import java.util.*;
+public class Parenthesis {
+	public static void createParenthesis(int n,int open,int close,String s,ArrayList<String> ans ) {
+		if(open==n && close==n) {
+			ans.add(s);
+			return;
+		}
+		if(open<n) {
+			createParenthesis(n,open+1,close,s+"(",ans);
+		}
+		if(close<open) {
+			createParenthesis(n,open,close+1,s+")",ans);
+		}
+	}
+
+	public static void main(String[] args) {
+		int n=2;
+		ArrayList<String> ans=new ArrayList<>();
+		createParenthesis(n,0,0," ",ans);
+		for(String s:ans) {
+			System.out.println(s);
+		}
+
+	}
+
+}
+
+import java.util.*;
+public class ValidSubstring {
+   static int maxLengthSubString(String s) {
+	   int length=s.length();
+	   Stack<Integer> stack=new Stack<>();
+	   stack.push(-1);
+	   int result=0;
+	   for(int i=0;i<length;i++) {
+		   if(s.charAt(i)=='(') {
+			   stack.push(i);
+		   }
+	   
+	   else {
+		   if(!stack.isEmpty()) {
+			   stack.pop();		   }
+	   }
+	   if(!stack.isEmpty()) {
+		   result=Math.max(result, i-stack.peek());
+	   }
+	   else {
+		   stack.push(i);
+	   }
+	   }
+	   return result;
+   }
+	public static void main(String[] args) {
+		String s ="(()()(()(())((()()(())";
+		System.out.println(maxLengthSubString(s));
+
+	}
+
+}
+
+
+
+

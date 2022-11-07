@@ -1,0 +1,42 @@
+git --version // it is used to check the version of the git
+git config --list // it is used to check the name of user and its email
+cd/ProjectHtml // it is used to access a folder on desktop
+ls // it is used to enter the folder and see what lies inside
+git init // used to create an empty git repostitory in the folder
+git status // to see the status of the files
+git add index1.html// to add this index .html file to git repo after this we can use git commit
+git commit -m"first Git" // this -m is generally used to add the comment
+git checkout about.html // this is used to undo the changes inside the about.html file
+git diff // it is used to see the changes in the file which has not been staged yet means which is not added like git add file
+git dif --staged // it is used to see the files which are modified and staged by using git add filenamedit 
+git diff HEAD // used to track the file after commiting
+git show // used to show object
+Display the most recent commits and status of the head.
+$git log
+$git log -p -2
+Output as one commit per line
+$git log –-oneline
+Display the files that have been modified
+$git log –-stat
+Display the modification on each line of a file:
+$ git blame <file name>
+
+git rm -f serivces.html // will permanently delete the file what if we want to remove it only from staged area then--
+git rm --cached services.html// will bring it back in the untracked stage
+git branch --list// it determines the list of branch
+git branch loginbranch // login branch is the new branch created by using the command git branch
+git checkout loginbranch // it used to switch from master branch to login branch ie used to travel b/w branches
+git checkout master// it will take you to the master branch
+ git branch -D loginbranch2 // it will delete the branch even if it is not merged with master branch but if it is merged then we have to use -d in place of -D to use this firstly we have to check out to master branch from loginbranch2
+git merge loginbranch// it will merge the loginbranch to master branch firstly we have to came into master branch then we can do this only
+git checkout -b registerbranch// this will switch from master branch and create registerbranch and log into that branch
+git remote add origin https://github.com/Vinayyadav296/gitTutoriral.git // to add the origin of github in which files are to be pushed
+git remote -v  // it gives the origin path of push and fetch
+git push -u origin main // it will push the branh whose name is main on to the github along with its branches
+git pull https://github.com/Vinayyadav296/gitTutoriral.git // it will clone the repository
+
+
+
+
+
+

@@ -1,0 +1,157 @@
+npx create-react-app hello-world // this is used to open the react app with low configuration from inside the vs code terminal
+
+ cd hello-world
+  npm start  --> it will start the index.html file and display it in the browser
+
+
+1. What is react?
+Ans. React is an open source javascript library for building user interfaces.
+React is a project created and maintained by Facebook.
+React has a component based architecture. This lets you break down your application into small encapsulated parts which can then be composed to make more complex UI.
+
+2.What are advantages of react?
+Ans.React has a component based architecture. This lets you break down your application into small encapsulated parts which can then be composed to make more complex UI.
+React is declarative.
+React will make it painless for you to create complex UIs by abstracting away the difficult parts. 
+React will handle efficiently updating and rendering just the right components in your application when your data changes. 
+DOM updates which is one of the more expensive operations is handled gracefully in React.
+Write once, learn anywhere.
+
+3. what is virtual dom?
+Ans.The virtual DOM (VDOM) is a programming concept where an ideal, or “virtual”, representation of a UI is kept in memory and synced with the “real” DOM by a library such as ReactDOM. This process is called reconciliation.
+
+A virtual DOM object is a representation of a DOM object, like a lightweight copy.
+
+A virtual DOM object has the same properties as a real DOM object, but it lacks the real thing’s power to directly change what’s on the screen.
+
+Manipulating the DOM is slow. Manipulating the virtual DOM is much faster, because nothing gets drawn onscreen. Think of manipulating the virtual DOM as editing a blueprint, as opposed to moving rooms in an actual house.
+When you render a JSX element, every single virtual DOM object gets updated.
+Once the virtual DOM has updated, then React compares the virtual DOM with a virtual DOM snapshot that was taken right before the update.
+
+By comparing the new virtual DOM with a pre-update version, React figures out exactly which virtual DOM objects have changed. This process is called “diffing.”
+
+Once React knows which virtual DOM objects have changed, then React updates those objects, and only those objects, on the real DOM.
+
+In summary, here’s what happens when you try to update the DOM in React:
+
+The entire virtual DOM gets updated.
+The virtual DOM gets compared to what it looked like before you updated it. React figures out which objects have changed.
+The changed objects, and the changed objects only, get updated on the real DOM.
+Changes on the real DOM cause the screen to change.
+
+4. What is lifecycle of a component?
+Ans.Each component in React has a lifecycle which you can monitor and manipulate during its three main phases.
+The three phases are: Mounting, Updating, and Unmounting.
+Mounting means putting elements into the DOM.
+
+React has four built-in methods that gets called, in this order, when mounting a component:
+
+constructor()
+getDerivedStateFromProps()
+render()
+componentDidMount()
+
+the next phase in the lifecycle is when a component is updated.
+
+A component is updated whenever there is a change in the component's state or props.
+
+React has five built-in methods that gets called, in this order, when a component is updated:
+
+getDerivedStateFromProps()
+shouldComponentUpdate()
+render()
+getSnapshotBeforeUpdate()
+componentDidUpdate()
+
+The next phase in the lifecycle is when a component is removed from the DOM, or unmounting as React likes to call it.
+
+React has only one built-in method that gets called when a component is unmounted:
+
+componentWillUnmount()
+
+5.What are lifecycle hooks?
+Ans.React Hooks are functions that allow you to “hook into” a React state and the lifecycle features within function components.Hooks do not work inside the class
+With the release of React 16.8, developers can now write stateful functional components with Hooks, which eliminates a lot of verbosity in a class-based component, and makes the code easier and simpler to write and read. The two most commonly used default hooks are useState and useEffect which are used to handle stateful data in a functional component and for creating side effects within. useEffect works similarly to the three lifecycle methods: componentDidMount, componentDidUpdate, and componentWillUnmount.
+
+6.what are lifecycle methods?
+Ans.Methods mentioned in the three phases of the lifecycle of a component
+
+7.can we use lifecycle methods in functional components?
+the lifecycle methods are very useful in react application development. Even though they are not available in functional components, we can achieve the functionality of componentDidMount, componentDidUpdate, and componentWillUnmount using the useEffect() hook.
+
+8.Create a counter application using useState?
+Ans.Let us start:
+
+We can build the project either using class or function. Classes use states and props while functions use React Hooks like useState and useEffect. I have used functions in this project.
+Once you create your React project, you will find a file named App.js.
+
+App.js file
+We will be working on this file.
+Remove everything inside the return() part.
+Enter the below code in the return(), it will display “This is Counter App” text in the localhost.
+function App(){
+return (
+<div>
+<h1>This is Counter App</h1>
+</div>
+);
+}
+useState: useState is a React hook. Import {useState} from 'react’ in your application. The value we pass through useState will be the default state, which in our example is 0.
+useState always returns an array with two values in which the first one is the state, which in our example is count, and the second one in the array is the setCount function which is used to update the count value.
+Your App.js file should look like this:
+import './App.css';
+import React,{useState} from 'react';
+function App() {
+const [count,setCount] = useState(0);
+return (
+<div>
+<h1>This is {count} </h1>
+<button onClick={()=>setCount(count+1)}>
+Click me
+</button>
+</div>
+);
+}
+export default App;
+So, in our code, when we click on the “click me” button, count will move from 0 to 1 since our setCount call increments count by 1 (count+1), it will update the count value every time we click on the button.
+I hope you understood useState. So, now let us start with useEffect.
+useEffect: In order to use this useEffect hook, firstly, you need to import it from ‘react’. This hook helps you to tell React that your component needs to do something after rendering. React will remember this function and call later after updating the DOM.
+useEffect by default runs both after the first render and also after every update.
+Let us see how we implement useEffect code in our application.
+import React,{useState, useEffect} from 'react';
+function App() {
+const [count,setCount] = useState(0);
+useEffect(() => console.log(count));
+return (
+<div>
+<h1>This is {count} </h1>
+<button onClick={()=>setCount(count+1)}>
+Click me
+</button>
+</div>
+);
+}
+export default App;
+
+9.Explain useEffect? answer is on w3schools
+The useEffect Hook allows you to perform side effects in your components.
+
+Some examples of side effects are: fetching data, directly updating the DOM, and timers.
+
+useEffect accepts two arguments. The second argument is optional.
+
+useEffect(<function>, <dependency>)
+
+10. What is props drilling?
+Ans.Prop drilling refers to the process of sending props from a higher-level component to a lower-level component. Prop drilling is basically a situation when the same data is being sent at almost every level due to requirements in the final level. However, prop drilling can become an issue in itself because of its repetitive code. 
+
+11.What is ContextApi?
+Ans.The Context API is a React structure that enables you to exchange unique details and assists in solving prop-drilling from all levels of your application.
+The React Context API is a way for a React app to effectively produce global variables that can be passed around. This is the alternative to "prop drilling" or moving props from grandparent to child to parent, and so on.
+Context API is a (kind of) new feature added in version 16.3 of React that allows one to share state across the entire app (or part of it) lightly and with ease.
+
+Rules of Hooks--
+"Only call Hooks at the top level"
+Don't call hooks inside loops,conditions or nested functions
+"Only Call Hooks from react functions"
+call them from within the react functional components not from any regular javascript functions

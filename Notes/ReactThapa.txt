@@ -1,0 +1,183 @@
+//import React from 'react'
+
+import React from "react"
+
+
+// function App() {
+//   return <h1>Hello world Learning projects on react</h1>
+    
+// }
+//we can also write the function in the form of arrow function  and we will use it
+
+const App=()=>{
+return <div>
+  {/* <MyName/>  its a nested component or nested function inside the main or parent component*/}
+  <MyName/>
+  <MyName/>
+  <h1>Hello world Learnign projects on react {3+3}</h1>
+  <MyName/>
+   </div>
+}
+
+// the above content <div> bla bla</div> this whole content is called jsx and the main point of jsx is we can now use javascript also in react like the above {3+3} is js sum
+// some rules==>
+//1. jsx always return a single statement so we have to enclose whole the main parent tag  like div section article etc. or one more convenient way is we can use <React.Fragment></React.Fragment> a syntactic
+// compact form of this react fragment is <> </>
+//2. we need to write className in using it in jsx
+//3. closing tag is always needed to be provided
+//4.camelCase for writing attributes name
+
+
+// how react sees the above two code and one more point is no two components in react can have same name
+// and this is an old approach and not feasible to follow
+// const App=()=>{
+//   return React.createElement("h1",{},"Hello world learning react project")
+// }
+
+
+const MyName=()=>{
+  return <h1>Vinay kumar yadav</h1>
+}
+
+
+
+export default App
+
+
+
+// Basically style ki baat kar raha hai ye neeche wala code
+
+import React from 'react'
+import './Style.css'
+
+const myStyles={color:'red'}
+const Resturant=()=> {
+  return (
+    <>
+    <div className='card-container'>
+        <div class='card'>
+            <div className='card-body'>
+                <span className='card-number card-circle subtle'>1</span>
+             //<span className='card-author subtle' style={myStyles}>Breakfast</span>
+                                                                                                ||
+                                                          yaha pe mystle object me css dale aur us object to style attribute me pass kar diye
+                <span className='card-author subtle' style={{color:'red'}}>Breakfast</span>
+            </div>                                                          ||
+        </div>                                                       to use inline css style attribute used and we can provide style
+    </div>
+    </>
+  )
+}
+
+export default Resturant
+
+if we want to pass the css style as an object we can do that also 
+but most convenient way is to provide a class name attribute in jsx element and provide external css to that class
+
+useState hook ka kam hai kisi bhi data ko get kar k rakhna ya apne pas hold kar k rakhna aur data ko manage karna
+
+
+  <section className='main-card--cointainer'>
+                {menuData.map((currEle)=>{
+                
+                    return (
+                        <>
+                <div className='card-container' key={currEle.id}>
+                <div className='card'>
+                    <div className='card-body'>
+                        <span className='card-number card-circle subtle'>{currEle.id}</span>
+                        <span className='card-author subtle' >{currEle.name}</span>
+                        <span className='card-title'>{currEle.name}</span>
+                        <span className='card-description subtle'>
+                        {currEle.description}
+                        </span>
+                        <div className='card-read'>Read</div>
+                    </div>
+                    <img src={currEle.image} alt='images' className='card-media'/>
+                    <span className='card-tag subtle'>Order Now</span>
+        
+                </div>
+            </div>
+            
+           </>
+                    )
+                })}
+            
+            </section> 
+                
+        
+         </>
+here we are repitig the currEle a number which should  be avoided because react says that avoid repition so in order to do that we can use destructring array 
+const {id,name,category,image,description}=currEle;
+now we can avoid using currEle repitetively
+
+ <section className='main-card--cointainer'>
+                {menuData.map((currEle)=>{
+                const {id,name,category,image,description}=currEle;
+                
+                    return (
+                        <>
+                <div className='card-container' key={id}>
+                <div className='card'>
+                    <div className='card-body'>
+                        <span className='card-number card-circle subtle'>{id}</span>
+                        <span className='card-author subtle' >{name}</span>
+                        <span className='card-title'>{name}</span>
+                        <span className='card-description subtle'>
+                        {description}
+                        </span>
+                        <div className='card-read'>Read</div>
+                    </div>
+                    <img src={image} alt='images' className='card-media'/>
+                    <span className='card-tag subtle'>Order Now</span>
+        
+                </div>
+            </div>
+            
+           </>
+                    )
+                })}
+            
+            </section> 
+                
+        
+         </>
+
+import React, { useState } from 'react'
+import './Style.css'
+import Menu from './menuapi'
+import MenuCard from './MenuCard'
+const uniqueList=[ ...new Set (Menu.map((curEle)=>{
+    return curEle.category;
+}))]
+console.log(uniqueList);
+
+const Resturant=()=> {
+    const[menuData,setMenuData]=useState(Menu);  //this useState will return array of two elements the first variable menuData which is a state variable to hold the menu i.e store the api the second element  is an update function used to update the data to write there is a convention to write like setState or set----name of your choice
+    const filterItem=(category)=>{
+        const updatedList=Menu.filter((currEle)=>{
+            return currEle.category===category;
+        })
+        setMenuData(updatedList)
+    } 
+    
+  return (
+    <>
+    <nav className='navbar'>
+        <div className='btn-group'>
+            <button className='btn-group__item' onClick={()=>filterItem('breakfast')}>Breakfast</button>
+            <button className='btn-group__item' onClick={()=>filterItem('lunch')}>Lunch</button>
+            <button className='btn-group__item'onClick={()=>filterItem('snacks')}>Snacks</button>
+            <button className='btn-group__item'onClick={()=>filterItem('dinner')}>Dinner</button>
+            <button className='btn-group__item' onClick={()=>setMenuData(Menu)}>All</button>
+        </div>
+    </nav>
+     <MenuCard  menuData={menuData}/>
+    </>
+  )
+}
+
+export default Resturant
+
+we are going to put this nav bar content into sepreate component which is a nav bar component
+

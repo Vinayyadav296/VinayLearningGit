@@ -1,0 +1,219 @@
+Everything happens in javascript in execution context
+it has two component
+memory component(variable environment) and codecomponent(Thread of execution)--in it coded is executed in single thread
+||
+in it variables and functions are stored in the form of key value pair
+java script is  synchronus single threaded language--which means it can execute only single line in a single order at a time
+
+
+hoisting -- it is phenomenon in java script in which you can acces the variables and functions even before declaring it in the program
+JavaScript Hoisting refers to the process whereby the interpreter appears to move the declaration of functions, variables or classes to the top of their scope, prior to execution of the code. Hoisting allows functions to be safely used in code before they are declared.
+arrow functions are not hoisted
+
+whenever we create global execution context a this keyword is also created by js search engine
+this===window object at global level
+
+shortest program in javascript --
+in this we will not write any code
+but still js engine will create window object that contains methods and other things in it.    
+
+anything which is written out of the function in the js program is considered to be in the global space 
+var x=10;   // 10 is considerd to be in the global space and be accesed by console.log(x) 
+function a(){
+var a=1;      //accessing the a by console.log(a) will throw reference error cause a is not defined in the globla space
+}
+java script is a loosely type language which means you need not to assign data type and value to variable
+
+lexical environment== it is equal to local memory+  lexical envionment of parent
+lexical environment is created whenever an execution context is created
+lexical parent is where the code is physically present 
+Lexical scoping defines the scope of a variable by the position of that variable declared in the source code.
+the whole chain of lexical environment is known as scope chain and it defines wheather a variable is present in the scope or not
+function greeting() {
+    let message = 'Hi';
+
+    function sayHi() {
+        console.log(message);
+    }
+
+    return sayHi;
+}
+
+let and const declaration are hoisted but they behave differently as compared to var declartion and hoisting
+temporal dead zone== it is the time frame in which the let variable and const variable is hoisted but not initialized or attached with a value 
+console.log(a)
+let a=10;    here we got reference error because the variable is in the temporal dead zonne because let and const not present in global object it present in sepreate memory
+
+redecalration with let variable is not possible
+const variable requires immidate declaration   const a=10;   const a;   a10    will throw syntax error and ressignement is also not possible it will throw type error
+
+block is also known as compound statment
+block is used to group multiple statement and make it as a single statement where javascript expects it 
+block scope=== it is basically refers to variables and functions that can be accessed inside the block
+let and const are in the block scope and the var is the global sope
+
+shadowing
+
+
+
+
+
+
+scope  Scope stands for where our variable will be available to use inside our code and where it will not.
+unction myFun() {
+    var myName  = "my name";
+    console.log(myName);
+}
+
+myFun(); //output => "my name"
+console.log(myName); //output => ReferenceError beacuse of the function scope and the function scope tells that the variable will be accessible where the function has been declared.
+block scope==Variable having Block-scope will only be available to use inside the block it declared, will not be accessible outside the block, and will give Reference Error if we try to access.
+if(true) {
+    let myName = "your name";
+    console.log(myName); //output=> "your name"
+}
+console.log(myName); //output => ReferenceError
+
+var==Var variable is the old way to declare a variable in javascript; var variable has the function scope, But global scope when it is declared outside the function.
+function myFun() {
+    var myName = "my name";
+    console.log(myName);
+}
+myFun(); //output => "my name"
+console.log(myName); //output=> re 
+When we declare a var variable outside the function, it will have the global scope and will be available to use everywhere inside the whole program.
+
+prooblems with var variable-->>When we declare a var variable outside the function, it will have the global scope and will be available to use everywhere inside the whole program.
+var name = "my name";
+var myAge = 22;
+
+if(myAge > 18) {
+    var name = "another person name";
+}
+
+console.log(name); //output => "another person name"
+let variable-->> Let variable introduce a special feature that does not allow re-declaration of variables, if you remember, re-declaration was a problem in var variable but let variable solve this problem.
+let myName = "my name";
+let myName = "not my name";
+
+console.log(myName); //output => SyntaxError: redeclaration of let name
+The let variable have block scope, meaning let variable will be accessible only inside the block it's declared if we try of access outside of the scope it will show Reference Error.
+let myAge = 20;
+if(myAge > 18) {
+    let myName = "my name";
+    console.log(myName) //output => "my name"
+}
+console.log(myName); //output => ReferenceError
+let variable didn't allow re-declaration of variable but it allows to update the variable
+console.log(myName); //output => ReferenceError
+let myName = "my name";
+
+Const -->>Const variable also has the Block scope like let variable, const variable also can't be accessed outside of the scope. Let take an example to understand:
+Const variable can't be updated or re-declared; this behavior of const variable helps us to write the error-free code.
+const myName = "my name";
+myName = "my new name";
+console.log(myName); //TypeError: invalid assignment to const 'myName'
+Const variable also gets hoisted to the top of scope But did not get initialize any value, as a result, if we try to access the const variable before declaration it will throw syntax error because it doesn’t have any value to print and it's illegal for const variable
+console.log(myName); //output => ReferenceError
+const myName = "my name";
+
+High Order Functions-->A higher-order function is a function that takes one or more functions as arguments or returns a function as its result. map, filter, andreduce are all higher order functions, which take a function as an argument.
+
+Map, Filter, Reduce Fundamentals
+All the functions are part of the JavaScript Array prototype which means they must be called directly on an array.
+
+When we are using map,filter, and reduce, we cannot:
+
+break the loop
+use continue
+
+map → Executes a function on each element of an array
+Every element of the array is passed to the callback function and returns a new array with the same length.
+
+When to use map: If we want to perform the same operation/transformation on each element of the array and get back a new array of the same length with the transformed values
+var numbers= [1,2,3,4,5];
+var doubled  = numbers.map(n => n * 2);
+doubled; // [2,4,6,8,10]
+
+filter → Remove items which don’t satisfy a condition
+Every element of the array is passed to the callback function. On each iteration, if the callback returns true, then that element will be added to the new array, otherwise, it is not added to the new array.
+
+var numbers = [1,2,3,4,5];
+var greaterThan2 = numbers.filter(n => n > 2);
+greaterThan2; // [3,4,5]
+
+Reduce → Creates a single value from elements of Array
+While using reduce, we need to declare the initial value of accumulator(final result). On each iteration, inside the callback we perform some operation and that will be added to the accumulator.
+var numbers = [1,2,3,4,5];
+var initialVal = 0;
+let result=numbers.reduce((accu, val) => val + accu , initialVal);
+console.log(result) // 15
+
+java Script closure==>>a closure is a function that references variables in the outer scope from its inner scope. The closure preserves the outer scope inside its inner scope.
+function greeting(message) {
+   return function(name){
+        return message + ' ' + name;
+   }
+}
+let sayHi = greeting('Hi');
+let sayHello = greeting('Hello');
+
+console.log(sayHi('John')); // Hi John
+console.log(sayHello('John')); // Hello John
+
+The syntax of the arrow function is:
+let myFunction = (arg1, arg2, ...argN) => {
+    statement(s)
+}
+let sum = (a, b) => {
+    let result = a + b;
+    return result;
+}
+
+let result1 = sum(5,7);
+console.log(result1); // 12
+
+The this keyword refers to different objects depending on how it is used:
+
+In an object method, this refers to the object.
+Alone, this refers to the global object.
+In a function, this refers to the global object.
+In a function, in strict mode, this is undefined.
+In an event, this refers to the element that received the event.
+Methods like call(), apply(), and bind() can refer this to any object.
+null and undefined difference==>
+Null is used to represent an intentional absence of value. It represents a variable whose value is undefined. It accepts only one value, which is null
+var a = null;   
+console.log( a );
+It represents uninitialized variables in TypeScript and JavaScript. It has only one value, which is undefined.
+                                                                                                                                                                     It is an assignment value. It can be assigned to a variable which indicates that a variable does not point any object.	It is not an assignment value. It means a variable has been declared but has not yet been assigned a value.
+2.	It is an object.	It is a type itself.
+3.	The null value is a primitive value which represents the null, empty, or non-existent reference.	The undefined value is a primitive value, which is used when a variable has not been assigned a value.
+4.	Null indicates the absence of a value for a variable.	Undefined indicates the absence of the variable itself.
+5.	Null is converted to zero (0) while performing primitive operations.	Undefined is converted to NaN while performing primitive operations.
+
+Event loop: An event loop is something that pulls stuff out of the queue and places it onto the function execution stack whenever the function stack becomes empty.
+The event loop is the secret by which JavaScript gives us an illusion of being multithreaded even though it is single-threaded
+
+What is the use of IIFE in JavaScript?
+An Immediately-invoked Function Expression (IIFE for friends) is a way to execute functions immediately, as soon as they are created. IIFEs are very useful because they don't pollute the global object, and they are a simple way to isolate variables declarations.
+
+The setTimeout() method calls a function after a number of milliseconds
+The setTimeout() is executed only once.
+If you need repeated executions, use setInterval() instead.
+The setInterval() method calls a function at specified intervals (in milliseconds).
+
+The setInterval() method continues calling the function until clearInterval() is called, or the window is closed.
+
+Function declarations load before any code is executed while Function expressions load only when the interpreter reaches that line of code.
+unction declarations are hoisted to the top of other code. Function expressions aren’t hoisted, which allows them to retain a copy of the local variables from the scope where they were defined.
+As closures
+As arguments to other functions
+As Immediately Invoked Function Expressions (IIFE)
+
+The split() method splits a string into an array of substrings.
+
+The split() method returns the new array.
+
+The split() method does not change the original string.
+

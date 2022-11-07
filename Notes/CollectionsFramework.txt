@@ -1,0 +1,396 @@
+Array Lists--
+
+package CollectionsFramework;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+
+public class ArrayLists {
+    public static void main(String[] args) {
+        List<Integer> list = new ArrayList<>();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        System.out.println(list);
+
+        list.add(4); // This will add 4 at the end of the List.
+        System.out.println(list);
+        list.add(1, 50); // This will add 50 at index 1. All the other elements will be shifted to
+                         // right.Here the add function is overloaded
+        System.out.println(list);
+
+        List<Integer> newList = new ArrayList<>(); // Creating a new List which will be added to original list.
+        newList.add(150);
+        newList.add(160);
+
+        list.addAll(newList); // This addAll function will add all the element present in newList to list.
+        System.out.println(list);
+
+        System.out.println(list.get(1)); // This get function will get the specified index elements
+
+        // List<Integer> list = new ArrayList<>();
+        // list.add(10);
+        // list.add(20);
+        // list.add(30);
+        // list.add(40);
+        // list.add(50);
+        // list.add(60);
+        // list.add(70);
+        // list.add(80);
+        // System.out.println(list);
+
+        // for (int i = 0; i < list.size(); i++) {
+        // System.out.println("The element is:" + list);
+        // }
+
+        // for (Integer element : list) {
+        // System.out.println("The elemnet is:" + element);
+        // }
+
+        // Iterator<Integer> it = list.iterator();
+
+        // while (it.hasNext()) {
+        // System.out.println("iterator " + it.next()); // for,foreach and iterator all
+        // these three elements are for interation of the list values
+        // }
+
+        // list.set(2, 1000); // this will add and element 1000 at index 2
+        // System.out.println(list);
+        // System.out.println(list.contains(500)); // this will return ans in true or
+        // false
+
+        // list.remove(1);// This will remove the element at index 1 i.e 20.
+        // System.out.println(list);
+        // list.remove(Integer.valueOf(30)); // This will remove 30 from the list
+        // System.out.println(list);
+        // list.clear(); // This will remove all the elements from the list.
+        // System.out.println(list);
+
+    }
+}
+
+
+Queue Using LinkLists--
+
+package CollectionsFramework;
+
+import java.util.LinkedList;
+import java.util.Queue;
+
+public class LearnLinkedListQueue {
+    public static void main(String[] args) {
+
+        Queue<Integer> queue = new LinkedList<>();
+        queue.offer(12); // this offer method add the elements in the queue
+        queue.offer(24);
+        queue.offer(36);
+
+        System.out.println(queue);
+
+        System.out.println(queue.poll()); // this poll will remove the element in fifo fashion
+
+        System.out.println(queue);
+
+        System.out.println(queue.peek()); // kaun sa element sabse pahle bahar nikalne wala hai
+
+    }
+
+}
+
+Stack--
+
+package CollectionsFramework;
+
+import java.util.Stack;
+
+public class LearnStack {
+
+    public static void main(String[] args) {
+        Stack<String> animals = new Stack<>();
+
+        animals.push("Lion");
+        animals.push("Dog");
+        animals.push("Horse");
+        animals.push("Cat");
+
+        // System.out.println("Stack: " + animals);
+
+        // System.out.println(animals.peek()); // this will print the cat beacause of
+        // LIFO
+
+        // animals.pop(); // this will remove the cat from last beacause of
+        // LIFO
+
+        // System.out.println("Stack: " + animals);
+
+        // System.out.println(animals.peek());
+    }
+}
+
+
+Dequeue--
+
+import java.util.ArrayDeque;
+
+public class LearnArrayDeque {
+
+    public static void main(String[] args) {
+
+        ArrayDeque<Integer> adq = new ArrayDeque<>();
+        // in this array deque we can remove elements from front and back both sides
+        // this array deque use exmaple is sliding window
+
+        adq.offer(23); // this will add element in last of the que
+        adq.offerFirst(12); // this will add in first in front
+        adq.offerLast(45); // this will add in last
+        adq.offer(26);
+
+        System.out.println(adq);
+
+        System.out.println(adq.peek()); // peek and peekFirst gives first element
+        System.out.println(adq.peekFirst());
+        System.out.println(adq.peekLast()); // peekLast will give last element
+
+        System.out.println(adq.poll()); // poll and pollFirst will remove element from first i.e front
+        System.out.println("poll() " + adq);
+
+        System.out.println(adq.pollFirst());
+        System.out.println("pollFirst() " + adq);
+
+        System.out.println(adq.pollLast());
+        System.out.println("pollLast() " + adq);
+
+    }
+
+}
+
+Priority Queue--
+
+
+import java.util.Comparator;
+import java.util.PriorityQueue;
+import java.util.Queue;
+
+public class LearnPriorityQueue {
+
+    public static void main(String[] args) {
+
+        Queue<Integer> pq = new PriorityQueue<>(Comparator.reverseOrder());
+        // this comparator.reverseOrder is implementing min heap however we can
+        // implement max heap
+        // by putting no arg inside the parameter
+        pq.offer(40);
+        pq.offer(12);
+        pq.offer(24);
+        pq.offer(36);
+
+        System.out.println(pq);
+        pq.poll();
+        System.out.println(pq);
+
+        System.out.println(pq.peek());
+
+    }
+
+}
+
+Set--
+
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+import java.util.Set;
+import java.util.TreeSet;
+
+public class LearnSet {
+
+    public static void main(String[] args) {
+
+        // All these sets like HashSet TreeHashSet LinkedHashSet allows only unique
+        // elements inside them if you try to add the copy of any elements then it will
+        // not allow it
+
+        // Set<Student> studentSet = new HashSet<>(); //tc O(1)
+
+        // studentSet.add(new Student("Anuj", 2));
+        // studentSet.add(new Student("Ramesh", 4));
+        // studentSet.add(new Student("Shivam", 3));
+
+        // studentSet.add(new Student("Rohit", 2));
+
+        // Student s1 = new Student("Anuj", 2);
+        // Student s2 = new Student("Rohit", 2);
+
+        // System.out.println(s1.equals(s2));
+        // System.out.println(studentSet);
+
+        // Set<Integer> set = new HashSet<>();
+        // Set<Integer> set = new LinkedHashSet<>();
+        // it posses all the property of the set but beside that it will also posses all
+        // the property of the Linked list it will print the values in the order in
+        // which they are entered
+
+        // Set<Integer> set = new TreeSet<>(); // tc O(logn)
+        // it posses all the property of the set and also implement BST inside it due to
+        // which all the elements are printed in sorted order
+        //
+        // set.add(32);
+        // set.add(2);
+        // set.add(54);
+        // set.add(21);
+        // set.add(65);
+        //
+        // System.out.println(set);
+
+        // set.remove(54); // this is used to remove elements from the set
+
+        // System.out.println(set);
+
+        // System.out.println(set.contains(21)); // this checks wheather the value is
+        // present or not inside the set and
+        // return the ans in true or false
+
+        // System.out.println(set.isEmpty()); // it checks wheather the set is empty or
+        // not and retuns true or false
+
+        // System.out.println(set.size()); // return the size of set
+        //
+        // set.clear(); // it will delete all the elements in the set and clear it
+        //
+        // System.out.println(set);
+
+    }
+}
+
+Map---
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.TreeMap;
+
+public class LearnMap {
+
+    public static void main(String[] args) {
+
+        Map<String, Integer> numbers = new HashMap<>();
+
+        // Map<String, Integer> numbers = new TreeMap<>(); //THis will print the keys in
+        // sorted order
+
+        numbers.put("One", 1);
+        numbers.put("Two", 2);
+        numbers.put("Three", 3);
+        numbers.put("Four", 4);
+        numbers.put("Five", 5);
+
+        numbers.remove("Three");
+
+        // if(!numbers.containsKey("Two")) {
+        // numbers.put("Two", 23);
+        // }
+
+        // numbers.putIfAbsent("Two", 23);
+        System.out.println(numbers);
+        System.out.println(numbers.containsValue(3));
+
+        System.out.println(numbers.isEmpty());
+
+        // for (Map.Entry<String, Integer> e: numbers.entrySet()) {
+        // System.out.println(e);
+        //
+        // System.out.println(e.getKey());
+        // System.out.println(e.getValue());
+        // }
+        //
+        // for (String key: numbers.keySet()) {
+        // System.out.println(key);
+        // }
+        //
+        // for(Integer value: numbers.values()) {
+        // System.out.println(value);
+        // }
+
+    }
+}
+
+
+Array Class---
+
+import java.util.Arrays;
+
+public class LearnArraysClass {
+
+    public static void main(String[] args) {
+        // This array class is used on normal arrays
+        // int[] numbers = { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        // int index = Arrays.binarySearch(numbers, 4);
+        // here the array in binary search should be sorted
+        // System.out.println("The index of element 4 in the array is " + index);
+
+        Integer[] numbers = { 10, 2, 32, 12, 15, 76, 17, 48, 79, 9 };
+        Arrays.sort(numbers); // for sorting the arrays
+
+        Arrays.parallelSort(numbers);
+        // 8192
+
+        Arrays.fill(numbers, 12);
+
+        for (int i : numbers) {
+            System.out.print(i + " ");
+        }
+
+    }
+}
+
+
+Collections Class--
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+
+public class LearnCollectionsClass {
+
+    public static void main(String[] args) {
+
+        // List<Student> list = new ArrayList<>();
+
+        // list.add(new Student("Anuj", 2));0
+        // list.add(new Student("Ramesh", 4));
+        // list.add(new Student("Shivam", 3));
+        // list.add(new Student("Rohit", 1));
+
+        // Student s1 = new Student("Anuj", 2);
+        // Student s2 = new Student("Rohit", 3);
+
+        // System.out.println((s1.compareTo(s2)));
+
+        // System.out.println(list);
+
+        // Collections.sort(list, (o1, o2) -> o1.name.compareTo(o2.name));
+
+        // System.out.println(list);
+
+        List<Integer> list = new ArrayList<>();
+        list.add(34);
+        list.add(12);
+        list.add(9);
+        list.add(9);
+        list.add(9);
+        list.add(76);
+        list.add(29);
+        list.add(75);
+
+        System.out.println("min element " + Collections.min(list));
+        System.out.println("max element " + Collections.max(list));
+        System.out.println(Collections.frequency(list, 9));
+
+        Collections.sort(list, Comparator.reverseOrder());
+
+        System.out.println(list);
+    }
+
+}
+
+

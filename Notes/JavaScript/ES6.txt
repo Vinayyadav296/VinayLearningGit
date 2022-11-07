@@ -1,0 +1,826 @@
+Arrow function=>
+<!DOCTYPE html>
+<html>
+
+<body>
+
+<h1>Function</h1>
+
+<p>This demonstrates a regular function, NOT an arrow function.</p>
+<p id="demo"></p>
+<script>
+hello=function(){
+return "Hello Vinay!!";
+}
+document.getElementById("demo").innerHTML=hello();
+</script>
+
+
+
+
+</body>
+</html>
+ 
+the same thing can be done compact manner by using arrow functions--
+
+<script>
+hello=()=>{
+return "Hello Vinay!!";
+}
+document.getElementById("demo").innerHTML=hello("How are you bro?");
+</script>
+
+if there is only one return statement in the function then in that case we can remove curly braces and return keyword--
+<script>
+hello=()=>  "Hello Vinay!!";
+</script>
+
+in case of argument in the function-
+<script>
+hello=(val)=>Hello Vinay!!+val;
+}
+document.getElementById("demo").innerHTML=hello("How are you bro?");
+</script>
+we can remove even the brackets also and directly write the argument
+hello=val=> Hello Vinay!!+val;
+
+Destructing Arrays==>
+Here is the old way of assigning array items to a variable:
+
+Before:
+const vehicles = ['mustang', 'f-150', 'expedition'];
+
+// old way
+const car = vehicles[0];
+const truck = vehicles[1];
+const suv = vehicles[2];
+
+With destructuring:
+const vehicles = ['mustang', 'f-150', 'expedition'];
+const [car, truck, suv] = vehicles;
+console.log(truck); // o/p==>f-150
+
+When destructuring arrays, the order that variables are declared is important.
+
+If we only want the car and suv we can simply leave out the truck but keep the comma:
+
+const vehicles = ['mustang', 'f-150', 'expedition'];
+
+const [car,, suv] = vehicles;
+
+Destructuring comes in handy when a function returns an array:
+
+Example
+ calculate=(a, b)=> {
+  const add = a + b;
+  const subtract = a - b;
+  const multiply = a * b;
+  const divide = a / b;
+
+  return [add, subtract, multiply, divide];
+}
+
+const [add, subtract, multiply, divide] = calculate(4, 7);
+console.log(add,multiply,subtract,divide)  //op==>11 28 -3 0.5714285714285714
+
+Destructuring Objects
+Here is the old way of using an object inside a function:
+const vehicleOne = {
+  brand: 'Ford',
+  model: 'Mustang',
+  type: 'car',
+  year: 2021, 
+  color: 'red'
+}
+function myFunction(vehicle){
+    let messege= 'My'+vehicle.brand+vehicle.model+'is a'+vehicle.type+'of'+vehicle.year+'of'+vehicle.color;
+    console.log(messege)
+}
+myFunction(vehicleOne);
+
+const vehicleOne = {
+  brand: 'Ford',
+  model: 'Mustang',
+  type: 'car',
+  year: 2021, 
+  color: 'red'
+}
+function myFunction({type,color,brand,model}){
+    let messege= 'My ' + type + ' is a ' + color + ' ' + brand + ' ' + model + '.';
+    console.log(messege)
+}
+myFunction(vehicleOne);
+
+Notice that the object properties do not have to be declared in a specific order.
+We can even destructure deeply nested objects by referencing the nested object then using a colon and curly braces to again destructure the items needed from the nested object:
+
+const vehicleOne = {
+  brand: 'Ford',
+  model: 'Mustang',
+  type: 'car',
+  year: 2021, 
+  color: 'red',
+  registration: {
+    city: 'Houston',
+    state: 'Texas',
+    country: 'USA'
+  }
+}
+
+function myVehicle({ model, registration: { state } }) {
+  const message = 'My ' + model + ' is registered in ' + state + '.';
+console.log(message);
+}
+myVehicle(vehicleOne)
+
+Spread Operator==>
+The JavaScript spread operator (...) allows us to quickly copy all or part of an existing array or object into another array or object.
+
+const numbersOne = [1, 2, 3];
+const numbersTwo = [4, 5, 6];
+const numbersCombined = [...numbersOne, ...numbersTwo];
+console.log(numbersCombined) //op==>[ 1, 2, 3, 4, 5, 6 ]
+
+The spread operator is often used in combination with destructuring.
+const numbers = [1, 2, 3, 4, 5, 6];
+const [one, two, ...rest] = numbers;
+console.log(one,rest,two)//o/p=>1 [ 3, 4, 5, 6 ] 2
+
+We can use the spread operator with objects too:
+Example
+Combine these two objects:-
+const myVehicle = {
+  brand: 'Ford',
+  model: 'Mustang',
+  color: 'red'
+}
+const updateMyVehicle = {
+  type: 'car',
+  year: 2021, 
+  color: 'yellow'
+}
+const myUpdatedVehicle = {...myVehicle, ...updateMyVehicle}
+console.log(myUpdatedVehicle);
+op-:
+{ brand: 'Ford',
+  model: 'Mustang',
+  color: 'yellow',
+  type: 'car',
+  year: 2021 }
+
+Notice the properties that did not match were combined, but the property that did match, color, was overwritten by the last object that was passed, updateMyVehicle. The resulting color is now yellow.
+ 
+useStateHooks==>useState lets you add React state to function components.
+
+in the absence of Hooks we implemented a counter app
+import React,{Component} from 'react'
+class Counter extends Component{
+  constructor(){
+    super();
+    this.state={
+      count:0
+    }
+  }
+  UpdateCount=()=>{
+    this.setState({
+      count:this.state.count+1
+    })
+  }
+  render(){
+    return (
+      <button onClick={this.UpdateCount}>Count{this.state.count}</button>
+    )
+  }
+}
+export default Counter
+
+ Now by using useState hooks
+const [count, setCount] = useState()
+
+count: the current state
+setCount: a function that updates the state
+
+This is similar to this.state.count and this.setState in a class, except you get them in a pair.
+
+The only argument to the useState() hook is the initial state. Unlike with classes, the state doesn’t have to be an object. We can keep a number or a string if that’s all we need.
+const [count, setCount] = useState(0)
+
+import React,{useState} from 'react';
+function Counter(){
+  const[count,setCount]=useState(0);
+  const updateCount=()=>{
+     setCount(count+1)
+  }
+
+  return(
+    <div>
+   <button onClick={updateCount}>Count{count}</button>
+      </div>
+  )
+}
+export default Counter
+import { useState } from "react";
+
+function FavoriteColor() {
+  const [color, setColor] = useState("");
+}
+Notice that again, we are destructuring the returned values from useState.
+
+The first value, color, is our current state.
+
+The second value, setColor, is the function that is used to update our state.
+
+These names are variables that can be named anything you would like.
+import React,{useState} from 'react';
+function ShowColor(){
+  const [color,setColor]=useState('red');
+    return (
+      <div>
+        <h1>this is the {color}</h1>
+        </div>
+    )
+}
+export default ShowColor;
+
+Update State
+To update our state, we use our state updater function.
+
+We should never directly update state. Ex: color = "red" is not allowed.
+import React,{useState} from 'react';
+function ShowColor(){
+  const [color,setColor]=useState('red');
+  
+    return (
+      <div>
+        <h1>this is the {color}</h1>
+        <button onClick={()=>setColor('blue')}>Change color</button>
+        </div>
+    )
+}
+export default ShowColor;  // the initial state of color was red and we are updating it to red
+// altenative of the above program in which setColor is used out of jsx
+import React,{useState} from 'react';
+function ShowColor(){
+  const [color,setColor]=useState('red');
+  const updateColor=()=>{
+    setColor('blue');
+  }
+    return (
+      <div>
+        <h1>this is the {color}</h1>
+        <button onClick={updateColor}>Change color</button>
+        </div>
+    )
+}
+export default ShowColor; 
+
+What Can State Hold
+The useState Hook can be used to keep track of strings, numbers, booleans, arrays, objects, and any combination of these!
+
+import React,{ useState } from "react";
+
+
+function Car() {
+  const [car, setCar] = useState({
+    brand: "Ford",
+    model: "Mustang",
+    year: "1964",
+    color: "red"
+  });
+  
+  return (
+    <div>
+      <h1>My {car.brand}</h1>
+      <p>
+        It is a {car.color} {car.model} from {car.year}.
+      </p>
+    </div>
+  )
+}
+export default Car;
+Since we are now tracking a single object, we need to reference that object and then the property of that object when rendering the component. (Ex: car.brand)
+
+Updating Objects and Arrays in State==>
+When state is updated, the entire state gets overwritten.
+
+What if we only want to update the color of our car?
+
+If we only called setCar({color: "blue"}), this would remove the brand, model, and year from our state.
+
+We can use the JavaScript spread operator to help us.
+
+Example:
+Use the JavaScript spread operator to update only the color of the car:
+import { useState } from "react";
+
+function Car() {
+  const [car, setCar] = useState({
+    brand: "Ford",
+    model: "Mustang",
+    year: "1964",
+    color: "red"
+  });
+  const updateColor=()=>{
+    setCar(prevState=>{
+       return {...prevState,color:'blue'}
+    });
+
+  }
+
+  return (
+    <div>
+      <h1>This is my{car.brand} </h1>
+      <p>
+        It is a {car.color} {car.model} from {car.year}.
+      </p>
+      <button onClick={updateColor}>UpdateColor</button>
+    </div>
+  );
+}
+export default Car
+Because we need the current value of state, we pass a function into our setCar function. This function receives the previous value.
+
+We then return an object, spreading the previousState and overwriting only the color.
+
+React useEffect Hooks==>The useEffect Hook allows you to perform side effects in your components.the useEffect hook allows us to use React’s lifecycle methods within a stateless component.
+ It is important to note that the useEffect hook is not a perfect copy of a replacement for all of the lifecycle methods. As a beginner, we’ll look into mirroring the effect componentDidMount and componentDidUpdate.
+
+Some examples of side effects are: The different types of effects are limitless such as changing the background image or document title, adding animations or music, data fetching, and subscriptions.
+With the useEffect Hook we can tell React that after every render, the callback passed to this useEffect function as its first parameter (“effect”) should be called. React will remember this callback and call it later after performing the DOM updates.
+When does useEffect run?
+By default, it runs after every render but we can customize it with the second param of the useEffect function. As a second argument, the useEffect function accepts an array that allow us to tell React when we want our effect to be called.
+
+After a render and before calling an effect, React will compare the array of values defined in the second parameter of the effect with the array defined in the same effect from the previous render. React will only call the effect when any value of the array has changed since the previous render.
+
+In the previous example, we don’t need to update the document title (our effect) after every render but only when the state variable name has changed its value since the previous render. That’s why we pass an array with the value of name as the second parameter:
+import React, { useState, useEffect } from "react";
+
+const App = () => {
+  const [name, setName] = useState("Ceci");
+  
+  useEffect(() => {
+    document.title = name;
+  }, [name]);
+
+  return (
+    <input value={name} onChange={event => setName(event.target.value)} />
+  );
+}
+
+useEffect accepts two arguments. The second argument is optional.
+
+useEffect(<function>, <dependency>)
+
+import React,{useState,useEffect} from 'react';
+function Timer(){
+  const[count,setCount]=useState(0);
+  useEffect(()=>{
+    setTimeout(()=>{
+      setCount((count)=>count+1)
+    },1000);
+  });
+  return (
+  <h1> I have rendered {count} times</h1>
+  )
+  
+}
+export default Timer;
+
+It keeps counting even though it should only count once!
+
+useEffect runs on every render. That means that when the count changes, a render happens, which then triggers another effect.
+
+This is not what we want. There are several ways to control when side effects run.
+
+We should always include the second parameter which accepts an array. We can optionally pass dependencies to useEffect in this array.
+
+1. No dependency passed:
+useEffect(() => {
+  //Runs on every render
+});
+2. An empty array:
+useEffect(() => {
+  //Runs only on the first render
+}, []);
+3. Props or state values:
+useEffect(() => {
+  //Runs on the first render
+  //And any time any dependency value changes
+}, [prop, state]);
+
+// so in order to make side effects for only once we have passed an empty array [] as second argument in useEffect 
+import React,{useState,useEffect} from 'react';
+function Timer(){
+  const[count,setCount]=useState(0);
+  useEffect(()=>{
+    setTimeout(()=>{
+      setCount((count)=>count+1)
+    },1000);
+  },[]);
+  return (
+  <h1> I have rendered {count} times</h1>
+  )
+  
+}
+export default Timer;
+
+
+Here is an example of a useEffect Hook that is dependent on a variable. If the count variable updates, the effect will run again:
+import React,{useState,useEffect} from 'react';
+function Timer(){
+  const[count,setCount]=useState(0);
+  const[calculation,setCalculation]=useState(0)
+  useEffect(() => {
+    setCalculation(() => count * 2);
+  }, [count]); // <- add the count variable here
+
+  return (
+    <div>
+      Count{count}
+      <button onClick={()=>setCount(count+1)}>+</button>
+ <p> Calculation:{calculation}</p>
+  </div>
+  )
+  
+}
+export default Timer;
+
+If there are multiple dependencies, they should be included in the useEffect dependency array.
+
+Effect Cleanup
+Some effects require cleanup to reduce memory leaks.
+
+Timeouts, subscriptions, event listeners, and other effects that are no longer needed should be disposed.
+
+We do this by including a return function at the end of the useEffect Hook.
+
+import React, { useState, useEffect } from "react";
+function Timer() {
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    let timer = setTimeout(() => {
+      setCount((count) => count + 1);
+    }, 1000);
+
+    return () => clearTimeout(timer);
+  }, []); // <- add empty array here
+
+  return (
+    <div>
+      <p> I have rendered {count}Times</p>
+    </div>
+  );
+}
+export default Timer;
+
+Props are the data we pass -or can access- from the top-level components to any number of child components on our website.
+
+Props Drilling (Threading) is a concept that refers to the process you pass the data from the parent component to the exact child Component BUT in between, other components owning the props just to pass it down the chain.
+Avoid Props By Drilling Using React Context API
+Context APIs enable us to define the context Object which stores some data and will make it available throughout the hierarchy without passing the data as props. To Simplify, context provides a container containing some data and making it available to the entire hierarchy of components below.
+
+import React, { useState } from "react";
+
+function UserDetailsComponent() {
+  var [userDetails, setUserDetails] = useState({
+    name: "Mayank",
+    age: 30
+  });
+                                               
+  return (
+    <div>
+      <h1>This is the Parent Component</h1><hr/>
+      <ChildComponent userDetails={userDetails}></ChildComponent>
+    </div>                                         
+  )
+}
+
+function ChildComponent(props) {
+  return (
+    <div>
+      <h2>This is Child Component</h2><hr/>
+      <SubChildComponent userDetails={props.userDetails}></SubChildComponent>
+    </div>
+  )
+}
+
+function SubChildComponent(props) {
+  return (
+    <div>
+      <h3>This is Sub Child Component</h3>
+      <h4>User Name: {props.userDetails.name}</h4>
+      <h4>User Age: {props.userDetails.age}</h4>
+    </div>
+  )
+}
+In the above code, the parent component defines some state variables which are not used inside the component, instead it is sent further to the child component “ChildComponent” as “props” data. The “ChildComponent” is not using the “userDetails” and further sending the data to its child component “SubChildComponent” as “props” data. This “SubChildComponent” uses the data passed as “props” to it, and displays the user name and age in the component.
+
+React useContext Hook==>React Context
+React Context is a way to manage state globally.
+“useContext” hook is used to create common data that can be accessed throughout the component hierarchy without passing the props down manually to each level. Context defined will be available to all the child components without involving “props”.
+
+import React, { useState,useContext} from "react";
+
+var userDetailContext = React.createContext(null);
+
+export default function UserDetailsComponent() {
+  var [userDetails] = useState({
+    name: "Mayank",
+    age: 30
+  });
+
+  return (
+    <userDetailContext.Provider value={userDetails}>
+      <h1>This is the Parent Component</h1>
+      <hr />
+      <ChildComponent userDetails={userDetails} />
+    </userDetailContext.Provider>
+  );
+}
+
+function ChildComponent(props) {
+  return (
+    <div>
+      <h2>This is Child Component</h2>
+      <hr />
+      <SubChildComponent />
+    </div>
+  );
+}
+
+function SubChildComponent(props) {
+  var contextData = React.useContext(userDetailContext);
+  return (
+    <div>
+      <h3>This is Sub Child Component</h3>
+      <h4>User Name: {contextData.name}</h4>
+      <h4>User Age: {contextData.age}</h4>
+    </div>
+  );
+}
+
+we have created a context object, “userDetailsContext” and we are adding state data to the context in the “UserDetailsComponent”. Since the data is added to the context provided in this component, any component in the hierarchy will have access to the context data.
+
+We can see in the above example that the “useContext” keyword will make the parent component data available to the child components at any level in the Hierarchy without exposing it as “props” data.
+
+useRef Hook==>The useRef Hook allows you to persist values between renders.
+It can be used to store a mutable value that does not cause a re-render when updated.
+It can be used to access a DOM element directly.
+
+If we tried to count how many times our application renders using the useState Hook, we would be caught in an infinite loop since this Hook itself causes a re-render.
+To avoid this, we can use the useRef Hook.
+
+useRef() only returns one item. It returns an Object called current.
+When we initialize useRef we set the initial value: useRef(0).
+It's like doing this: const count = {current: 0}. We can access the count by using count.current.
+
+import React,{useState,useEffect,useRef} from 'react'
+
+function App(){
+  const[inputValue,setInputValue]=useState('')
+  const count=useRef(0)
+  useEffect(()=>{
+    count.current=count.current+1
+  })
+  return(
+    <div>
+   <input type='text' value={inputValue} onChange={(e)=>setInputValue(e.target.value)}/>
+  <h1> RenderCount:{count.current}</h1>
+      </div>
+  )
+}
+export default App
+
+Accessing DOM Elements==>
+import React,{useRef} from 'react'
+function App(){
+  const element=useRef()
+  const focusInput=()=>{
+      element.current.focus();
+  }
+    return(
+    <div>
+   <input type='text' ref={element} />
+   <button onClick={focusInput}>FocusInput</button>
+ </div>
+  )
+}
+export default App
+
+Tracking State Changes
+The useRef Hook can also be used to keep track of previous state values.
+This is because we are able to persist useRef values between renders.
+This time we use a combination of useState, useEffect, and useRef to keep track of the previous state.
+In the useEffect, we are updating the useRef current value each time the inputValue is updated by entering text into the input field.
+
+import React,{useState,useEffect,useRef} from 'react'
+
+function App(){
+  const[inputValue,setInputValue]=useState('')
+  const prevInputValue=useRef('')
+  useEffect(()=>{
+    prevInputValue.current=inputValue
+  },[inputValue])
+ 
+  
+  return(
+    <div>
+   <input type='text' value={inputValue} onChange={(e)=>setInputValue(e.target.value)} />
+   <h1>CurrentInput :{inputValue}</h1>
+   <h1>PrevInput:{prevInputValue.current}</h1>
+ </div>
+  )
+}
+export default App
+
+React useReducer Hook==>The useReducer Hook is similar to the useState Hook.
+It allows for custom state logic.
+If you find yourself keeping track of multiple pieces of state that rely on complex logic, useReducer may be useful.
+Syntax
+The useReducer Hook accepts two arguments.
+useReducer(<reducer>, <initialState>)
+
+The reducer function contains your custom state logic and the initialStatecan be a simple value but generally will contain an object.
+The useReducer Hook returns the current stateand a dispatchmethod.
+
+import React, { useReducer, useState } from "react";
+
+const initialState = 0;
+const reducer = (state, action) => {
+  switch (action) {
+    case "increment":
+      return state + 1;
+    case "decrement":
+      return state - 1;
+    case "reset":
+      return initialState;
+    default:
+      return state;
+  }
+};
+function App() {
+  const [count, dispatch] = useReducer(reducer, initialState);
+  return (
+    <div>
+      <div>Count:{count}</div>
+      <button onClick={() => dispatch("increment")}>Increment</button>
+      <button onClick={() => dispatch("decrement")}>Decrement</button>
+      <button onClick={() => dispatch("reset")}>Reset</button>
+    </div>
+  );
+}
+export default App
+
+
+/ advantage of using reducer with object--
+//1.by making use of action as an object we can use additional data in the reducer function like action.value and in button value:5
+import React, { useReducer } from "react";
+
+const initialState = {
+  firstCounter:0
+}
+const reducer = (state, action) => {
+  switch (action.type) {
+    case "increment":
+      return {firstCounter:state.firstCounter+action.value};
+    case "decrement":
+      return {firstCounter:state.firstCounter-action.value};
+    case "reset":
+      return initialState;
+    default:
+      return state;
+  }
+};
+function App() {
+  const [count, dispatch] = useReducer(reducer, initialState);
+  return (
+    <div>
+    <div>Count-{count.firstCounter}</div> 
+        <button onClick={()=>dispatch({type:'increment',value:1})}>Increment</button>
+        <button onClick={()=>dispatch({type:'decrement',value:1})}>Decrement</button>
+        <button onClick={()=>dispatch({type:'increment',value:5})}>Increment5</button>
+        <button onClick={()=>dispatch({type:'decrement',value:5})}>Decrement5</button>
+        <button onClick={()=>dispatch({type:'reset'})}>Reset</button>
+    </div>
+  );
+}
+export default App
+
+React useMemo Hook==>The React useMemo Hook returns a memoized value.
+Think of memoization as caching a value so that it does not need to be recalculated.
+The useMemo Hook only runs when one of its dependencies update.
+This can improve performance.
+The useMemo and useCallback Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function. 
+
+In this example, we have an expensive function that runs on every render.
+When changing the count or adding a todo, you will notice a delay in execution.
+
+import React,{useState} from 'react'
+function App(){
+  const [count,setCount]=useState(0)
+  const [todos,setTodos]=useState([])
+  const calculation=expensiveCalculation(count);
+
+  const increment=()=>{
+    setCount((c)=>c+1)
+  }
+  const addTodo = () => {
+    setTodos((t) => [...t, "New Todo"]);
+  };
+  return(
+    <div>
+      <div>
+        <h1>My ToDos</h1>
+        {todos.map((todo, index) => {
+          return <p key={index}>{todo}</p>;
+        })}
+        <button onClick={addTodo}>Add ToDO</button>
+        <hr/>
+        </div>
+        <div>
+          Count:{count}
+          <button onClick={increment}>+</button>
+          <h1>Expensive Calculation</h1>
+             {calculation}
+         </div>
+      </div>
+  )
+      }
+  const expensiveCalculation=(num)=>{
+    console.log('calculating.....');
+    for(let i=0;i<100000000;i++){
+      num+=1;
+    }
+    return num;
+  }
+
+export default App
+
+To fix this performance issue, we can use the useMemo Hook to memoize the expensiveCalculation function. This will cause the function to only run when needed.
+We can wrap the expensive function call with useMemo.
+The useMemoHook accepts a second parameter to declare dependencies. The expensive function will only run when its dependencies have changed.
+In the following example, the expensive function will only run when count is changed and not when todo's are added.
+
+import React,{useState} from 'react'
+function App(){
+  const [count,setCount]=useState(0)
+  const [todos,setTodos]=useState([])
+  const calculation=useMemo(()=>expensiveCalculation(count),[count])
+
+  const increment=()=>{
+    setCount((c)=>c+1)
+  }
+  const addTodo = () => {
+    setTodos((t) => [...t, "New Todo"]);
+  };
+  return(
+    <div>
+      <div>
+        <h1>My ToDos</h1>
+        {todos.map((todo, index) => {
+          return <p key={index}>{todo}</p>;
+        })}
+        <button onClick={addTodo}>Add ToDO</button>
+        <hr/>
+        </div>
+        <div>
+          Count:{count}
+          <button onClick={increment}>+</button>
+          <h1>Expensive Calculation</h1>
+             {calculation}
+         </div>
+      </div>
+  )
+      }
+  const expensiveCalculation=(num)=>{
+    console.log('calculating.....');
+    for(let i=0;i<100000000;i++){
+      num+=1;
+    }
+    return num;
+  }
+export default App
+
+React useCallback Hook=>The React useCallback Hook returns a memoized callback function.
+Think of memoization as caching a value so that it does not need to be recalculated.
+This allows us to isolate resource intensive functions so that they will not automatically run on every render.
+The useCallback Hook only runs when one of its dependencies update.
+This can improve performance.
+The useCallback and useMemo Hooks are similar. The main difference is that useMemo returns a memoized value and useCallback returns a memoized function. 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

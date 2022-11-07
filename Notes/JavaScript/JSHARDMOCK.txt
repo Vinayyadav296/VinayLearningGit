@@ -1,0 +1,457 @@
+IIFE--A JavaScript immediately invoked function expression is a function defined as an expression and executed immediately after creation. The following shows the syntax of defining an immediately invoked function expression:
+
+(function(){
+    //...
+})();
+
+Why IIFEs
+When you define a function, the JavaScript engine adds the function to the global object. See the following example:
+
+function add(a,b) {
+    return a + b;
+}
+
+In web browsers, the JavaScript engine adds the add() function to the window global object:
+console.log(window.add);
+Likewise, if you declare a variable outside of a function using the var keyword, the JavaScript engine also adds the variable to the global object:
+
+var counter = 10;
+console.log(window.counter); // 10
+
+If you have many global variables and functions, the JavaScript engine will only release the memory allocated for them until the global object loses its scopes.
+
+As a result, the script may use the memory inefficiently. On top of that, having global variables and functions will likely cause the name collisions.
+
+One way to prevent the functions and variables from polluting the global object is to use immediately invoked function expressions.
+
+let sum = (function(a,b){
+    return a + b;
+})(10, 20);
+
+console.log(sum);
+
+Deep Copy and Shallow Copy--A deep copying means that value of the new variable is disconnected from the original variable while a shallow copy means that some values are still connected to the original variable.
+
+Shallow copy example--
+let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    address: {
+        street: 'North 1st street',
+        city: 'San Jose',
+        state: 'CA',
+        country: 'USA'
+    }
+};
+
+
+let copiedPerson = Object.assign({}, person);
+
+copiedPerson.firstName = 'Jane'; // disconnected
+
+copiedPerson.address.street = 'Amphitheatre Parkway'; // connected
+copiedPerson.address.city = 'Mountain View'; // connected
+
+console.log(copiedPerson);
+
+In this example:
+
+First, create a new object named person.
+Second, clone the person object using the Object.assign() method.
+Third, change the first name and address information of the copiedPerson object.
+Here is the output:
+
+{
+    firstName: 'Jane',
+    lastName: 'Doe',
+    address: {
+        street: 'Amphitheatre Parkway',
+        city: 'Mountain View',
+        state: 'CA',
+        country: 'USA'
+    }
+}
+
+However, when you show the values of the person object, you will find that the address information changed but the first name:
+
+console.log(person);
+Output:
+
+{
+    firstName: 'John',
+    lastName: 'Doe',
+    address: {
+        street: 'Amphitheatre Parkway',
+        city: 'Mountain View',
+        state: 'CA',
+        country: 'USA'
+    }
+}
+
+The reason is that the address is reference value while the first name is a primitive value. Both person and copiedPerson references different objects but these objects reference the same address objects.
+
+Deep Copy--The following snippet replaces the Object.assign() method by the JSON methods to carry a deep copy the person object:
+
+let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    address: {
+        street: 'North 1st street',
+        city: 'San Jose',
+        state: 'CA',
+        country: 'USA'
+    }
+};
+
+
+let copiedPerson = JSON.parse(JSON.stringify(person));
+
+copiedPerson.firstName = 'Jane'; // disconnected
+
+copiedPerson.address.street = 'Amphitheatre Parkway';
+copiedPerson.address.city = 'Mountain View';
+
+console.log(person);
+
+Output
+
+{
+    firstName: 'John',
+    lastName: 'Doe',
+    address: {
+        street: 'North 1st street',
+        city: 'San Jose',
+        state: 'CA',
+        country: 'USA'
+    }
+}
+
+In this example, all values in the copiedPerson object are disconnected from the original person object. In this tutorial, you have learned how to copy objects in JavaScript using either shallow or deep copy.
+
+Syntax--
+Following is the syntax to create a function using Function( ) constructor along with the new operator.
+
+<script type = "text/javascript">
+<!--
+var variablename = new Function(Arg1, Arg2..., "Function Body");
+//-->
+</script>
+
+The Function() constructor expects any number of string arguments. The last argument is the body of the function – it can contain arbitrary JavaScript statements, separated from each other by semicolons.
+     let  func = new Function("x", "y", "return x*y;");
+            function secondFunction() {
+               
+               let result = func(10,20);
+               console.log(result);
+            }
+            secondFunction();
+
+Prototype
+A prototype in JavaScript is an object from which another object is derived from.
+
+In class based languages we have a class which contains all the properties and methods defined inside the class.
+
+When the object of the class is created the newly created object has the access to the properties and the public methods defined inside the class.
+
+Prototype is very similar to the class which acts as the blueprint of the JavaScript objects.
+
+The newly created JavaScript object has access to all the properties and methods of the prototype from which the object is created in addition to its own properties and methods.
+
+Also due to the dynamic nature of the JavaScript we can not only add properties to an object dynamically but we can also add properties to the prototype object which would mean adding a property or behavior to the base class at runtime so that all the newly created objects have access to the properties added dynamically to the prototype object.
+
+function Student(name,age){
+    this.name = name;
+    this.age = age;
+}
+//creating an object of type student
+let student1 = new Student('John',32)
+let student2 = new Student('Mary',32)
+
+console.log(student1);
+console.log(student2);
+
+//adding property to student1 instance dynamically
+student1.sports = 'Cricket';
+
+//adding property to the prototype of the Student
+//this would add the gender property to all the 
+//existing object instance of the Student object 
+//and would initialize it to null
+Student.prototype.gender = null
+
+// although student3 is created with name and age
+// initialized but the gender property would also 
+//be attached to it and assigned as null because 
+//of the above mentioned line of code.
+let student3 = new Student('Anna',26)
+
+Prototype Chaining--
+Prototypes are the means of inheritance in JavaScript. The prototype of an object would also have a prototype object. This continues until we reach the top level when there is no prototype object.
+
+This is called prototype chaining or prototype chain in JavaScript.
+
+The properties defined on the prototype objects are also accessible to the object instance. And this is the reason why we are able to access properties which we have not defined explicitly on an object since those are accessible by inheritance through the prototype chaining.
+
+When we try to access any property of an object it is first checked in the own property of the object.
+
+If the property does not exist in the own property then the prototype object is scanned for that property. This continues until we get the property we are accessing or we reach at to the end of prototype chain giving undefined.
+// defining the constructor function
+function Student(name,age){
+    this.name = name;
+    this.age = age; 
+}
+// creating an object instance of the Student
+const student = new Student('John',32)
+
+console.log(student)
+
+can we write a function inside the constructor function?
+yes--When you define a function inside the constructor as this.myFunction=..., it is specific to your instance. This means that it must be constructed and kept in memory for all instances, which may be heavy. It also can't be inherited .
+
+The only valid reason to do this are :
+
+the enclosing of specific values
+other types of specific functions (you might build a different function each time)
+
+What is getter and setter in JavaScript?
+In JavaScript, accessor properties are methods that get or set the value of an object. For that, we use these two keywords: get - to define a getter method to get the property value. set - to define a setter method to set the property value.
+
+class Person {
+    constructor(name) {
+        this.setName(name);
+    }
+    getName() {
+        return this.name;
+    }
+    setName(newName) {
+        newName = newName.trim();
+        if (newName === ' ') {
+            throw 'The name cannot be empty';
+        }
+        this.name = newName;
+    }
+}
+
+let person = new Person('Jane Doe');
+console.log(person); // Jane Doe
+
+person.setName('Jane Smith');
+console.log(person.getName()); // Jane Smith
+
+Map--Map is a collection of keyed data items, just like an Object. But the main difference is that Map allows keys of any type
+let map = new Map();
+map.set('1', 'str1');   // a string key
+map.set(1, 'num1');     // a numeric key
+map.set(true, 'bool1'); // a boolean key
+
+// remember the regular Object? it would convert keys to string
+// Map keeps the type, so these two are different:
+alert( map.get(1)   ); // 'num1'
+alert( map.get('1') ); // 'str1'
+
+alert( map.size ); // 3
+
+Set
+A Set is a special type collection – “set of values” (without keys), where each value may occur only once.
+
+let set = new Set();
+let john = { name: "John" };
+let pete = { name: "Pete" };
+let mary = { name: "Mary" };
+
+// visits, some users come multiple times
+set.add(john);
+set.add(pete);
+set.add(mary);
+set.add(john);
+set.add(mary);
+
+// set keeps only unique values
+alert( set.size ); // 3
+
+for (let user of set) {
+  alert(user.name); // John (then Pete and Mary)
+}
+
+The for...in loop--
+The for...in loop allows you to iterate the enumerable properties of an object. In each iteration, you can get the object key and by using that you can access the property value. For example:
+
+let person = {
+    firstName: 'John',
+    lastName: 'Doe',
+    age: 25,
+    ssn: '123-456-2356'
+};
+
+for (let key in person) {
+    if (person.hasOwnProperty(key)) {
+        console.log(`${key} : ${person[key]}`);
+    }
+}
+Output:
+
+firstName : John
+lastName : Doe
+age : 25
+ssn : 123-456-2356
+
+WeakMap--WeakMap originated from Map, so they are very similar to each other.
+Difference 1: The key must be an object.
+Not all methods from Map are supportive
+The methods you can use with WeakMap are as follows.
+delete
+get
+has
+set
+Difference 3: Data is removed when GC cleans up the reference
+
+WeakSet--
+Like WeakMap, WeakSet also loses the access link to inner data if they’re garbage-collected.
+
+let John = { major: "math" };
+const set = new Set();
+const weakSet = new WeakSet();
+set.add(John);
+// Set {{...}}
+weakSet.add(John);
+// WeakSet {{...}}
+John = null;
+
+WeakMap and WeakSet
+Not an iterable object — can’t loop over
+Can’t access the data if the referencing data is garbage-collected
+Less supportive methods
+
+In JavaScript, a promise is a good way to handle asynchronous operations. It is used to find out if the asynchronous operation is successfully completed or not.
+
+promises--
+A promise may have one of three states.
+
+Pending
+Fulfilled
+Rejected
+A promise starts in a pending state. That means the process is not complete. If the operation is successful, the process ends in a fulfilled state. And, if an error occurs, the process ends in a rejected state.
+
+For example, when you request data from the server by using a promise, it will be in a pending state. When the data arrives successfully, it will be in a fulfilled state. If an error occurs, then it will be in a rejected state.
+const count = true;
+
+let countValue = new Promise(function (resolve, reject) {
+    if (count) {
+        resolve("There is a count value.");
+    } else {
+        reject("There is no count value");
+    }
+});
+
+console.log(countValue);
+JavaScript Promise Chaining
+Promises are useful when you have to handle more than one asynchronous task, one after another. For that, we use promise chaining.
+
+You can perform an operation after a promise is resolved using methods then(), catch() and finally().
+
+JavaScript then() method
+The then() method is used with the callback when the promise is successfully fulfilled or resolved.
+
+The syntax of then() method is:
+
+promiseObject.then(onFulfilled, onRejected);
+Example 2: Chaining the Promise with then()
+
+// returns a promise
+
+let countValue = new Promise(function (resolve, reject) {
+  resolve("Promise resolved");
+});
+
+// executes when promise is resolved successfully
+
+countValue
+  .then(function successValue(result) {
+    console.log(result);
+  })
+
+  .then(function successValue1() {
+    console.log("You can call multiple functions this way.");
+  });
+
+The Promise.all() returns a promise that resolves to an array of values from the input promises while the Promise.race() returns a promise that resolves to the value from the first settled promise.
+ const p1 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('The first promise with 100 has resolved');
+                resolve(100);
+            }, 1 * 1000);
+        });
+        const p2 = new Promise((resolve, reject) => {
+            setTimeout(() => {
+                console.log('The second promise with 200 has rejected');
+                reject(200);
+            }, 2 * 1000);
+        });
+        Promise.race([p1, p2])
+            .then(value => console.log(`Resolved: ${value}`))
+            .catch(reason => console.log(`Rejected: ${reason}`));
+
+The Promise.allSettled() method returns a promise that resolves to an array of objects that each describes the result of the input promise.
+
+Each object has two properties: status and value (or reason).
+
+The status can be either fulfilled or rejected.
+The value if case the promise is fulfilled or reason) if the promise is rejected.
+
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('The first promise has resolved');
+        resolve(10);
+    }, 1 * 1000);
+
+});
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('The second promise has rejected');
+        reject(20);
+    }, 2 * 1000);
+});
+
+Promise.allSettled([p1, p2])
+    .then((result) => {
+        console.log(result);
+    });
+
+
+
+
+
+setTimout--The setTimeout() method executes a block of code after the specified time. The method executes the code only once.
+
+The commonly used syntax of JavaScript setTimeout is:
+setTimeout(function, milliseconds);
+// program to display a text using setTimeout method
+function greet() {
+    console.log('Hello world');
+}
+
+setTimeout(greet, 3000);
+console.log('This message is shown first');
+
+Event Loop
+Event loop is just a guardian who keeps a good communication with Call Stack and Callback Queue. It checks if the call stack is free, then lets know the callback queue. Then Callback queue passes the callback function to Call stack to be executed. When all the callback functions are executed, the call stack is out and global execution context is free.
+
+ CallBack Function --Any function that is passed as an argument to any other function is known as callback function. it is a function which is to be executed after another function finished executing
+why we need callbacks--JavaScript is an event driven language which means that instead of waiting for a response before moving on javascript will keep executing while listening for other events therefore calllback is a way that certain code does'nt execute untill other code already finished execution
+
+ const arr=[{name:'vinay',id:'101'},
+ {name:'Suryakumar',id:'160'},
+ {name:'Dsuryakumar',id:'109'}];
+
+ let sortArr=arr.sort((val1,val2)=>{
+     if(val1.name>val2.name)
+     return 1;
+     else if(val1.name<val2.name)
+     return -1;
+ });
+ console.log(sortArr);
+
+
+
+

@@ -1,0 +1,700 @@
+JavaScript Function Type==>In JavaScript, all functions are objects. They are the instances of the Function type. Because functions are objects, they have properties and methods like other objects.
+Functions properties:>
+Each function has two important properties: length and prototype.
+The length property determines the number of named arguments specified in the function declaration.
+The prototype property references the actual function object.
+
+function add(x, y) {
+    return x + y;
+}
+console.log(add.length); // 2
+console.log(add.prototype); // Object{}
+The add() function accepts two arguments x and y. Therefore, the length property returns two.
+
+Function methods: apply, call, and bind
+A function object has three important methods: apply(), call() and bind().
+
+The apply() and call() methods
+The apply() and call() methods call a function with a given this value and arguments.
+
+The difference between the apply() and call() is that you need to pass the arguments to the apply() method as an array-like object, whereas you pass the arguments to the call() function individually. For example:
+Apply Method==>
+let cat = { type: 'Cat', sound: 'Meow' };
+let dog = { type: 'Dog', sound: 'Woof' };
+
+const say = function (message) {
+  console.log(message);
+  console.log(this.type + ' says ' + this.sound);
+};
+
+say.apply(cat, ['What does a cat say?']);
+say.apply(dog, ['What does a dog say?']); //What does a cat say?
+                                                                       Cat says Meow
+                                                                      What does a dog say?
+                                                                       Dog says Woof
+Call Method=>
+let cat = { type: 'Cat', sound: 'Meow' };
+let dog = { type: 'Dog', sound: 'Woof' };
+
+const say = function (message) {
+  console.log(message);
+  console.log(this.type + ' says ' + this.sound);
+};
+
+say.apply(cat, 'What does a cat say?');
+say.apply(dog, 'What does a dog say?'); //What does a cat say?
+                                                                       Cat says Meow
+                                                                      What does a dog say?
+                                                                       Dog says Woof
+Bind Method=>The bind() method creates a new function instance whose this value is bound to the object that you provide.
+let car = {
+    speed: 5,
+    start() {
+        console.log('Start with ' + this.speed + ' km/h');
+    }
+};
+let aircraft = {
+    speed: 10,
+    fly() {
+        console.log('Flying');
+    }
+};
+let taxiing = car.start.bind(aircraft);
+taxiing();
+
+closures:>
+JavaScript closures
+In JavaScript, a closure is a function that references variables in the outer scope from its inner scope. The closure preserves the outer scope inside its inner scope.
+To understand the closures, you need to know how the lexical scoping works first.
+Lexical scoping
+Lexical scoping defines the scope of a variable by the position of that variable declared in the source code. For example:
+let name = 'John';
+function greeting() { 
+    let message = 'Hi';
+    console.log(message + ' '+ name);
+}
+
+In this example:The variable name is a global variable. It is accessible from anywhere including within the greeting() function.
+The variable message is a local variable that is accessible only within the greeting() function.
+
+If you try to access the message variable outside the greeting() function, you will get an error.
+
+So the JavaScript engine uses the scope to manage the variable accessibility.
+
+According to lexical scoping, the scopes can be nested and the inner function can access the variables declared in its outer scope. For example:
+
+function greeting() {
+    let message = 'Hi';
+
+    function sayHi() {
+        console.log(message);
+    }
+
+    sayHi();
+}
+greeting();
+
+function greeting() {
+    let message = 'Hi';
+
+    function sayHi() {
+        console.log(message);
+    }
+
+    return sayHi;
+}
+let hi = greeting();
+hi(); // still can access the message variable
+Now, instead of executing the sayHi() function inside the greeting() function, the greeting() function returns the sayHi() function object.
+
+Note that functions are the first-class citizens in JavaScript, therefore, you can return a function from another function.
+
+Outside of the greeting() function, we assigned the hi variable the value returned by the greeting() function, which is a reference of the sayHi() function.
+
+Then we executed the sayHi() function using the reference of that function: hi(). If you run the code, you will get the same effect as the one above.
+
+However, the interesting point here is that, normally, a local variable only exists during the execution of the function.
+
+It means that when the greeting() function has completed executing, the message variable is no longer accessible.
+
+In this case, we execute the hi() function that references the sayHi() function, the message variable still exists.
+
+The magic of this is closure. In other words, the sayHi() function is a closure.
+
+function greeting(message) {
+   return function(name){
+        return message + ' ' + name;
+   }
+}
+let sayHi = greeting('Hi');
+let sayHello = greeting('Hello');
+
+console.log(sayHi('John')); // Hi John
+console.log(sayHello('John')); // Hello John
+
+The greeting() function takes one argument named message and returns a function that accepts a single argument called name.
+
+The return function returns a greeting message that is the combination of the message and name variables.
+
+The greeting() function behaves like a function factory. It creates sayHi() and sayHello() functions with the respective messages Hi and Hello.
+
+The sayHi() and sayHello() are closures. They share the same function body but store different scopes.
+
+In the sayHi() closure, the message is Hi, while in the sayHello() closure the message is Hello.
+
+Why IIFEs==>
+When you define a function, the JavaScript engine adds the function to the global object. See the following example:
+
+function add(a,b) {
+    return a + b;
+}
+In web browsers, the JavaScript engine adds the add() function to the window global object:
+console.log(window.add);
+Likewise, if you declare a variable outside of a function using the var keyword, the JavaScript engine also adds the variable to the global object:
+
+var counter = 10;
+console.log(window.counter); // 10
+If you have many global variables and functions, the JavaScript engine will only release the memory allocated for them until the global object loses its scopes.
+
+As a result, the script may use the memory inefficiently. On top of that, having global variables and functions will likely cause name collisions.
+
+One way to prevent the functions and variables from polluting the global object is to use immediately invoked function expressions.
+let sum=( function add(a,b){
+    return a+b;
+}
+)(10,20);
+console.log(sum)
+const calculator = (function () {
+    function add(a, b) {
+        return a + b;
+    }
+
+    function multiply(a, b) {
+        return a * b;
+    }
+    return {
+        add: add,
+        multiply: multiply
+    }
+})();
+let result=calculator.add(55,45)
+console.log(result)
+
+A rest parameter allows you to represent an indefinite number of arguments as an array. See the following syntax:
+
+function fn(a,b,...args) {
+   //...
+}
+The last parameter (args) is prefixed with the three-dots ( ...). It’s called a rest parameter ( ...args).
+
+function sum(...args) {
+    let total = 0;
+    for (const a of args) {
+        total += a;
+    }
+    return total;
+}
+
+let result=sum(1, 2, 3);
+console.log(result)
+
+What are callbacks==>A callback is a function passed as an argument to another function
+function isOdd(number){
+    return number%2!=0;
+}
+function isEven(number){
+    return number%2==0;
+}
+
+function filter(numbers,logic){
+    let result=[];
+    for(const number of numbers){
+        if(logic(number)){
+            result.push(number);
+        }
+    }
+    return result;
+}
+let numbers= [1, 2, 4, 7, 3, 5, 6];
+console.log(filter(numbers,isOdd));
+console.log(filter(numbers,isEven));  //[ 1, 7, 3, 5 ]
+                                                              [ 2, 4, 6 ]
+By definition, the isOdd and isEven are callback functions or callbacks. Because the filter() function accepts a function as an argument, it’s called a high-order function.
+
+function filter(numbers, callback) {
+  let results = [];
+  for (const number of numbers) {
+    if (callback(number)) {
+      results.push(number);
+    }
+  }
+  return results;
+}
+
+let numbers = [1, 2, 4, 7, 3, 5, 6];
+
+let oddNumbers = filter(numbers, (number) => number % 2 != 0);
+
+console.log(oddNumbers);
+
+Synchronous callbacks
+A synchronous callback is executed during the execution of the high-order function that uses the callback. The isOdd and isEven are examples of synchronous callbacks because they execute during the execution of the filter() function.
+
+Asynchronous callbacks
+An asynchronous callback is executed after the execution of the high-order function that uses the callback.
+
+Asynchronicity means that if JavaScript has to wait for an operation to complete, it will execute the rest of the code while waiting.
+
+Note that JavaScript is a single-threaded programming language. It carries asynchronous operations via the callback queue and event loop.
+
+let url = 'https://www.javascripttutorial.net/pic.jpg';
+
+download(url);
+process(url);  //Processing https://javascripttutorial.net/pic.jpg
+Downloading https://javascripttutorial.net/pic.jpg ...
+
+This is not what you expected because the process() function executes before the download() function. The correct sequence should be:
+
+Download the picture and wait for the download completes.
+Process the picture.
+To resolve this issue, you can pass the process() function to the download() function and execute the process() function inside the download() function once the download completes, like this:
+
+function download(url, callback) {
+    setTimeout(() => {
+        // script to download the picture here
+        console.log(`Downloading ${url} ...`);
+        
+        // process the picture once it is completed
+        callback(url);
+    }, 1000);
+}
+
+function process(picture) {
+    console.log(`Processing ${picture}`);
+}
+
+let url = 'https://wwww.javascripttutorial.net/pic.jpg';
+download(url, process);   //Downloading https://javascripttutorial.net/pic.jpg ...
+//Processing https://javascripttutorial.net/pic.jpg
+
+Nesting callbacks and the Pyramid of Doom
+How do you download three pictures and process them sequentially?
+function download(url,callBack) {
+    setTimeout(() => {
+        // script to download the picture here
+        console.log(`Downloading ${url}....`);
+       callBack(url)
+        
+    },1000);
+}
+ function process(picture) {
+    console.log(`Processing ${picture}`);
+}
+
+let url1 = 'https://www.javascripttutorial.net/pic.jpg';
+let url2 = 'https://www.javascripttutorial.net/pic.jpg';
+let url3 = 'https://www.javascripttutorial.net/pic.jpg';
+
+
+download(url1,process);
+download(url2,process);
+download(url3,process);
+The script works perfectly fine.
+
+However, this callback strategy does not scale well when the complexity grows significantly.
+
+Nesting many asynchronous functions inside callbacks is known as the pyramid of doom or the callback hell:
+or to deal with asynchronous operations, you often used the callback functions. However, when you nest many callback functions, the code will be more difficult to maintain. And you end up with a notorious issue which is known as the callback hell.
+
+Suppose that you need to perform three asynchronous operations in the following sequence:
+
+Select a user from the database.
+Get services of the user from an API.
+Calculate the service cost based on the services from the server. 
+The following functions illustrate the three tasks. Note that we use the setTimeout() function to simulate the asynchronous operation.
+
+function getUser(userId, callback) {
+    console.log('Get user from the database.');
+    setTimeout(() => {
+        callback({
+            userId: userId,
+            username: 'john'
+        });
+    }, 1000);
+}
+
+function getServices(user, callback) {
+    console.log(`Get services of  ${user.username} from the API.`);
+    setTimeout(() => {
+        callback(['Email', 'VPN', 'CDN']);
+    }, 2 * 1000);
+}
+
+function getServiceCost(services, callback) {
+    console.log(`Calculate service costs of ${services}.`);
+    setTimeout(() => {
+        callback(services.length * 100);
+    }, 3 * 1000);
+}
+Code language: JavaScript (javascript)
+The following shows the nested callback functions:
+
+getUser(100, (user) => {
+    getServices(user, (services) => {
+        getServiceCost(services, (cost) => {
+            console.log(`The service cost is ${cost}`);
+        });
+    });
+});
+
+Output:
+
+Get user from the database.
+Get services of  john from the API.
+Calculate service costs of Email,VPN,CDN.
+The service cost is 300
+Code language: JavaScript (javascript)
+
+asyncFunction(function(){
+    asyncFunction(function(){
+        asyncFunction(function(){
+            asyncFunction(function(){
+                asyncFunction(function(){
+                    ....
+                });
+            });
+        });
+    });
+});
+To avoid the pyramid of doom, you use promises or async/await functions.
+
+JavaScript Promises==>a promise is an object that encapsulates the result of an asynchronous operation.
+A promise object has a state that can be one of the following:
+
+Pending
+Fulfilled with a value
+Rejected for a reason
+In the beginning, the state of a promise is pending, indicating that the asynchronous operation is in progress. Depending on the result of the asynchronous operation, the state changes to either fulfilled or rejected.
+
+The fulfilled state indicates that the asynchronous operation was completed successfully:
+The rejected state indicates that the asynchronous operation failed.
+
+Creating a promise
+To create a promise object, you use the Promise() constructor:
+
+const promise = new Promise((resolve, reject) => {
+  // contain an operation
+  // ...
+
+  // return the state
+  if (success) {
+    resolve(value);
+  } else {
+    reject(error);
+  }
+});
+The promise constructor accepts a callback function that typically performs an asynchronous operation. This function is often referred to as an executor.
+
+In turn, the executor accepts two callback functions with the name resolve and reject.
+
+Note that the callback functions passed into the executor are resolve and reject by convention only.
+
+If the asynchronous operation completes successfully, the executor will call the resolve() function to change the state of the promise from pending to fulfilled with a value.
+
+In case of an error, the executor will call the reject() function to change the state of the promise from pending to rejected with the error reason.
+
+Once a promise reaches either fulfilled or rejected state, it stays in that state and can’t go to another state.
+
+In other words, a promise cannot go from the fulfilled state to the rejected state and vice versa. Also, it cannot go back from the fulfilled or rejected state to the pending state.
+
+Once a new Promise object is created, its state is pending. If a promise reaches fulfilled or rejected state, it is resolved.
+
+1) The then() method
+To get the value of a promise when it’s fulfilled, you call the then() method of the promise object. The following shows the syntax of the then() method:
+
+promise.then(onFulfilled,onRejected);
+The then() method accepts two callback functions: onFulfilled and onRejected.
+
+The then() method calls the onFulfilled() with a value, if the promise is fulfilled or the onRejected() with an error if the promise is rejected.
+
+Note that both onFulfilled and onRejected arguments are optional.
+
+function getUsers() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve([
+        { username: 'john', email: 'john@test.com' },
+        { username: 'jane', email: 'jane@test.com' },
+      ]);
+    }, 1000);
+  });
+}
+
+function onFulfilled(users) {
+  console.log(users);
+}
+
+const promise = getUsers();
+promise.then(onFulfilled);  //op=>.[ { username: 'john', email: 'john@test.com' },
+  { username: 'jane', email: 'jane@test.com' } ]
+
+2) The catch() method
+If you want to get the error only when the state of the promise is rejected, you can use the catch() method of the Promise object:
+
+promise.catch(onRejected);
+Internally, the catch() method invokes the then(undefined, onRejected) method.
+
+The following example changes the success flag to false to simulate the error scenario:
+
+let success = false;
+
+function getUsers() {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (success) {
+        resolve([
+          { username: 'john', email: 'john@test.com' },
+          { username: 'jane', email: 'jane@test.com' },
+        ]);
+      } else {
+        reject('Failed to the user list');
+      }
+    }, 1000);
+  });
+}
+
+const promise = getUsers();
+
+promise.catch((error) => {
+  console.log(error);
+});
+
+3) The finally() method
+Sometimes, you want to execute the same piece of code whether the promise is fulfilled or rejected
+
+
+const render = () => {
+  //...
+};
+
+getUsers()
+  .then((users) => {
+    console.log(users);
+  })
+  .catch((error) => {
+    console.log(error);
+  })
+  .finally(() => {
+    render();
+  });
+
+promise Chaining=>Sometimes, you want to execute two or more related asynchronous operations, where the next operation starts with the result from the previous step.then there should be used promise chaining
+
+let p = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        resolve(10);
+    }, 3 * 100);
+});
+
+p.then((result) => {
+    console.log(result); // 10
+    return result * 2;
+}).then((result) => {
+    console.log(result); // 20
+    return result * 3;
+}).then((result) => {
+    console.log(result); // 60
+    return result * 4;
+});
+
+Output:
+
+10
+20
+60
+
+promise.any()=>In practice, you use the Promise.any() to return the first fulfilled promise. Once a promise is fulfilled, the Promise.any() method does not wait for other promises to be complete. In other words, the Promise.any() short-circuits after a promise is fulfilled.
+Case1=> if promise resolved
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    console.log('Promise 1 fulfilled');
+    resolve(1);
+  }, 1000);
+});
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    console.log('Promise 2 fulfilled');
+    resolve(2);
+  }, 2000);
+});
+
+const p = Promise.any([p1, p2]);
+p.then((value) => {
+  console.log('Returned Promise');
+  console.log(value);
+});
+
+Case2=> if all promise is rejected
+const p1 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    console.log('Promise 1 rejected');
+    reject('error1');
+  }, 1000);
+});
+o/p=>Promise 1 fulfilled
+Returned Promise
+1
+Promise 2 fulfilled
+
+const p2 = new Promise((resolve, reject) => {
+  setTimeout(() => {
+    console.log('Promise 2 rejected');
+    reject('error2');
+  }, 2000);
+});
+
+const p = Promise.any([p1, p2]);
+p.catch((e) => {
+  console.log('Returned Promise');
+  console.log(e, e.errors);
+});
+
+Promise 1 rejected
+Promise 2 rejected
+Returned Promise
+[AggregateError: All promises were rejected] [ 'error1', 'error2' ]
+
+Promise.allSettled() =>The Promise.allSettled() method accepts an iterable of promises and returns a new promise that resolves when every input promise has settled with an array of objects that describes the result of each promise in the iterable object.
+
+const p1 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('The first promise has resolved');
+        resolve(10);
+    }, 1 * 1000);
+
+});
+
+const p2 = new Promise((resolve, reject) => {
+    setTimeout(() => {
+        console.log('The second promise has rejected');
+        reject(20);
+    }, 2 * 1000);
+});
+
+Promise.allSettled([p1, p2])
+    .then((result) => {
+        console.log(result);
+    });
+
+
+Async Await==>
+Suppose that you need to perform three asynchronous operations in the following sequence:
+
+Select a user from the database.
+Get services of the user from an API.
+Calculate the service cost based on the services from the server. 
+The following functions illustrate the three tasks. Note that we use the setTimeout() function to simulate the asynchronous operation.
+
+function getUser(userId, callback) {
+    console.log('Get user from the database.');
+    setTimeout(() => {
+        callback({
+            userId: userId,
+            username: 'john'
+        });
+    }, 1000);
+}
+
+function getServices(user, callback) {
+    console.log(`Get services of  ${user.username} from the API.`);
+    setTimeout(() => {
+        callback(['Email', 'VPN', 'CDN']);
+    }, 2 * 1000);
+}
+
+function getServiceCost(services, callback) {
+    console.log(`Calculate service costs of ${services}.`);
+    setTimeout(() => {
+        callback(services.length * 100);
+    }, 3 * 1000);
+}
+Code language: JavaScript (javascript)
+The following shows the nested callback functions:
+
+getUser(100, (user) => {
+    getServices(user, (services) => {
+        getServiceCost(services, (cost) => {
+            console.log(`The service cost is ${cost}`);
+        });
+    });
+});
+Code language: JavaScript (javascript)
+Output:
+
+Get user from the database.
+Get services of  john from the API.
+Calculate service costs of Email,VPN,CDN.
+The service cost is 300
+Code language: JavaScript (javascript)
+
+To avoid this callback hell issue, ES6 introduced the promises that allow you to write asynchronous code in more manageable ways.
+
+First, you need to return a Promise in each function:
+
+function getUser(userId) {
+    return new Promise((resolve, reject) => {
+        console.log('Get user from the database.');
+        setTimeout(() => {
+            resolve({
+                userId: userId,
+                username: 'john'
+            });
+        }, 1000);
+    })
+}
+
+function getServices(user) {
+    return new Promise((resolve, reject) => {
+        console.log(`Get services of  ${user.username} from the API.`);
+        setTimeout(() => {
+            resolve(['Email', 'VPN', 'CDN']);
+        }, 2 * 1000);
+    });
+}
+
+function getServiceCost(services) {
+    return new Promise((resolve, reject) => {
+        console.log(`Calculate service costs of ${services}.`);
+        setTimeout(() => {
+            resolve(services.length * 100);
+        }, 3 * 1000);
+    });
+}
+Code language: JavaScript (javascript)
+Then, you chain the promises:
+
+getUser(100)
+    .then(getServices)
+    .then(getServiceCost)
+    .then(console.log);
+
+The following defines an async function that calls the three asynchronous operations in sequence:
+
+async function showServiceCost() {
+    let user = await getUser(100);
+    let services = await getServices(user);
+    let cost = await getServiceCost(services);
+    console.log(`The service cost is ${cost}`);
+}
+
+showServiceCost();
+You use the await keyword to wait for a Promise to settle either in resolved or rejected state. And you can use the await keyword only inside an async function:
+
+
+
+
+
+
+
+

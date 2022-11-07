@@ -1,0 +1,818 @@
+React Features--The important features of ReactJS are as following:-
+1) JSX
+JSX stands for JavaScript XML. It is a JavaScript syntax extension. Its an XML or HTML like syntax used by ReactJS. This syntax is processed into JavaScript calls of React Framework. It extends the ES6 so that HTML like text can co-exist with JavaScript react code. It is not necessary to use JSX, but it is recommended to use in ReactJS.
+2)Components-:
+ReactJS is all about components. ReactJS application is made up of multiple components, and each component has its own logic and controls. These components can be reusable which help you to maintain the code when working on larger scale projects.
+3)One-way Data Binding
+ReactJS is designed in such a manner that follows unidirectional data flow or one-way data binding. The benefits of one-way data binding give you better control throughout the application. If the data flow is in another direction, then it requires additional features. It is because components are supposed to be immutable and the data within them cannot be changed. Flux is a pattern that helps to keep your data unidirectional. This makes the application more flexible that leads to increase efficiency.
+4)Virtual DOM
+A virtual DOM object is a representation of the original DOM object. It works like a one-way data binding. Whenever any modifications happen in the web application, the entire UI is re-rendered in virtual DOM representation. Then it checks the difference between the previous DOM representation and new DOM. Once it has done, the real DOM will update only the things that have actually changed. This makes the application faster, and there is no wastage of memory.
+5)Simplicity
+ReactJS uses JSX file which makes the application simple and to code as well as understand. We know that ReactJS is a component-based approach which makes the code reusable as your need. This makes it simple to use and learn.
+
+6)Performance
+ReactJS is known to be a great performer. This feature makes it much better than other frameworks out there today. The reason behind this is that it manages a virtual DOM. The DOM is a cross-platform and programming API which deals with HTML, XML or XHTML. The DOM exists entirely in memory. 
+
+React JSX==>
+all of the React components have a render function. The render function specifies the HTML output of a React component. JSX(JavaScript Extension), is a React extension which allows writing JavaScript code that looks like HTML. In other words, JSX is an HTML-like syntax used by React that extends ECMAScript so that HTML-like syntax can co-exist with JavaScript/React code.
+
+Why use JSX?
+It is faster than regular JavaScript because it performs optimization while translating the code to JavaScript.
+It is type-safe, and most of the errors can be found at compilation time.
+It makes easier to create templates.
+
+Nested Elements in JSX
+To use more than one element, you need to wrap it with one container element. Here, we use div as a container element which has three nested elements inside it.
+
+App.JSX
+
+
+
+import React, { Component } from 'react';  
+class App extends Component{  
+   render(){  
+      return(  
+         <div>  
+            <h1>JavaTpoint</h1>  
+          <h2>Training Institutes</h2>  
+            <p>This website contains the best CS tutorials.</p>  
+         </div>  
+      );  
+   }  
+}  
+export default App;  
+Output:JavaTpoint
+Training Institutes
+This website contains the best CS tutorials.
+
+In JSX, we can specify attribute values in two ways:
+
+1. As String Literals: We can specify the values of attributes in double quotes:
+<h1 className = "hello" >JavaTpoint</h1>  
+ <p data-demoAttribute = "demo">This website contains the best CS tutorials.</p>  
+
+example--import React, { Component } from 'react';  
+class App extends Component{  
+   render(){  
+      return(  
+         <div>  
+            <h1 className = "hello" >JavaTpoint</h1>  
+            <p data-demoAttribute = "demo">This website contains the best CS tutorials.</p>  
+         </div>  
+      );  
+   }  
+}  
+export default App;  
+op--JavaTpoint
+This website contains the best CS tutorials.
+
+2. As Expressions: We can specify the values of attributes as expressions using curly braces {}:
+<h1 className = "hello" >{25+20}</h1>  
+import React, { Component } from 'react';  
+class App extends Component{  
+   render(){  
+      return(  
+         <div>  
+            <h1 className = "hello" >{25+20}</h1>  
+         </div>  
+      );  
+   }  
+}  
+export default App;  
+Output:45
+
+JSX Comments
+JSX allows us to use comments that begin with /* and ends with */ and wrapping them in curly braces {} just like in the case of JSX expressions. Below example shows how to use comments in JSX.
+
+Example
+import React, { Component } from 'react';  
+class App extends Component{  
+   render(){  
+      return(  
+         <div>  
+            <h1 className = "hello" >Hello JavaTpoint</h1>  
+        {/* This is a comment in JSX */}   
+         </div>  
+      );  
+   }  
+}  
+export default App;  
+
+JSX Styling
+React always recommends to use inline styles. To set inline styles, you need to use camelCase syntax. React automatically allows appending px after the number value on specific elements. The following example shows how to use styling in the element.
+
+Example
+import React, { Component } from 'react';  
+class App extends Component{  
+   render(){  
+     var myStyle = {  
+         fontSize: 80,  
+         fontFamily: 'Courier',  
+         color: '#003300'  
+      }  
+      return (  
+         <div>  
+            <h1 style = {myStyle}>www.javatpoint.com</h1>  
+         </div>  
+      );  
+   }  
+}  
+export default App;  
+
+NOTE: JSX cannot allow to use if-else statements. Instead of it, you can use conditional (ternary) expressions. It can be seen in the following example.
+import React, { Component } from 'react';  
+class App extends Component{  
+   render(){  
+      var i = 5;  
+      return (  
+         <div>  
+            <h1>{i == 1 ? 'True!' : 'False!'}</h1>  
+         </div>  
+      );  
+   }  
+}  
+export default App;  
+Output:False!
+
+
+React Components==>A Component is considered as the core building blocks of a React application. It makes the task of building UIs much easier. Each component exists in the same space, but they work independently from one another and merge all in a parent component, which will be the final UI of your application.
+
+Every React component have their own structure, methods as well as APIs. They can be reusable as per your need. For better understanding, consider the entire UI as a tree. Here, the root is the starting component, and each of the other pieces becomes branches, which are further divided into sub-branches.
+
+In ReactJS, we have mainly two types of components. They are
+
+1.Functional Components==>In React, function components are a way to write components that only contain a render method and don't have their own state. They are simply JavaScript functions that may or may not receive data as parameters. We can create a function that takes props(properties) as input and returns what should be rendered. A valid functional component can be shown in the below example.
+
+function WelcomeMessage(props) {  
+  return <h1>Welcome to the , {props.name}</h1>;  
+}  
+The functional component is also known as a stateless component because they do not hold or manage state. It can be explained in the below example.
+
+Example1.
+import React,{Component} from 'react';
+class App extends Component{
+    render(){
+   
+      return(
+        <div>
+          <Greetings name="Vinay Yadav" heroName="Musan"/>
+          </div>
+      )
+    }
+}
+const Greetings=props=>{
+    return(
+    <h1> Hello{props.name} a.k.a {props.heroName} </h1>
+       );
+  }
+export default App;
+
+Exampple2.
+import React, { Component } from 'react';  
+class App extends Component {  
+   render() {  
+      return (  
+         <div>  
+            <First/>  
+            <Second/>  
+         </div>  
+      );  
+   }  
+}  
+class First extends Component {  
+   render() {  
+      return (  
+         <div>  
+            <h1>JavaTpoint</h1>  
+         </div>  
+      );  
+   }  
+}  
+class Second extends Component {  
+   render() {  
+      return (  
+         <div>  
+            <h2>www.javatpoint.com</h2>  
+            <p>This websites contains the great CS tutorial.</p>  
+         </div>  
+      );  
+   }  
+}  
+export default App;  
+2.Class Components==>Class components are more complex than functional components. It requires you to extend from React. Component and create a render function which returns a React element. You can pass data from one class to other class components. You can create a class by defining a class that extends Component and has a render function. Valid class component is shown in the below example.
+
+class MyComponent extends React.Component {  
+  render() {  
+    return (  
+      <div>This is main component.</div>  
+    );  
+  }  
+}  
+The class component is also known as a stateful component because they can hold or manage local state. It can be explained in the below example.
+
+React State==>The state is an updatable structure that is used to contain data or information about the component. The state in a component can change over time. The change in state over time can happen as a response to user action or system event. A component with the state is known as stateful components. It is the heart of the react component which determines the behavior of the component and how it will render. They are also responsible for making a component dynamic and interactive.
+A state must be kept as simple as possible. It can be set by using the setState() method and calling setState() method triggers UI updates. A state represents the component's local state or information. It can only be accessed or modified inside the component or by the component directly. To set an initial state before any interaction occurs, we need to use the getInitialState() method.
+
+Defining State==>
+The below sample code shows how we can create a stateful component using ES6 syntax.
+
+import React, { Component } from 'react';  
+class App extends Component {  
+ constructor() {  
+      super();        
+      this.state = { displayBio: true };  
+      }  
+      render() {  
+          const bio = this.state.displayBio ? (  
+              <div>  
+                  <p><h3>Javatpoint is one of the best Java training institute in Noida, Delhi, Gurugram, Ghaziabad and Faridabad. We have a team of experienced Java developers and trainers from multinational companies to teach our campus students.</h3></p>   
+            </div>  
+              ) : null;  
+              return (  
+                  <div>  
+                      <h1> Welcome to JavaTpoint!! </h1>  
+                      { bio }   
+                  </div>  
+              );  
+     }  
+}  
+export default App;  
+
+to set the state, it is required to call the super() method in the constructor. It is because this.state is uninitialized before the super() method has been called.
+
+Changing the State
+We can change the component state by using the setState() method and passing a new state object as the argument. Now, create a new method toggleDisplayBio() in the above example and bind this keyword to the toggleDisplayBio() method otherwise we can't access this inside toggleDisplayBio() method.
+
+this.toggleDisplayBio = this.toggleDisplayBio.bind(this); 
+
+Props==>Props stand for "Properties." They are read-only components. It is an object which stores the value of attributes of a tag and work similar to the HTML attributes. It gives a way to pass data from one component to other components. It is similar to function arguments. Props are passed to the component in the same way as arguments passed in a function.
+Greet.js-
+import React, { Component } from 'react';
+class Greet extends Component {  
+   render() {     
+      return (  
+          <div>  
+            <h1> Welcome to { this.props.name } </h1>    
+            <p> <h4> Javatpoint is one of the best Java training institute in Noida, Delhi, Gurugram, Ghaziabad and Faridabad. </h4> </p>          
+          </div>  
+      );  
+   }  
+}  
+App.js--
+import React,{Component} from 'react';
+import Greet from './Greet'
+class App extends Component{
+  render(){
+    return (
+      <div>
+        <Greet name="Vinay" /> 
+        </div>
+    )
+  }
+}
+export default App;
+the above code is for class component if we want to use functional component then code for that is-->
+ const Greet=props=>{
+   return (  
+   <div>  
+      <h1> Welcome to { props.name } </h1>    
+       <p> <h4> Javatpoint is one of the best Java training institute in Noida, Delhi, Gurugram, Ghaziabad and Faridabad. </h4> </p>          
+     </div>  
+ );  
+ }
+
+State and Props
+It is possible to combine both state and props in your app. You can set the state in the parent component and pass it in the child component using props. It can be shown in the below example.
+
+import React,{Component} from 'react';
+class App extends Component{
+  constructor(){
+    super();
+    this.state={
+      name:"JavaTpoint"     // setting the state in parent component 
+    }
+  }
+  render(){
+    return(
+      <div>
+        <Jtp jtpProp={this.state.name}/>
+        </div>
+    )
+  }
+}
+class Jtp extends Component{
+  render(){
+    return (
+      <div>
+        <h1>State & Props Example</h1>  
+              <h3>Welcome to {this.props.jtpProp}</h3>  // passing the state as props in child component
+        </div>
+    )
+  }
+}
+export default App;
+
+state vs props==>
+      SN	Props	                                  State
+1.	Props are read-only.	State changes can be asynchronous.
+2.	Props are immutable.	State is mutable.
+3.	Props allow you to pass data from one component to other components as an argument.	State holds information about the components.
+4.	Props can be accessed by the child component.	State cannot be accessed by child components.
+5.	Props are used to communicate between components.	States can be used for rendering dynamic changes with the component.
+6.	Stateless component can have Props.	Stateless components cannot have State.
+7.	Props make components reusable.	State cannot make components reusable.
+8.	Props are external and controlled by whatever renders the component.	The State is internal and controlled by the React Component itself
+
+What is Constructor?
+The constructor is a method used to initialize an object's state in a class. It automatically called during the creation of an object in a class.
+
+The concept of a constructor is the same in React. The constructor in a React component is called before the component is mounted. When you implement the constructor for a React component, you need to call super(props) method before any other statement. If you do not call super(props) method, this.props will be undefined in the constructor and can lead to bugs.
+
+Syntax
+Constructor(props){  
+     super(props);  
+}  
+In React, constructors are mainly used for two purposes:
+
+It used for initializing the local state of the component by assigning an object to this.state.
+It used for binding event handler methods that occur in your component.
+
+import React,{Component} from 'react';
+class App extends Component{
+     constructor(props){
+       super(props);
+         this.state={
+           data:"www.javaTpoint.com"   // here we are initializing the local state
+         }
+       }
+       handleEvent=()=>{
+         console.log(this.props);
+       }
+       render(){
+         return(
+           <div>
+         <h2>React Constructor Example</h2> 
+      <input type="text" value={this.state.data}/>
+      <button onClick={this.handleEvent}>Click</button>   
+             </div>
+         );
+       }
+     }
+     export default App;
+
+React Component API==>
+ReactJS component is a top-level API. It makes the code completely individual and reusable in the application. It includes various methods for:
+
+Creating elements
+Transforming elements
+Fragments
+Here, we are going to explain the three most important methods available in the React component API.
+
+1.setState()==>setState()
+This method is used to update the state of the component. This method does not always replace the state immediately. Instead, it only adds changes to the original state. It is a primary method that is used to update the user interface(UI) in response to event handlers and server responses.
+
+Example==> in this we are displaying a messege and by using a button changing the messege by making use of setState.
+import React,{Component}from 'react';
+class App extends Component{
+  constructor(){
+    super();
+    this.state={
+      msg: "Welcome to JavaTpoint"  
+    }
+  }
+  changeMsg=()=>{
+    this.setState(
+      {msg:"it is best reactJs tutorial"}
+    )
+  }
+  
+  render(){
+    return (
+      <div>
+        <h1>{this.state.msg}</h1>
+        <button onClick={this.changeMsg}>Click</button>
+        </div>
+    )
+  }
+}
+export default App;
+
+2.forceUpdate()==>This method allows us to update the component manually.
+import React, { Component } from "react";
+class App extends Component {
+  
+  forceUpdateState = () => {
+    this.forceUpdate();
+  };
+
+  render() {
+    return (
+      <div>
+        <h1>Example of force Update</h1>
+        <h3> Random number={Math.random()}</h3>   // generating a random number
+        <button onClick={this.forceUpdateState}>ForceUpdate</button> // forcibly updating that number by clicking on button and calling ForceUpadate state function
+      </div>
+    );
+  }
+}
+export default App;
+
+findDOMNode()==>its complex study from java t point online
+
+React Component Life-Cycle==>In ReactJS, every component creation process involves various lifecycle methods. These lifecycle methods are termed as component's lifecycle
+
+The lifecycle of the component is divided into three phases. They are:
+
+Mounting Phase
+Updating Phase
+Unmounting Phase
+Each phase contains some lifecycle methods that are specific to the particular phase.
+
+Mounting means putting elements into the DOM.
+
+React has four built-in methods that gets called, in this order, when mounting a component:
+
+constructor()
+getDerivedStateFromProps()
+render()
+componentDidMount()
+
+the next phase in the lifecycle is when a component is updated.
+
+A component is updated whenever there is a change in the component's state or props.
+
+React has five built-in methods that gets called, in this order, when a component is updated:
+
+getDerivedStateFromProps()
+shouldComponentUpdate()
+render()
+getSnapshotBeforeUpdate()
+componentDidUpdate()
+
+The next phase in the lifecycle is when a component is removed from the DOM, or unmounting as React likes to call it.
+
+React has only one built-in method that gets called when a component is unmounted:
+
+componentWillUnmount()
+
+React Forms
+Forms are an integral part of any modern web application. It allows the users to interact with the application as well as gather information from the users. Forms can perform many tasks that depend on the nature of your business requirements and logic such as authentication of the user, adding user, searching, filtering, booking, ordering, etc. A form can contain text fields, buttons, checkbox, radio button, etc.
+
+Creating Form
+React offers a stateful, reactive approach to build a form. The component rather than the DOM usually handles the React form. In React, the form is usually implemented by using controlled components.
+
+There are mainly two types of form input in React.
+
+Uncontrolled component==>Uncontrolled component
+The uncontrolled input is similar to the traditional HTML form inputs. The DOM itself handles the form data. Here, the HTML elements maintain their own state that will be updated when the input value changes. To write an uncontrolled component, you need to use a ref to get form values from the DOM
+Example--
+import React,{Component} from 'react';
+class App extends Component{
+  constructor(props){
+    super(props);
+    this.input=React.createRef();
+  }
+  updateSubmit=(event)=>{   // event is passed as an arg in order to use event.preventDefault otherwise on submtting values will be reset and lost
+    alert('You have entered the UserName and CompanyName successfully.'); 
+    event.preventDefault();  
+  }
+  render(){
+    return(
+      <form onSubmit={this.updateSubmit}>
+       <h1>Uncontrolled Form component example</h1>
+       <label> Name:
+         <input type="text" ref={this.input}/>
+         </label>
+         <label> College:
+         <input type="text" ref={this.input}/>
+         </label>
+         <input type="submit" value="submit"/>
+        </form>
+    )
+  }
+}
+export default App
+
+Controlled component==>In HTML, form elements typically maintain their own state and update it according to the user input. In the controlled component, the input form element is handled by the component rather than the DOM. Here, the mutable state is kept in the state property and will be updated only with setState() method.
+Example==>
+import React, { Component } from 'react';  
+class App extends Component {  
+  constructor(props) {  
+      super(props);  
+      this.state = {value: ''};  
+  }  
+  handleChange=(event)=> {  
+      this.setState({value: event.target.value});  
+  }  
+  handleSubmit=(event)=> {  
+      alert('You have submitted the input successfully: ' + this.state.value);  
+      event.preventDefault();  
+  }  
+  render() {  
+      return (  
+          <form onSubmit={this.handleSubmit}>  
+            <h1>Controlled Form Example</h1>  
+            <label>  
+                Name:  
+                <input type="text" value={this.state.value} onChange={this.handleChange} />  
+            </label>  
+            <input type="submit" value="Submit" />  
+         </form>  
+      );  
+  }  
+}  
+export default App;  
+
+Difference table between controlled and uncontrolled component
+SN	Controlled	                                  Uncontrolled
+1.	It does not maintain its internal state.	It maintains its internal states.
+2.	Here, data is controlled by the parent component.	Here, data is controlled by the DOM itself.
+3.	It accepts its current value as a prop.	It uses a ref for their current values.
+4.	It allows validation control.	              It does not allow validation control.
+5.	It has better control over the form elements and data.	It has limited control over the form elements and                                                                                                                              data.
+
+React Events==>
+An event is an action that could be triggered as a result of the user action or system generated event. For example, a mouse click, loading of a web page, pressing a key, window resizes, and other interactions are called events.
+
+React has its own event handling system which is very similar to handling events on DOM elements. The react event handling system is known as Synthetic Events. 
+Handling events with react have some syntactic differences from handling events on DOM. These are:
+
+React events are named as camelCase instead of lowercase.
+With JSX, a function is passed as the event handler instead of a string. For example:
+Event declaration in plain HTML:
+
+<button onclick="showMessage()">  
+       Hello JavaTpoint  
+</button>  
+Event declaration in React:
+
+<button onClick={showMessage}>  
+      Hello JavaTpoint  
+</button>  
+ In react, we cannot return false to prevent the default behavior. We must call preventDefault event explicitly to prevent the default behavior.
+
+Example of Event:In the below example, we have used only one component and adding an onChange event. This event will trigger the changeName function, which returns the company name.
+import React,{Component} from 'react';
+class App extends Component{
+  constructor(){
+    super();
+    this.state={
+      companyName:''
+    }
+  }
+  changeName=(event)=>{
+    this.setState({
+      companyName:event.target.value
+    })
+  }
+  render(){
+    return(
+      <div>
+        <h1>Simple Event</h1>
+        <label htmlFor="name">Enter Company Name:</label>
+        <input type="text" id="companyName" onChange={this.changeName}/>
+        <h3>You entered {this.state.companyName}</h3>
+      </div>
+    )
+  }
+}
+export default App;
+
+From the given scenario, we can understand how conditional rendering works. Consider an example of handling a login/logout button. The login and logout buttons will be separate components. If a user logged in, render the logout component to display the logout button. If a user not logged in, render the login component to display the login button. In React, this situation is called as conditional rendering.
+
+React Conditional Rendering--From the given scenario, we can understand how conditional rendering works. Consider an example of handling a login/logout button. The login and logout buttons will be separate components. If a user logged in, render the logout component to display the logout button. If a user not logged in, render the login component to display the login button. In React, this situation is called as conditional rendering.
+In other words, based on one or several conditions, a component decides which elements it will return.
+
+There is more than one way to do conditional rendering in React. They are given below:-
+if--It is the easiest way to have a conditional rendering in React in the render method. It is restricted to the total block of the component. IF the condition is true, it will return the element to be rendered
+ternary operator
+logical && operator
+switch case operator
+Example-- conditional rendering example
+import React, { Component } from 'react';    
+// Message Component   
+function Message(props)   
+{   
+    if (props.isLoggedIn)   
+        return <h1>Welcome Back!!!</h1>;   
+    else  
+        return <h1>Please Login First!!!</h1>;   
+}   
+// Login Component   
+function Login(props)   
+{   
+   return(   
+           <button onClick = {props.clickInfo}> Login </button>   
+       );   
+}    
+// Logout Component   
+function Logout(props)   
+{   
+    return(   
+           <button onClick = {props.clickInfo}> Logout </button>   
+       );   
+}   
+class App extends Component{    
+   constructor(props)   
+    {   
+        super(props);    
+        
+      this.state = {isLoggedIn : false};   
+    }   
+   handleLogin=()=>{   
+        this.setState({isLoggedIn : true});   
+    }   
+    handleLogout=()=>{       
+        this.setState({isLoggedIn : false});   
+    }   
+    render(){   
+        return(   
+            <div>   
+        <h1> Conditional Rendering Example </h1>  
+                <Message isLoggedIn = {this.state.isLoggedIn}/>               
+                {   
+                    (this.state.isLoggedIn)?(   
+                    <Logout clickInfo = {this.handleLogout} />   
+                    ) : (   
+                    <Login clickInfo = {this.handleLogin} />   
+                    )   
+                }   
+            </div>         
+            );   
+    }   
+}   
+export default App;    
+
+React Lists
+Lists are used to display data in an ordered format and mainly used to display menus on websites. In React, Lists can be created in a similar way as we create lists in JavaScript. Let us see how we transform Lists in regular JavaScript.
+
+The map() function is used for traversing the lists. In the below example, the map() function takes an array of numbers and multiply their values with 5. We assign the new array returned by map() to the variable multiplyNums and log it.
+var numbers = [1, 2, 3, 4, 5];   
+const multiplyNums = numbers.map((number)=>{   
+    return (number * 5);   
+});   
+console.log(multiplyNums);   
+Output
+
+The above JavaScript code will log the output on the console. The output of the code is given below.
+
+[5, 10, 15, 20, 25]
+
+Exampple of list using react==>
+import React from 'react';
+
+function App(){
+  const mylist= ['Peter', 'Sachin', 'Kevin', 'Dhoni', 'Alisa'];   
+const listItems=mylist.map((list)=>{
+  return <li>{list}</li>
+})
+  return (
+    <div>
+      <ul> {listItems}</ul>
+      </div>
+  )
+}
+export default App;
+
+React Keys--A key is a unique identifier. In React, it is used to identify which items have changed, updated, or deleted from the Lists. It is useful when we dynamically created components or when the users alter the lists. It also helps to determine which components in a collection needs to be re-rendered instead of re-rendering the entire set of components every time
+
+import React from 'react';   
+import ReactDOM from 'react-dom';   
+  
+function ListItem(props) {  
+  const item = props.item;  
+  return (  
+    // No need to specify the key here.  
+    <li> {item} </li>  
+  );  
+}  
+function NameList(props) {  
+  const myLists = props.myLists;  
+  const listItems = myLists.map((strLists) =>  
+    // The key should have been specified here.  
+    <ListItem key={myLists.toString()} item={strLists} />  
+  );  
+  return (  
+    <div>  
+        <h2>Correct Key Usage Example</h2>  
+            <ol>{listItems}</ol>  
+    </div>  
+  );  
+}  
+const myLists = ['Peter', 'Sachin', 'Kevin', 'Dhoni', 'Alisa'];  
+ReactDOM.render(  
+  <NameList myLists={myLists}/>,  
+  document.getElementById('app')  
+);  
+export default App;  
+
+Hooks==>Hooks are the functions which "hook into" React state and lifecycle features from function components. It does not work inside classes.
+
+Hooks are backward-compatible, which means it does not contain any breaking changes. Also, it does not replace your knowledge of React concepts.
+
+When to use a Hooks
+If you write a function component, and then you want to add some state to it, previously you do this by converting it to a class. But, now you can do it by using a Hook inside the existing function component.
+
+Rules of Hooks
+Hooks are similar to JavaScript functions, but you need to follow these two rules when using them. Hooks rule ensures that all the stateful logic in a component is visible in its source code. These rules are:
+
+1. Only call Hooks at the top level
+Do not call Hooks inside loops, conditions, or nested functions. Hooks should always be used at the top level of the React functions. This rule ensures that Hooks are called in the same order each time a components renders.
+
+2. Only call Hooks from React functions
+You cannot call Hooks from regular JavaScript functions. Instead, you can call Hooks from React function components. Hooks can also be called from custom Hooks.
+
+useState Hooks--
+
+Example=>Counter 1
+import React,{useState} from 'react'
+ function HookCounter(){
+   
+   const[count,setCount]=useState(0); // useState is a state variable initialized to zero
+   return (
+     <div>
+         <button onClick={()=>setCount(count+1)}>Count {count}</button>
+     </div>
+   )
+ }
+ export default HookCounter;
+
+Example=> HookCOunter two
+import React, { useState } from "react";
+function HookCOunterTwo() {
+  const initialCount = 0;
+  const [count, setCount] = useState(initialCount);
+  return (
+    <div>
+      Count:{count}
+      {/* <button onClick={()=>setCount(initialCount)}>Reset</button>
+      <button onClick={()=>setCount(count+1)}>Increment</button>
+      <button onClick={()=>setCount(count-1)}>Decrement</button> */}
+      <button onClick={() => setCount(initialCount)}>Reset</button>
+      <button onClick={() => setCount((prevCount) => prevCount + 1)}>
+        Increment
+      </button>
+      <button onClick={() => setCount((prevCount) => prevCount - 1)}>
+        Decrement
+      </button>
+    </div>
+  );
+}
+export default HookCOunterTwo;
+
+Example: HookCounterThree
+import React, { useState } from 'react'
+
+function HookCounterThree() {
+    const[name,setName]=useState({firstName:'',lastName:''});
+  return (
+    <div>
+        <form>
+            <input type="text" value={name.firstName} onChange={e=>setName({...name,firstName:e.target.value})}/>
+            <input type="text" value={name.lastName} onChange={e=>setName({...name,lastName:e.target.value})}/>
+            <h2>Your firstName is: {name.firstName}</h2>
+            <h2>Your lastName is: {name.lastName}</h2>
+            <h2>{JSON.stringify(name)}</h2>
+        </form>
+    </div>
+  )
+}
+
+export default HookCounterThree
+
+import React, { useState } from 'react'
+
+function HookCounterFour() {
+	const [items, setItems] = useState([])
+
+	const addItem = () => {
+		setItems([
+			...items,
+			{
+				id: items.length,
+				value: Math.floor(Math.random() * 10) + 1
+			}
+		])
+	}
+
+	return (
+		<div>
+			<button onClick={addItem}>Add a number</button>
+			<ul>
+				{items.map(item => (
+					<li key={item.id}>{item.value}</li>
+				))}
+			</ul>
+		</div>
+	)
+}
+
+export default HookCounterFour
+
+
+
+
+
+
+
+

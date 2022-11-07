@@ -1,0 +1,296 @@
+ The BOM provides you with objects that expose the web browser’s functionality.
+
+The window object is global=>
+The global object of JavaScript in the web browser is the window object. It means that all variables and functions declared globally with the var keyword become the properties and methods of the window object. 
+If you don’t want to pollute the window object, you can use the let keyword to declare variables and functions.
+
+Alert Method=>
+setTimeout(() => {
+    alert('3 seconds has been passed!')
+}, 3000);
+
+JavaScript confirm() method=>
+let result = window.confirm(question);
+
+The confirm() is a method of the window object.
+The confirm() shows a system dialog that consists of a question and two buttons: OK and Cancel.
+
+let result = confirm('Are you sure you want to delete?');
+
+let message = result ? 'You clicked the OK button' :
+    'You clicked the Cancel button';
+
+alert(message);
+
+JavaScript prompt() method==>
+The prompt() is a method of the window object. The prompt() method instructs the web browser to display a dialog with a text, text input field, and two buttons OK and Cancel.
+
+let lang = prompt('What is your favorite programming language?');
+
+let feedback = lang.toLowerCase() === 'javascript' ? `It's great!` :
+    `It's ${lang}`;
+
+alert(feedback);
+
+The result of the prompt() is a string. If you want to get the answer as a number, you should always cast the string into a number.
+let ageStr = prompt('How old are you?');
+let age = Number(ageStr);
+
+let feedback = age >= 16 ?
+    'You're eligible to join.' :
+    'You must be at least 16 year old to join.';
+
+alert(feedback);
+
+ JavaScript setTimeout()==>
+The setTimeout() is a method of the window object. The setTimeout()  sets a timer and executes a callback function after the timer expires.
+
+The following illustrates the syntax of setTimeout():
+
+let timeoutID  = setTimeout(cb [,delay], arg1, arg2,...);
+
+<p>JavaScript setTimeout Demo</p>
+<button onclick="showAlert();">Show</button>
+<button onclick="cancelAlert();">Cancel</button>
+Code language: HTML, XML (xml)
+JavaScript
+var timeoutID;
+
+function showAlert() {
+    timeoutID = setTimeout(alert, 3000, 'setTimeout Demo!');
+}
+
+function clearAlert() {
+    clearTimeout(timeoutID);
+}
+
+How JavaScript setTimeout() works
+JavaScript is single-threaded therefore it can only do one task at a time. It means that it can only carry a single task a given time. Besides the JavaScript engine, the web browser has other components such as Event Loop, Call Stack, and Web API.
+
+When you call the setTimeout(), the JavaScript engine creates a new function execution context and places it on the call stack.
+
+The setTimeout() executes and creates a timer in the Web APIs component of the web browser. When the timer expires, the callback function that was passed in the setTimeout() is placed to the callback queue.
+
+The event loop monitors both the call stack and the callback queue. It removes the callback function from the callback queue and places it to call stack when the call stack is empty.
+
+Once the callback function is on the call stack, it is executed.
+
+function task() {
+    console.log('setTimeout Demo!')
+}
+
+setTimeout(task, 3000);
+In this example:
+
+First, the setTimeout() is placed on the call stack. It creates a timer on Web API.
+Second, after roughly 3 seconds, the timer expires, the task is pushed to the callback queue and waited for the next opportunity to execute.Third, because the call stack is empty, the event loop removes the task() from the callback queue, places it on the call stack, and executes it:
+
+javascript setTimeout step 3
+
+Fourth, the console.log() in the setTimeout() executes that creates a new function execution context.
+Finally, the console.log() and task() are popped out of the call stack once they are completed.
+
+ JavaScript setInterval()
+The setInterval() is a method of the window object. The setInterval() repeatedly calls a function with a fixed delay between each call.
+
+The following illustrates the syntax of the setInterval():
+
+let intervalID = setInterval(callback, delay,[arg1, arg2, ...]);
+Code language: JavaScript (javascript)
+In this syntax:
+
+The callback is a callback function to be executed every delay milliseconds.
+The delay is the time (in milliseconds) that the timer should delay between executions of the callback function.
+The arg1, … argN are the arguments that are passed to the callback function
+You can pass the intervalID to the clearInterval() to cancel the timeout.
+Note that the setInterval() works like the setTimeout() but it repeatedly executes a callback once every specified delay.
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <title>JavaScript setInterval Demo</title>
+
+  <script>
+    let intervalID;
+ 
+    function toggleColor() {
+      let e = document.getElementById('flashtext');
+      e.style.color = e.style.color == 'red' ? 'blue' : 'red';
+    }
+
+    function stop() {
+      clearInterval(intervalID);
+    }
+
+    function start() {
+       intervalID = setInterval(toggleColor, 1000); 
+    }
+  </script>
+</head>
+ 
+<body>
+  <p id="flashtext">JavScript setInterval Demo</p>
+  <button onclick="start()">Start</button>
+  <button onclick="stop()">Stop</button>
+  
+</body>
+</html>
+
+What is Document Object Model (DOM)==>
+The Document Object Model (DOM) is an application programming interface (API) for manipulating HTML documents.
+
+The DOM represents an HTML document as a tree of nodes. The DOM provides functions that allow you to add, remove, and modify parts of the document effectively.
+
+Note that the DOM is cross-platform and language-independent ways of manipulating HTML and XML documents.
+
+The DOM represents an HTML document as a hierarchy of nodes. Consider the following HTML document:
+
+<html>
+    <head>
+        <title>JavaScript DOM</title>
+    </head>
+    <body>
+        <p>Hello DOM!</p>
+    </body>
+</html>
+
+In this DOM tree, the document is the root node. The root node has one child node which is the <html> element. The <html> element is called the document element.
+
+Each document can have only one document element. In an HTML document, the document element is the <html> element. Each markup can be represented by a node in the tree.
+
+getElementById() method==>
+The document.getElementById() method returns an Element object that represents an HTML element with an id that matches a specified string.
+
+If the document has no element with the specified id, the document.getElementById() returns null.
+The following shows the syntax of the getElementById() method:
+
+const element = document.getElementById(id);
+If the HTML document has multiple elements with the same id, the document.getElementById() method returns the first element it encounters.
+
+JavaScript getElementsByName() method==>
+Every element on an HTML document may have a name attribute:
+
+<input type="radio" name="language" value="JavaScript">
+let elements = document.getElementsByName(name);
+
+example=><!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>JavaScript getElementsByName Demo</title>
+</head>
+
+<body>
+    <p>Please rate the service:</p>
+    <p>
+        <label for="very-poor">
+            <input type="radio" name="rate" value="Very poor" id="very-poor"> Very poor
+        </label>
+        <label for="poor">
+            <input type="radio" name="rate" value="Poor" id="poor"> Poor
+        </label>
+        <label for="ok">
+            <input type="radio" name="rate" value="OK" id="ok"> OK
+        </label>
+        <label for="good">
+            <input type="radio" name="rate" value="Good"> Good
+        </label>
+        <label for="very-good">
+            <input type="radio" name="rate" value="Very Good" id="very-good"> Very Good
+        </label>
+    </p>
+    <p>
+        <button id="btnRate">Submit</button>
+    </p>
+    <p id="output"></p>
+    <script>
+        let btn = document.getElementById('btnRate');
+        let output = document.getElementById('output');
+
+        btn.addEventListener('click', () => {
+            let rates = document.getElementsByName('rate');
+            rates.forEach((rate) => {
+                if (rate.checked) {
+                    output.innerText = `You selected: ${rate.value}`;
+                }
+            });
+
+The getElementsByTagName() method accepts a tag name and returns a live HTMLCollection of elements with the matching tag name in the order which they appear in the document.
+
+The following illustrates the syntax of the getElementsByTagName():
+
+let elements = document.getElementsByTagName(tagName);
+
+ <!DOCTYPE html>
+<html>
+<head>
+    <title>JavaScript getElementsByTagName() Demo</title>
+</head>
+<body>
+    <h1>JavaScript getElementsByTagName() Demo</h1>
+    <h2>First heading</h2>
+    <p>This is the first paragraph.</p>
+    <h2>Second heading</h2>
+    <p>This is the second paragraph.</p>
+    <h2>Third heading</h2>
+    <p>This is the third paragraph.</p>
+
+    <button id="btnCount">Count H2</button>
+
+    <script>
+        let btn = document.getElementById('btnCount');
+        btn.addEventListener('click', () => {
+            let headings = document.getElementsByTagName('h2');
+            alert(`The number of H2 tags: ${headings.length}`);
+        });
+    </script>
+</body>
+
+</html>
+
+The getElementsByClassName() method returns an array-like of objects of the child elements with a specified class name. The getElementsByClassName() method is available on the document element or any other elements.
+
+When calling the method on the document element, it searches the entire document and returns the child elements of the document:
+
+let elements = document.getElementsByClassName(names);
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <header>
+        <nav>
+            <ul id="menu">
+                <li class="item">HTML</li>
+                <li class="item">CSS</li>
+                <li class="item highlight">JavaScript</li>
+                <li class="item">TypeScript</li>
+            </ul>
+        </nav>
+        <h1>getElementsByClassName Demo</h1>
+    </header>
+        <script>
+        let menu = document.getElementById('menu');
+let items = menu.getElementsByClassName('item');
+
+let data = [].map.call(items, item => item.textContent);
+
+console.log(data);
+    </script>
+    
+    
+    <script src="BOMDOM.js"></script>
+</body>
+</html>
+
+A CSS selector defines elements to which a CSS rule applies.
+The querySelector() finds the first element that matches a CSS selector or a group of CSS selectors.
+let element = parentNode.querySelector(selector);
+
+
